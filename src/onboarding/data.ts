@@ -91,9 +91,9 @@ export const GEM_TEXT: Readonly<Record<Gem, string>> = {
     'The Mender. Keep the table standing and grow as the fight goes on. Hand G G B, Limit Breaker Exploit ×1.5.',
 };
 
+/** Singapore only (owner's decision, 7 October 2026). The prototype also lists Kuala Lumpur; it stays parked (MIGRATION §1). */
 export const CITIES: readonly { key: City; name: string; sub: string }[] = [
   { key: 'SG', name: 'Singapore', sub: 'UTC+8 · five dishes · five venues' },
-  { key: 'KL', name: 'Kuala Lumpur', sub: 'UTC+8 · five dishes · five venues' },
 ];
 
 export const ONBOARDING = {

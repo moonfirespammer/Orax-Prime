@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import type { ClassKey, Figure, Gem } from '@/ds';
+import type { City } from '@/data/cities';
 import { createStorage, type Storage } from '@/services/storage';
 
-export type City = 'SG' | 'KL';
+export type { City };
 
 export interface Me {
   name: string;
