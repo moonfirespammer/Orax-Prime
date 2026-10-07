@@ -18,11 +18,6 @@ test.describe('Phase 1b · design system and the seven components', () => {
     });
   }
 
-  test('the app entry lands on the gallery for now', async ({ page }) => {
-    await open(page);
-    await expect(page).toHaveURL(/\/ds$/);
-  });
-
   test('the Settings button toggles the theme and the choice survives a reload', async ({ page }) => {
     await open(page, { path: '/ds' });
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

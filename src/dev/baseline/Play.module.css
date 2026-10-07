@@ -1,0 +1,112 @@
+/* The baseline phone: 390×844, a scroll area over a pinned tab bar (OraX-Baseline.dc.html, "Baseline Play"). */
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: var(--text-body);
+}
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--gutter);
+  flex: none;
+}
+.iconButton {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -10px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  flex: none;
+}
+.iconButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.section {
+  padding: 0 var(--gutter);
+  flex: none;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  color: var(--ink);
+}
+.entry {
+  margin-top: var(--space-3);
+}
+.rowText {
+  flex: 1;
+  min-width: 0;
+}
+.strong {
+  font: var(--text-body-strong);
+}
+.caption {
+  margin: 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.brandIcon {
+  color: var(--brand-text);
+  display: inline-flex;
+}
+.mutedIcon {
+  color: var(--ink-muted);
+  display: inline-flex;
+}
+.partyHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--gutter) var(--space-3);
+  flex: none;
+}
+.h1 {
+  margin: 0;
+  font: var(--text-heading-md);
+  letter-spacing: var(--tracking-heading-md);
+}
+.pixel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+}
+.round {
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0 var(--gutter);
+  flex: none;
+}
