@@ -28,9 +28,18 @@ function initialTheme(): Theme {
 
 export type Sheet = 'play' | null;
 
+export interface HeaderText {
+  title: string;
+  subtitle: string;
+}
+
 interface ShellState {
   /** Dark first; light is a full peer (DESIGN_RULES). Applied to <html data-theme> by the App. */
   theme: Theme;
+  /** A screen whose header reads from data (the Station names its dish) sets this while it is mounted. */
+  header: HeaderText | null;
+  setHeader: (header: HeaderText) => void;
+  clearHeader: () => void;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
   /** The sheet over the current screen: the Play sheet from the centre tab button (MIGRATION §3.2). */
@@ -45,6 +54,13 @@ interface ShellState {
  */
 export const useShell = create<ShellState>((set, get) => ({
   theme: initialTheme(),
+  header: null,
+  setHeader: (header) => {
+    set({ header });
+  },
+  clearHeader: () => {
+    set({ header: null });
+  },
   sheet: null,
   openSheet: (sheet) => {
     set({ sheet });

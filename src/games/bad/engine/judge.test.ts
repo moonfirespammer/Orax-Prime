@@ -43,14 +43,12 @@ describe('judge (spec §3.5–3.9)', () => {
     expect(v.hint).toBeUndefined();
     expect(v.wasteLine).toBeUndefined();
     expect(COPY.lines[3]).toContain(v.line);
-    expect(v.summary).toBe(
-      'Poached chicken ×1 · Chicken rice ×1 · Ginger sauce ×1 · Chilli sauce ×1 · Cucumber ×1 · Dark soy ×1',
-    );
+    expect(v.summary).toBe('Chicken ×1 · Rice ×1 · Ginger ×1 · Chilli sauce ×1 · Cucumber ×1 · Dark soy ×1');
   });
 
-  it('the same plate with 10 × ginger sauce (Leftovers hour) → the Ten line, the Leftovers hour chip, Unhinged', () => {
+  it('the same plate with 10 × ginger (Leftovers hour) → the Ten line, the Leftovers hour chip, Unhinged', () => {
     const v = judge(CR, plate(withItem(clean(), 'ginger', { n: 10 })), H0);
-    expect(v.line).toBe('Ten portions of ginger sauce. Ten. I counted.');
+    expect(v.line).toBe('Ten portions of ginger. Ten. I counted.');
     expect(v.leftoversUsed).toBe(true);
     expect(v.style).toBe('Unhinged');
     // 100 − 27 (excess 9 × 3) − 10 (an item at ≥ 5 portions) = 63: two stones, not cursed (register Q58).
@@ -59,7 +57,7 @@ describe('judge (spec §3.5–3.9)', () => {
       stones: 2,
       cursed: false,
       label: 'Saucy but controlled',
-      name: 'Chicken rice, drowning in ginger sauce',
+      name: 'Chicken rice, drowning in ginger',
       habit: 'Unhinged plate ×1 this month',
     });
   });
@@ -87,7 +85,7 @@ describe('judge (spec §3.5–3.9)', () => {
   it('two burnt items → cursed', () => {
     const v = judge(CR, plate(withItem(withItem(clean(), 'chicken', { heat: 3 }), 'rice', { heat: 3 })), H0);
     expect(v).toMatchObject({ score: 70, cursed: true, stones: 1 });
-    expect(v.line).toBe('You burnt the poached chicken. It did nothing to you.');
+    expect(v.line).toBe('You burnt the chicken. It did nothing to you.');
     expect(v.wasteLine).toBeUndefined(); // score ≥ 15 and fewer than two extras
   });
 
@@ -142,7 +140,7 @@ describe('judge (spec §3.5–3.9)', () => {
     // Raw chicken and raw cucumber → 74: two stones, Neat.
     const comforting = withItem(withItem(clean(), 'chicken', { cut: 0, heat: 0 }), 'cucumber', { cut: 0 });
     expect(judge(CR, plate(comforting), H0)).toMatchObject({ score: 74, stones: 2, label: 'Comforting' });
-    // Three ginger sauces on that plate: saucy wins over Generous/Neat.
+    // Three ginger portions on that plate: saucy wins over Generous/Neat.
     expect(judge(CR, plate(withItem(comforting, 'ginger', { n: 3 })), H0).label).toBe('Saucy but controlled');
     // One raw chicken alone: coverage 1/6 → 58, −18 → 40: one stone, not cursed.
     expect(judge(CR, plate([item('chicken')]), H0)).toMatchObject({
@@ -170,18 +168,18 @@ describe('judge (spec §3.5–3.9)', () => {
     );
     expect(
       judge(CR, plate(withItem(withItem(base, 'ginger', { n: 8 }), 'chicken', { heat: 3 })), H0).line,
-    ).toBe('Eight portions of ginger sauce. Eight. I counted.');
+    ).toBe('Eight portions of ginger. Eight. I counted.');
     expect(
       judge(CR, plate(withItem(withItem(base, 'chicken', { heat: 3 }), 'rice', { heat: 0 })), H0).line,
-    ).toBe('You burnt the poached chicken. It did nothing to you.');
+    ).toBe('You burnt the chicken. It did nothing to you.');
     expect(judge(CR, plate(withItem(base, 'rice', { heat: 0 })), H0).line).toBe(
       'The rice is raw. Rice is the easy part.',
     );
     expect(judge(CR, plate(withItem(base, 'ginger', { n: 12 })), H0).line).toBe(
-      'Twelve portions of ginger sauce. Twelve. I counted.',
+      'Twelve portions of ginger. Twelve. I counted.',
     );
     expect(judge(CR, plate(withItem(base, 'ginger', { n: 13 })), H0).line).toBe(
-      '13 portions of ginger sauce. 13. I counted.',
+      '13 portions of ginger. 13. I counted.',
     );
     expect(numberWord(8)).toBe('Eight');
     expect(numberWord(3)).toBe('3');

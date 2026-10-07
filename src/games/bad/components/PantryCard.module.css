@@ -1,0 +1,129 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* As the prototype's card div: min-height is content-box, so 102 px with its border, 104 selected. */
+  min-height: 100px;
+  box-sizing: content-box;
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  min-width: 0;
+}
+.extra {
+  min-height: 88px;
+}
+.selected {
+  border: 2px solid var(--brand);
+}
+.gone {
+  background: var(--surface-sunken);
+  color: var(--ink-faint);
+  border-color: transparent;
+}
+.gone.selected {
+  border-color: var(--brand);
+}
+.add {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  background: transparent;
+  border: 0;
+  padding: 8px 8px 6px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-height: var(--touch-target);
+  width: 100%;
+  font: inherit;
+  border-radius: var(--radius-md);
+}
+.selected .add {
+  padding: 7px 7px 5px;
+}
+.add:focus-visible,
+.minus:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.name {
+  font: var(--text-body-strong);
+  line-height: 20px;
+  overflow-wrap: break-word;
+}
+.extra .name {
+  font: var(--text-caption);
+  font-weight: 500;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+.prep {
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.state {
+  margin-top: auto;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  font: var(--text-caption);
+  color: var(--ink-faint);
+}
+.roomForMinus {
+  padding-right: 32px;
+}
+.gone .state {
+  color: inherit;
+}
+.low {
+  color: var(--warning);
+}
+.minus {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+.minusBox {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+}
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  /* As the prototype's badge span: 24 px of content plus the padding, a 36 px pill at one digit. */
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  box-sizing: content-box;
+  border-radius: var(--radius-full);
+  background: var(--brand);
+  color: var(--on-brand);
+  font: var(--text-caption);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}

@@ -13,7 +13,7 @@ export const COPY = {
     cookingToday: 'Cooking today',
     cooking: 'cooking',
     /** RULING (Q5): one stock word per dish instead of counts. */
-    stock: { plenty: 'plenty', moderate: 'moderate', low: 'running low', gone: 'all out!' },
+    stock: { plenty: 'plenty', moderate: 'moderate', low: 'running low', gone: 'all out' }, // OraX: no exclamation marks
     cta: {
       pick: 'Pick a dish',
       pickDish: 'Pick {dish} for today',

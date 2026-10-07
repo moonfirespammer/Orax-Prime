@@ -184,7 +184,7 @@ describe('MockPoolService', () => {
       cursed: false,
       habit: 'Neat plater, apparently',
       leftoversUsed: false,
-      summary: 'Poached chicken ×1',
+      summary: 'Chicken ×1',
       dishId: 'chicken-rice',
       key: 1,
       flags: { chilli: false, rawRice: false },

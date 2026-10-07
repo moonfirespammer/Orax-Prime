@@ -18,11 +18,15 @@ const I = (
   ...(extra ? { extra } : {}),
 });
 
-/** Ids and attributes ported verbatim from the prototype (the reference implementation); assetKey from the asset brief. */
+/**
+ * Ids, attributes and stock seeds are BaD's spec table (the engine's content of record); the display names are the
+ * OraX prototype's ING table, the copy of record for the screens (short names that fit a Pantry card: Chicken, not
+ * Poached chicken). assetKey is from BaD's asset brief.
+ */
 export const INGREDIENTS: readonly Ingredient[] = [
-  I('chicken', 'Poached chicken', 'poached-chicken', 1, 1, ['protein']),
-  I('rice', 'Chicken rice', 'chicken-rice', 0, 1, ['rice']),
-  I('ginger', 'Ginger sauce', 'ginger-sauce', 0, 0, ['sauce']),
+  I('chicken', 'Chicken', 'poached-chicken', 1, 1, ['protein']),
+  I('rice', 'Rice', 'chicken-rice', 0, 1, ['rice']),
+  I('ginger', 'Ginger', 'ginger-sauce', 0, 0, ['sauce']),
   I('chilli-sauce', 'Chilli sauce', 'chilli-sauce', 0, 0, ['sauce', 'chilli']),
   I('cucumber', 'Cucumber', 'cucumber', 1, 0),
   I('dark-soy', 'Dark soy', 'dark-soy', 0, 0, ['sauce']),
@@ -33,7 +37,7 @@ export const INGREDIENTS: readonly Ingredient[] = [
   I('parsley', 'Parsley', 'parsley', 1, 0),
   I('parmesan', 'Parmesan', 'parmesan', 0, 0),
   I('mutton', 'Mutton', 'mutton', 1, 1, ['protein']),
-  I('spices', 'Soup spices', 'soup-spices', 0, 1),
+  I('spices', 'Spices', 'soup-spices', 0, 1),
   I('onion', 'Onion', 'onion', 1, 1),
   I('coriander', 'Coriander', 'coriander', 1, 0),
   I('baguette', 'Baguette', 'baguette', 1, 0),
@@ -41,13 +45,13 @@ export const INGREDIENTS: readonly Ingredient[] = [
   I('sourdough', 'Sourdough', 'sourdough', 1, 1),
   I('coconut-rice', 'Coconut rice', 'coconut-rice', 0, 1, ['rice']),
   I('sambal', 'Sambal', 'sambal', 0, 1, ['sauce', 'chilli']),
-  I('anchovies', 'Fried anchovies', 'fried-anchovies', 0, 1),
+  I('anchovies', 'Anchovies', 'fried-anchovies', 0, 1),
   I('peanuts', 'Peanuts', 'peanuts', 0, 1),
   I('egg', 'Egg', 'egg', 0, 1),
-  I('fish', 'Fish fillet', 'fish-fillet', 1, 1, ['protein']),
+  I('fish', 'Fish', 'fish-fillet', 1, 1, ['protein']),
   I('batter', 'Batter', 'batter', 0, 1),
   I('potato', 'Potato', 'potato', 1, 1),
-  I('peas', 'Mushy peas', 'mushy-peas', 0, 1),
+  I('peas', 'Peas', 'mushy-peas', 0, 1),
   I('tartare', 'Tartare', 'tartare', 0, 0, ['sauce']),
   I('lemon', 'Lemon', 'lemon', 1, 0),
   I('chilli-padi', 'Chilli padi', 'chilli-padi', 1, 0, ['chilli'], true),

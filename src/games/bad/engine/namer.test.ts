@@ -80,8 +80,8 @@ describe('namer (spec §3.6)', () => {
 
   it('suffix precedence: a sauce at 4+ > exactly one extra > coverage < 1', () => {
     const base = { style: 'Neat' as const, coverage: 0.5, burnt: false, seared: false };
-    expect(dishName(CR, { ...base, sauce: 'ginger sauce', extra: 'durian' })).toBe(
-      'Chicken rice, drowning in ginger sauce',
+    expect(dishName(CR, { ...base, sauce: 'ginger', extra: 'durian' })).toBe(
+      'Chicken rice, drowning in ginger',
     );
     expect(dishName(CR, { ...base, extra: 'durian' })).toBe('Chicken rice with durian');
     expect(dishName(CR, base)).toBe('Chicken rice, missing something');
@@ -110,9 +110,9 @@ describe('namer (spec §3.6)', () => {
     expect(at(full.map((i) => (i.ingredientId === 'chicken' ? { ...i, heat: 2 } : i)))).toBe(
       'Seared chicken rice',
     );
-    // Four ginger sauces make nine portions: Generous, and drowning.
+    // Four ginger portions make nine portions: Generous, and drowning.
     expect(at(full.map((i) => (i.ingredientId === 'ginger' ? { ...i, n: 4 } : i)))).toBe(
-      'Generous chicken rice, drowning in ginger sauce',
+      'Generous chicken rice, drowning in ginger',
     );
     expect(at(full.slice(0, 5))).toBe('Chicken rice, missing something');
     expect(at([...full, prepped('cheddar', 1, 0, 0)])).toBe('Chicken rice with cheddar');

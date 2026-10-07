@@ -58,7 +58,7 @@ describe('MockPoolService.plate (spec §7, §3.5–3.9)', () => {
       label: 'Clean plate',
       cursed: false,
     });
-    expect(v.summary).toContain('Poached chicken ×1');
+    expect(v.summary).toContain('Chicken ×1');
     expect((await service.getToday('SG')).binEaten).toBe(bin0 + 1);
     expect(profile.get().habits.plates).toBe(1);
     expect(profile.get().cursedPlates).toEqual([]);

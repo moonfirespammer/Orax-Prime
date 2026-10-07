@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 import { Gallery } from '@/dev/Gallery';
+import { Board } from '@/games/bad/screens/Board';
+import { Station } from '@/games/bad/screens/Station';
 import { BaselinePlay } from '@/dev/baseline/Play';
 import { Invite } from '@/onboarding/Invite';
 import { Onboarding } from '@/onboarding/Onboarding';
@@ -51,9 +53,16 @@ export const router = createBrowserRouter([
       { path: 'you', handle: tabs, element: <You /> },
       { path: 'you/wardrobe', handle: header('Wardrobe', 'Kits from the class board'), element: <Pending /> },
       { path: 'you/classes', handle: header('Change class', 'Takes effect at 00:00'), element: <Pending /> },
+      // Build-A-Dish (MIGRATION §3.9): the Board, the Station named after the dish, the verdict (3c).
       {
         path: 'play/bad',
         handle: header('Today’s dishes', 'One dish a day · swap once', 'resets'),
+        element: <Board />,
+      },
+      { path: 'play/bad/station', handle: header('', '', 'resets'), element: <Station /> },
+      {
+        path: 'play/bad/verdict',
+        handle: header('The Bin’s verdict', '', 'resets', 'x'),
         element: <Pending />,
       },
       {

@@ -83,7 +83,7 @@ describe('Station store actions', () => {
     expect(n('ginger')).toBe(10);
     expect(remarks).toEqual([
       'Leftovers hour. Go on, then. I am watching.',
-      'Ten portions of ginger sauce. Ten. I am counting.',
+      'Ten portions of ginger. Ten. I am counting.',
     ]);
   });
 
@@ -129,7 +129,7 @@ describe('Station store actions', () => {
     expect(g().plate.mess).toBe(1);
     expect(remarks).toEqual([
       'Strokes need a target. Tap something first.',
-      'You burnt the poached chicken. It did nothing to you.',
+      'You burnt the chicken. It did nothing to you.',
     ]);
     expect(save).toHaveBeenLastCalledWith(g().plate);
     const seq = g().flash?.seq ?? 0;

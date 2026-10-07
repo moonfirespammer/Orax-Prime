@@ -95,7 +95,7 @@ describe('applySigil (spec §3.4, prototype order)', () => {
     expect(remarks).toEqual([
       undefined,
       undefined,
-      'You burnt the poached chicken. It did nothing to you.',
+      'You burnt the chicken. It did nothing to you.',
       'It cannot get more burnt. It is trying.',
     ]);
   });

@@ -40,7 +40,7 @@ describe('Verdict store actions (spec §3.5–3.13)', () => {
     expect(g().verdict).toBe(v);
     expect(g().sent).toBe(false);
     expect(useToast.getState().text).toBeNull();
-    expect(v?.summary).toBe('Poached chicken ×1');
+    expect(v?.summary).toBe('Chicken ×1');
     expect(v?.dishId).toBe('chicken-rice');
     expect(g().profile?.habits.plates).toBe(1); // the profile subscription carries the new counters
     expect(g().plate.items).toHaveLength(1); // the plate stays for another go

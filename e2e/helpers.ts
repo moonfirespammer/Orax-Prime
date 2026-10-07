@@ -10,6 +10,8 @@ export interface OpenOptions {
   theme?: Theme;
   /** Singapore wall time the app should read now, e.g. `2026-09-23T18:48` (src/services/clock.ts). */
   clock?: string;
+  /** Force the Leftovers-hour flag (src/services/clock.ts). */
+  leftovers?: 'on' | 'off';
   reducedMotion?: boolean;
 }
 
@@ -18,6 +20,7 @@ export async function open(page: Page, opts: OpenOptions = {}): Promise<void> {
   const params = new URLSearchParams();
   if (opts.theme) params.set('theme', opts.theme);
   if (opts.clock) params.set('clock', opts.clock);
+  if (opts.leftovers) params.set('leftovers', opts.leftovers);
   if (opts.reducedMotion) await page.emulateMedia({ reducedMotion: 'reduce' });
   const query = params.toString();
   await page.goto(`${opts.path ?? '/'}${query ? `?${query}` : ''}`);

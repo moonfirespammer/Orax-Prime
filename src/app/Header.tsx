@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router';
 import { Icon } from '@/ds';
+import { useShell } from '@/store/shell';
 import { useNow, clock } from './clock';
 import type { ScreenHandle } from './Shell';
 import styles from './Header.module.css';
@@ -10,15 +11,24 @@ export function tabRootOf(pathname: string): string {
   return first === 'you' ? '/you' : '/today';
 }
 
+/** A screen inside a room (`/play/bad/station`) goes back to the room; a sub-screen goes back to its tab. */
+export function parentOf(pathname: string): string {
+  const parts = pathname.split('/').filter(Boolean);
+  return parts.length >= 3 ? `/${parts.slice(0, -1).join('/')}` : tabRootOf(pathname);
+}
+
 /** The generic sub-screen header: 44 px back target, heading-sm title, caption subtitle, a pixel-label on the right. */
 export function Header({ handle }: { handle: ScreenHandle }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const override = useShell((s) => s.header);
   useNow();
+  const title = override?.title ?? handle.title;
+  const subtitle = override?.subtitle ?? handle.subtitle;
   const back = () => {
     const idx = (window.history.state as { idx?: number } | null)?.idx ?? 0;
     if (idx > 0) void navigate(-1);
-    else void navigate(tabRootOf(pathname), { replace: true });
+    else void navigate(parentOf(pathname), { replace: true });
   };
   return (
     <header className={styles.header}>
@@ -26,8 +36,8 @@ export function Header({ handle }: { handle: ScreenHandle }) {
         <Icon name={handle.backIcon ?? 'arrow-left'} size={24} />
       </button>
       <div className={styles.text}>
-        <h1 className={styles.title}>{handle.title}</h1>
-        {handle.subtitle ? <p className={styles.subtitle}>{handle.subtitle}</p> : null}
+        <h1 className={styles.title}>{title}</h1>
+        {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
       </div>
       <span className={styles.right}>{handle.right === 'resets' ? clock.resetsLabel() : ''}</span>
     </header>
