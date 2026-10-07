@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router';
+import { captureInstallPrompt } from '@/services/install';
+import { useMe } from '@/store/me';
 import { useShell } from '@/store/shell';
 import styles from './App.module.css';
 import { router } from './routes';
@@ -11,6 +13,11 @@ export function App() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    captureInstallPrompt();
+    void useMe.getState().hydrate();
+  }, []);
 
   return (
     <div className={styles.app} data-testid="orax-app">

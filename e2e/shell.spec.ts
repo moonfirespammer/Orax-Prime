@@ -61,8 +61,35 @@ test.describe('Phase 2a · the shell: Today, the Play sheet, You', () => {
     });
   }
 
-  test('the app entry is Today', async ({ page }) => {
-    await open(page, { clock: CLOCK });
+  test('the app entry is Today once a player has been saved on this device', async ({ page }) => {
+    await open(page, { path: '/today', clock: CLOCK });
+    // The saved player as src/store/me.ts writes it, in idb-keyval's default store.
+    await page.evaluate(
+      (saved) =>
+        new Promise<void>((resolve, reject) => {
+          const req = indexedDB.open('keyval-store', 1);
+          req.onupgradeneeded = () => req.result.createObjectStore('keyval');
+          req.onerror = () => {
+            reject(new Error('could not open keyval-store'));
+          };
+          req.onsuccess = () => {
+            const tx = req.result.transaction('keyval', 'readwrite');
+            tx.objectStore('keyval').put(saved, 'orax:me');
+            tx.oncomplete = () => {
+              resolve();
+            };
+            tx.onerror = () => {
+              reject(new Error('could not write orax:me'));
+            };
+          };
+        }),
+      {
+        me: { name: 'Wen', classKey: 'stirrer', figure: 't1m', gem: 'sapphire', city: 'SG' },
+        onboarded: true,
+      },
+    );
+    await page.goto('/');
+    await page.locator('[data-testid="orax-app"]').waitFor();
     await expect(page).toHaveURL(/\/today$/);
   });
 

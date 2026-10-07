@@ -1,9 +1,12 @@
-import { Navigate, createBrowserRouter } from 'react-router';
+import { createBrowserRouter } from 'react-router';
 import { Gallery } from '@/dev/Gallery';
 import { BaselinePlay } from '@/dev/baseline/Play';
+import { Invite } from '@/onboarding/Invite';
+import { Onboarding } from '@/onboarding/Onboarding';
 import { Today } from '@/today/Today';
 import { You } from '@/you/You';
 import { CITY_NAME } from './clock';
+import { Entry } from './Entry';
 import { Pending } from './Pending';
 import { Shell, header, tabs } from './Shell';
 
@@ -13,7 +16,10 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Shell />,
     children: [
-      { index: true, element: <Navigate to="/today" replace /> },
+      { index: true, element: <Entry /> },
+      // Onboarding is immersive: no tabs, no header (PRODUCT_SPEC §4).
+      { path: 'invite', handle: { chrome: 'none' }, element: <Invite /> },
+      { path: 'onboarding', handle: { chrome: 'none' }, element: <Onboarding /> },
       { path: 'today', handle: tabs, element: <Today /> },
       {
         path: 'today/match',
