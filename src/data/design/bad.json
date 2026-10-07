@@ -1,0 +1,44 @@
+{
+  "version": "v2 · 7 October 2026",
+  "status": "Design v1 locked 23 September. Board, Station and Verdict built and reviewed; wall, thread and share in Phase 4.",
+  "asBuilt": [
+    { "n": "Day and city", "t": "Resets at 00:00 city time. Singapore and Kuala Lumpur each get five dishes and one Pantry. Leftovers hour, 21:00 to midnight, lifts the portion cap on shelves that are still plentiful. A dish’s main ingredient never runs out." },
+    { "n": "Picking", "t": "One dish a day, one swap. The pick is public: the card shows who is cooking it, three avatars and a count, and your own avatar joins them. Swapping returns your portions to the shelf." },
+    { "n": "Pantry", "t": "Four to six required ingredients per dish; mutton soup has an optional bread row. Four extras shared across every dish and always off-recipe: chilli padi, durian, cheddar, ice cream. A tap takes one portion. Cap 3. Running low at 25, Gone at 0." },
+    { "n": "Building", "t": "Free order. Cut 0–3 (cut, diced, dust) and heat 0–3 (cooked, seared, burnt) per item. Sigils on a pad: a slash cuts, a spiral heats, a flick up plates, a sweep wipes mess. A fast stroke is +1 flair. Burning adds mess; anything can be flung to the Bin." },
+    { "n": "Judging", "t": "A hidden score from 0 to 100 becomes one to three stones in your gem. A plate is cursed when it is empty, scores under 35, or carries two extras or two burnt items. Names are seeded from the plate, so the same plate is always called the same thing." },
+    { "n": "After the verdict", "t": "The Bin’s line, a label, a habit chip. The same-dish wall, sorted by stones with your row pinned in its tier; the same-dish thread, today only. A Cursed Plates gallery, a Signature Dish on your profile, a 326px share card." }
+  ],
+  "judge": {
+    "stones": "3 at 75, 2 at 45, otherwise 1.",
+    "cursed": "Empty plate, score under 35, two extras, or two burnt items.",
+    "terms": [
+      { "n": "Coverage", "t": "−50 × the share of required ingredients missing. Six of six starts at 100; three of six at 75." },
+      { "n": "Needs cutting, left whole", "t": "−8 per recipe item." },
+      { "n": "Needs heat, left raw", "t": "−10 per recipe item. Raw rice is remembered and gets its own line." },
+      { "n": "Heated when it should not be", "t": "−4 per recipe item." },
+      { "n": "Cut to dust", "t": "−6 per recipe item." },
+      { "n": "Burnt", "t": "−15 per item, on or off the recipe. Two burnt items curse the plate." },
+      { "n": "Pantry extra", "t": "−20 each. Two extras curse the plate." },
+      { "n": "Excess portions", "t": "−3 per portion over the recipe count, to −30." },
+      { "n": "One item at five or more", "t": "−10." },
+      { "n": "Flair", "t": "+2 per fast stroke, to +10." }
+    ]
+  },
+  "ruling": {
+    "class": "Blank canvas. The judge and the shelf are identical for everyone; the class changes what the Bin notices. Never a cooking power: the identity test promised that class is who you are, not what you are good at.",
+    "gem": "The colour of your stones, the ring on your wall row, the chip on your share card. It never touches the judge: a Ruby three and an Emerald three are the same three on the wall.",
+    "fireRate": "One non-cursed plate in four fires its palate, so the line stays a small pleasure rather than a stamp."
+  },
+  "palates": [
+    { "key": "provider", "cls": "Provider", "watch": "Generosity", "when": "Style Generous, not Unhinged, with every required ingredient present.", "line": "Enough for the table. You cooked for people who are not here yet.", "chip": "Feeds the table ×n" },
+    { "key": "foodsmith", "cls": "Foodsmith", "watch": "The cut", "when": "Every item that needs cutting is cut or diced, none is dust, and a protein is seared.", "line": "Every cut where it should be. I noticed. I always notice.", "chip": "Knife first ×n" },
+    { "key": "spark", "cls": "Spark", "watch": "Heat and speed", "when": "Chilli portions at two or more, or flair at three or more.", "line": "Fast hands and too much chilli. I would not have it any other way.", "chip": "Brings the heat ×n" },
+    { "key": "gastronaut", "cls": "Gastronaut", "watch": "The whole shelf", "when": "Full coverage, and the optional row used when the dish has one.", "line": "You found everything on the shelf. Even the bread.", "chip": "Leaves nothing off ×n" },
+    { "key": "taster", "cls": "Taster", "watch": "Balance", "when": "Sauce portions equal to protein portions; nothing burnt, nothing at dust.", "line": "Balanced. Tested first, plated second. As it should be.", "chip": "Tests first ×n" },
+    { "key": "purist", "cls": "Purist", "watch": "The clean plate", "when": "Neat, three stones, no extras, no mess left on the pad.", "line": "Clean plate. No extras. You did not enjoy that, and it shows in the best way.", "chip": "Clean plater ×n" },
+    { "key": "rebel", "cls": "Rebel", "watch": "Off the recipe", "when": "Exactly one extra, and still two stones or more.", "line": "{Extra} in {dish}, and it held. Do it again and I will pretend not to look.", "chip": "Breaks the recipe ×n" },
+    { "key": "stirrer", "cls": "Stirrer", "watch": "Leftovers", "when": "Plated in Leftovers hour with an item above three portions, or flung something and still scored two stones.", "line": "Ten portions and a fling. Nothing wasted. I respect that more than I should.", "chip": "Leftovers regular ×n" },
+    { "key": "host", "cls": "Host", "watch": "The shared table", "when": "Among the first ten in the city to pick the dish, or posted in its thread before plating.", "line": "You set the table early. People came.", "chip": "Sets the table ×n" }
+  ]
+}

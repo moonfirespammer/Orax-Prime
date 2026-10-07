@@ -1,21 +1,27 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
+import { RouterProvider } from 'react-router';
+import { captureInstallPrompt } from '@/services/install';
+import { useMe } from '@/store/me';
+import { useShell } from '@/store/shell';
 import styles from './App.module.css';
+import { router } from './routes';
 
-/**
- * The OraX shell. Phase 1a is the frame only: the theme attribute and a root landmark.
- * Tabs, the Play sheet, the header and routes arrive in phase 2 (MIGRATION §3.2).
- * Dev-only URL parameter: ?theme=light (dark is the default; DESIGN_RULES: dark first, light a full peer).
- */
+/** The OraX app: the theme on <html> (dark first, light a full peer) and the router with the shell inside it. */
 export function App() {
-  const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  const theme = useShell((s) => s.theme);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', params.get('theme') === 'light' ? 'light' : 'dark');
-  }, [params]);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    captureInstallPrompt();
+    void useMe.getState().hydrate();
+  }, []);
 
   return (
-    <main className={styles.app} data-testid="orax-app">
-      <h1>OraX</h1>
-    </main>
+    <div className={styles.app} data-testid="orax-app">
+      <RouterProvider router={router} />
+    </div>
   );
 }

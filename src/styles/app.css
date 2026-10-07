@@ -1,4 +1,4 @@
-/* The design system (src/ds/styles.css) is imported here from phase 1b. */
+@import '../ds/styles.css';
 
 /* App shell: mobile-first at 390px, fluid above. Page gutter never below 16px. */
 html,

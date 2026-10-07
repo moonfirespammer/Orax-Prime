@@ -1,0 +1,104 @@
+{
+  "version": "v2 · 7 October 2026",
+  "engine": "oxp/MECHANICS.md: hands, the ten combo groups, the damage pipeline, Nerve, Counter, the attack timer, the gauge, Limit Tokens, two lives, the 30 s clock. Unchanged. Academy mode is retired.",
+  "seat": {
+    "rule": "The colour a seat brings is the colour of its gem. Class is cosmetic: the drawing, the clips, the Limit Breaker cut-in.",
+    "composition": { "mono": "+8%", "trinity": "+4%" },
+    "duplicateGems": "A second or third seat of one gem deepens the one passive a step; copies never stack.",
+    "lives": 2
+  },
+  "map": {
+    "rows": 10,
+    "nodesPerRow": "3 in rows 1–4 and 6–9; 1 in rows 5 and 10",
+    "bosses": { "5": "The Blind Judge of the Palate", "10": "The Burnt Caramel Colossus" },
+    "secretRow": "Row 11, the Critic: appears for a table that clears row 10 with both lives and at least one Limit Token banked.",
+    "vote": "Majority; a tie goes to seat 1, rotating each row.",
+    "generation": [
+      "Each node connects to one or two nodes in the next row; every node is reachable; at least two full paths share no node outside the boss rows.",
+      "Rows 1–4 draw from the Starter pool, rows 6–9 from the Main pool; no monster twice on one map.",
+      "Every row has one safe node (modifier weight ≤ 1) and one hot node (weight ≥ 3).",
+      "Exactly one Elite in rows 2–4 and one in rows 7–9: +30% HP, two modifiers, relic floor Rare."
+    ],
+    "rewardTier": "Points × (1 + 0.15 × total modifier weight). Relic floor: weight 0–2 Common, 3–4 Rare, 5+ Epic.",
+    "afterEveryFight": "Relic vote (three offered, four in Leftovers hour or after an Elite), Nerve to 100, hands refilled. A lost life restarts the encounter, not the map."
+  },
+  "augmentLayers": [
+    { "n": "Seat augments", "when": "Rows 1, 4 and 7", "t": "Each seat picks one of three, private to the seat: 24 general, 8 per gem. Two held seat augments fuse into a Recipe at the next row.", "ref": "Compendium E.1, E.2, E.6" },
+    { "n": "Party relics", "when": "After every fight", "t": "The trio votes one of three. 38 relics plus 8 Boss relics; one rarity each, never tiered.", "ref": "Compendium E.3" },
+    { "n": "Course blessings", "when": "Rows 1 and 6", "t": "One of two framing rules for the half of the map ahead.", "ref": "Compendium E.4" },
+    { "n": "Leftover relics", "when": "Leftovers hour and after any Elite", "t": "A fourth option, stronger than Epic, that melts after a set number of fights.", "ref": "Compendium E.5" },
+    { "n": "Class signatures", "when": "Never", "t": "Compendium E.7 stays off. Class is cosmetic in OXP.", "ref": "Compendium E.7" }
+  ],
+  "ttk": { "rule": "Turns to kill at the party’s expected combo damage for that row; the harness calibrates HP to TTK, not the other way round.", "byRow": { "1–2": 2, "3–4": 3, "5": 5, "6–7": 3, "8–9": 4, "10": 6, "11": 7 } },
+  "monsters": [
+    { "label": "Starter pool · rows 1–4", "rows": [
+      { "n": "Gingerbread Sentry", "tag": "", "hp": 200, "def": "10%", "ab": "—", "timer": 3, "pts": 100, "wr": "R · —", "ttk": 2 },
+      { "n": "Meringue Moth", "tag": "", "hp": 150, "def": "10%", "ab": "Summon: Cake 1 HP (tutorial)", "timer": 2, "pts": 150, "wr": "B · —", "ttk": 2 },
+      { "n": "Popcorn Swarm", "tag": "new", "hp": 180, "def": "0%", "ab": "Summon: 3 × Kernel 30", "timer": 3, "pts": 150, "wr": "R · —", "ttk": 2 },
+      { "n": "Jam Slime", "tag": "new", "hp": 260, "def": "0%", "ab": "Split: at 50% HP spawns Jelly Blob 80", "timer": 3, "pts": 175, "wr": "G · —", "ttk": 3 },
+      { "n": "Onion Wailer", "tag": "new", "hp": 300, "def": "10%", "ab": "Sour", "timer": 3, "pts": 200, "wr": "B · R", "ttk": 3 },
+      { "n": "Boba Blob", "tag": "new", "hp": 320, "def": "20%", "ab": "Regen 30", "timer": 3, "pts": 200, "wr": "G · B", "ttk": 3 },
+      { "n": "Croissant Crab", "tag": "new", "hp": 350, "def": "30%", "ab": "Brittle", "timer": 2, "pts": 225, "wr": "R · G", "ttk": 3 },
+      { "n": "Sourdough Ghoul", "tag": "", "hp": 400, "def": "20%", "ab": "—", "timer": 3, "pts": 200, "wr": "G · R", "ttk": 3 },
+      { "n": "Roast Drumstick Hound", "tag": "", "hp": 500, "def": "30%", "ab": "—", "timer": 3, "pts": 250, "wr": "R · B", "ttk": 3 } ] },
+    { "label": "Main pool · rows 6–9", "rows": [
+      { "n": "Scalding Steam Wraith", "tag": "", "hp": 600, "def": "40%", "ab": "Counter 10", "timer": 3, "pts": 300, "wr": "B · G", "ttk": 3 },
+      { "n": "Cast-Iron Skillet Knight", "tag": "", "hp": 700, "def": "10%", "ab": "Counter 10", "timer": 2, "pts": 350, "wr": "G · —", "ttk": 3 },
+      { "n": "Fondue Hydra", "tag": "new", "hp": 780, "def": "0%", "ab": "Summon: 2 × Cheese Head 120 · Glutton", "timer": 3, "pts": 375, "wr": "R · B", "ttk": 3 },
+      { "n": "Sausage-Link Serpent", "tag": "", "hp": 800, "def": "10%", "ab": "Counter 10 · Summon: Meatball 100", "timer": 3, "pts": 400, "wr": "B · R", "ttk": 4 },
+      { "n": "Kimchi Kraken", "tag": "new", "hp": 820, "def": "20%", "ab": "Shifting palate · Rot 5", "timer": 3, "pts": 400, "wr": "rotates · —", "ttk": 4 },
+      { "n": "Pressure-Cooker Golem", "tag": "new", "hp": 850, "def": "30%", "ab": "Counter 10 · Vent", "timer": 3, "pts": 425, "wr": "G · R", "ttk": 4 },
+      { "n": "Twin Chili Fangs", "tag": "", "hp": 900, "def": "10%", "ab": "Summon: Chili Flake 100", "timer": 2, "pts": 450, "wr": "R · G", "ttk": 4 },
+      { "n": "Durian Warden", "tag": "new", "hp": 900, "def": "40%", "ab": "Shell", "timer": 3, "pts": 450, "wr": "B · R", "ttk": 4 },
+      { "n": "Wagyu Minotaur", "tag": "new", "hp": 1000, "def": "20%", "ab": "Enrage · Sticky", "timer": 3, "pts": 475, "wr": "G · B", "ttk": 4 } ] },
+    { "label": "Bosses · fixed · and the secret row", "rows": [
+      { "n": "The Blind Judge of the Palate", "tag": "row 5", "hp": 950, "def": "50%", "ab": "Summon: Salt Block Guardian 100 · Enrage", "timer": 3, "pts": 500, "wr": "G · B", "ttk": 5 },
+      { "n": "The Burnt Caramel Colossus", "tag": "row 10", "hp": 1250, "def": "60%", "ab": "Counter 10 · Summon: 2 × Toffee Golem 300 · Enrage", "timer": 3, "pts": 600, "wr": "— · —", "ttk": 6 },
+      { "n": "The Critic", "tag": "secret · row 11", "hp": 1500, "def": "30%", "ab": "Counter 10 · Summon: Assistant 200 · Mood", "timer": 3, "pts": 1200, "wr": "least-used · most-used", "ttk": 7 } ] }
+  ],
+  "abilities": [
+    { "n": "Defense", "t": "Reduces damage by its percentage unless armour is ignored." },
+    { "n": "Counter N", "t": "Each striking seat drains N Nerve every turn the monster is attacked; a Trinity’s Round Delay staggers it for the turn." },
+    { "n": "Summon", "t": "Pets spawn at the start of the encounter. Single-target combos hit pets first; AOE hits everything." },
+    { "n": "Enrage", "t": "At or below 30% HP: +20% damage and the attack timer drops one step at once (min 1). Decided in v2." },
+    { "n": "Regen N", "t": "Heals N at the end of every turn it survives." },
+    { "n": "Split", "t": "At 50% HP, spawns the named pet once." },
+    { "n": "Sour", "t": "Gauge gains are halved while it lives." },
+    { "n": "Brittle", "t": "Defense drops 10% every time it is hit, to a floor of 0." },
+    { "n": "Glutton", "t": "Below 50% HP it eats a living pet to heal 150." },
+    { "n": "Shifting palate", "t": "Weakness rotates R → G → B at the end of every turn." },
+    { "n": "Rot N", "t": "The party loses N Nerve at the end of every turn it survives." },
+    { "n": "Vent", "t": "Every second turn its Counter is 20 instead of 10." },
+    { "n": "Shell", "t": "Single-target combos deal −50%." },
+    { "n": "Sticky", "t": "The party’s buffs and armour breaks last one turn." },
+    { "n": "Mood", "t": "Bitter: Counter 20. Sour: gauge halved. Sweet: Regen 60. Rolled when the Critic appears." },
+    { "n": "Weakness · resist", "t": "×1.25 to a combo whose majority colour matches the weakness, ×0.80 against the resist; a Trinity has no majority and is never tested." }
+  ],
+  "modifiers": [
+    { "n": "Hardened", "w": 1, "t": "Defense +15%." }, { "n": "Thick-skinned", "w": 1, "t": "HP +25%." }, { "n": "Crowded", "w": 1, "t": "One more pet, 100 HP." }, { "n": "Shifting", "w": 1, "t": "Weakness rotates each turn." },
+    { "n": "Hasty", "w": 2, "t": "Attack timer −1, min 2." }, { "n": "Spiteful", "w": 2, "t": "Counter +5; Counter 5 if it had none." }, { "n": "Sour", "w": 2, "t": "Gauge gains −50%." }, { "n": "Sticky", "w": 2, "t": "Buffs and breaks last one turn." },
+    { "n": "Ashen", "w": 2, "t": "Also resists Ruby." }, { "n": "Frosted", "w": 2, "t": "Also resists Sapphire." }, { "n": "Bitter", "w": 2, "t": "Also resists Emerald." }, { "n": "Short Fuse", "w": 2, "t": "Enrages at 50% HP." },
+    { "n": "Regenerating", "w": 2, "t": "Regen 40." }, { "n": "Silent Service", "w": 2, "t": "The turn clock is 15 s." }, { "n": "Blind Tasting", "w": 3, "t": "The combo preview line is hidden; the table commits blind." }, { "n": "Greedy", "w": 3, "t": "Steals 10 gauge every turn it survives." }
+  ],
+  "relics": {
+    "note": "The design-doc set. The Compendium (E.3) extends it to 38 plus 8 Boss relics and is canonical for the catalogue.",
+    "groups": [
+      { "label": "Common", "rows": [ { "n": "Salt Cellar", "t": "Pure-colour combos deal +10%." }, { "n": "Sharpening Stone", "t": "Single-target combos deal +8%." }, { "n": "Big Ladle", "t": "AOE combos deal +8%." }, { "n": "Warm Bread", "t": "Start every encounter with +10 gauge." }, { "n": "Mise en Place", "t": "The first combo of every encounter deals +20%." }, { "n": "Tip Jar", "t": "A kill on turn 1 pays +50 points." }, { "n": "Cast Iron", "t": "Counter drains 5 less per seat." }, { "n": "Order Pad", "t": "The turn clock is 40 s." }, { "n": "Spice Rack", "t": "Weakness pays ×1.35 instead of ×1.25." }, { "n": "Second Plate", "t": "Buffs and breaks from mixed combos last three turns." }, { "n": "Wet Towel", "t": "Monsters never Enrage." }, { "n": "Egg Timer", "t": "Attack timers start one higher, cap 3." } ] },
+      { "label": "Rare", "rows": [ { "n": "Trinity Ring", "t": "Trinity combos deal +30%." }, { "n": "Loaded Dice", "t": "Hold up to three Limit Tokens." }, { "n": "Family Recipe", "t": "The mono-gem bonus is +15% instead of +8%." }, { "n": "Pantry Key", "t": "Four relics offered after every fight instead of three." }, { "n": "Doggy Bag", "t": "Overkill on a pet spills onto the monster." }, { "n": "Bell Jar", "t": "The first Nerve break of the run costs no life." }, { "n": "Ember Jar", "t": "Sear at 10% even without a Ruby seat; a Ruby seat’s Sear is +5%." }, { "n": "Prism Lens", "t": "Any seat may recolour once per encounter." }, { "n": "Whetstone", "t": "Every combo ignores +25% Defense." }, { "n": "Sommelier’s Nose", "t": "Weakness and resist are shown for the next two rows of the map before you choose." } ] },
+      { "label": "Epic", "rows": [ { "n": "Head Chef’s Hat", "t": "Two Limit Breakers per round instead of one." }, { "n": "Golden Whisk", "t": "Gauge gains +50%." }, { "n": "Dinner Bell", "t": "Trinity’s Round Delay adds two turns instead of one." }, { "n": "Full Course", "t": "Every kill grants Grow +3% run damage; stacks with Second Helping." }, { "n": "Grease Trap", "t": "Counter damage is reflected: the monster takes 50 for every seat it drains." }, { "n": "Chef’s Table", "t": "Bosses take +20%." } ] },
+      { "label": "Boss relics · after rows 5 and 10 · power with a price", "rows": [ { "n": "Poison Ring", "t": "All combos +25%. Nerve maximum is 70." }, { "n": "Overtime", "t": "The turn clock is 60 s and every attack timer is one higher. Points −20%." }, { "n": "All You Can Eat", "t": "Two relics after every fight. Lives are reduced to one." }, { "n": "Blind Tasting", "t": "Combos deal +35%. The combo preview is hidden for the rest of the run." }, { "n": "Sous Vide", "t": "Monsters never Enrage and Counter is halved. Gauge gains −30%." }, { "n": "Clean Plate", "t": "Kills restore Nerve fully and pay +20 gauge. Limit Tokens cannot be banked past the round they are minted." } ] }
+    ]
+  },
+  "scoring": { "node": "points × reward tier", "turnBonus": "+50% for a kill on turn 1, +25% on turn 2", "livesLeft": 200, "boards": ["Daily Gauntlet (ranked, the day’s map)", "Free Table (fresh seed, unranked)"] },
+  "critic": "Resists the colour the table committed most that run and is weak to the colour it committed least. Points doubled, drops nothing.",
+  "tuning": [
+    { "metric": "Full clear, both bosses down", "target": "1 in 6", "band": "1 in 5–8" },
+    { "metric": "Median run ends at", "target": "row 8–9", "band": "—" },
+    { "metric": "Runs ending before row 5", "target": "<10%", "band": "—" },
+    { "metric": "Tables that see the Critic", "target": "1 in 50", "band": "1 in 40–60" },
+    { "metric": "TTK against the row target", "target": "0", "band": "±1 turn" },
+    { "metric": "Nerve lost per fight · Starter / Main / boss", "target": "≤20 / ≤35 / ≤45", "band": "—" },
+    { "metric": "Relic take-rate per offer slot", "target": "33%", "band": "15–45%" },
+    { "metric": "Hot node chosen", "target": "40% of rows", "band": "30–50%" }
+  ]
+}

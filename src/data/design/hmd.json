@@ -1,0 +1,110 @@
+{
+  "version": "v2 · 7 October 2026",
+  "fight": {
+    "timerSeconds": 180,
+    "horde": 999,
+    "fieldCap": 400,
+    "arena": "Side-on, landscape, 960×600 world. The party stands on the left third; the horde enters from the right edge.",
+    "formation": { "front": 3, "back": 2, "frontBonus": "+10% ARM", "backRule": "Reachable only by ranged enemies and leapers", "adjacency": "up/down and front/back" },
+    "orders": { "options": ["Nearest", "Weakest", "Strongest", "Protect"], "changeable": true, "cooldownSeconds": 15, "lockedBy": "Silent Service" },
+    "heat": { "perHitLanded": 10, "perHitTaken": 6, "perSecond": 2, "signatureAt": 100, "cadenceTarget": "7–9 s in a crowd" },
+    "threat": { "sapphire": 2, "emeraldHealing": 1.5, "default": 1 },
+    "surroundCap": { "meleePerCook": 4, "ranged": "unlimited, by line of sight" },
+    "enemyRates": { "meleeAttacksPerSecond": 1.0, "rangedAttacksPerSecond": 0.7, "speedTilesPerSecond": { "swarm": 1.5, "standard": 1.0, "slow": 0.6 } },
+    "damage": { "formula": "ATK × multiplier", "armour": "flat percentage reduction", "crit": "×1.5 at 5% base" },
+    "falls": "A downed cook stays down until Rise. Guests and Scraps are not cooks and do not count toward the end.",
+    "end": "The fight ends at 0:00 or when the fifth cook falls, whichever comes first.",
+    "rise": "At the end every cook rises, five Signatures fire together, and everything on the field and in the queue is finished. Finished kills are shown and never scored.",
+    "scoring": { "score": "kills before the end", "championValue": 10, "cleanPlate": "999 before the end: score ×1.5", "boards": ["Daily Table (party best of the day)", "Personal (a cook’s own kills)", "Free Table (fresh seed, unranked)"] },
+    "simulation": "Fixed-step, seeded. The daily seed fixes the conditions and the Champion order; the run seed varies wave rolls, Ingredient drops and Champion entry points."
+  },
+  "courses": [
+    { "id": "I", "name": "Amuse-bouche", "kills": "0–249", "pourPerSecond": 6, "avgHp": 40, "avgAtk": 6,
+      "units": [
+        { "n": "Cupcake", "hp": 35, "atk": 6, "share": "50%", "speed": "swarm", "range": "melee", "note": "The bulk of the first Course." },
+        { "n": "Weevil", "hp": 20, "atk": 4, "share": "20%", "speed": "swarm", "range": "melee", "note": "Packs of six; goes for the back row if it can." },
+        { "n": "Mould Blob", "hp": 90, "atk": 8, "share": "10%", "speed": "slow", "range": "melee", "note": "Splits into two Spores (15 HP) on death. Spores count as kills." },
+        { "n": "Salt Sprite", "hp": 45, "atk": 7, "share": "20%", "speed": "standard", "range": "mid", "note": "Thrower; holds position." } ] },
+    { "id": "II", "name": "Starter", "kills": "250–499", "pourPerSecond": 7, "avgHp": 55, "avgAtk": 12,
+      "units": [
+        { "n": "Line Cook", "hp": 55, "atk": 12, "share": "45%", "speed": "standard", "range": "melee", "note": "The rival table’s rank and file." },
+        { "n": "Saucier", "hp": 45, "atk": 10, "share": "20%", "speed": "standard", "range": "long", "note": "Hits apply Burn ×1." },
+        { "n": "Pastry Golem", "hp": 120, "atk": 18, "share": "10%", "speed": "slow", "range": "melee", "note": "20% ARM; a wall that hides the Sauciers." },
+        { "n": "Dish Pig", "hp": 45, "atk": 11, "share": "25%", "speed": "standard", "range": "melee", "note": "Leaper: lands in the back row and stays there." } ] },
+    { "id": "III", "name": "Main", "kills": "500–749", "pourPerSecond": 8, "avgHp": 95, "avgAtk": 24,
+      "units": [
+        { "n": "Grease Wraith", "hp": 100, "atk": 24, "share": "35%", "speed": "standard", "range": "melee", "note": "Lifesteal 30%; the Course that punishes thin healing." },
+        { "n": "Cursed Cutlery", "hp": 32, "atk": 14, "share": "30%", "speed": "swarm", "range": "melee", "note": "Packs of eight; chip damage adds up." },
+        { "n": "Oven Golem", "hp": 320, "atk": 34, "share": "10%", "speed": "slow", "range": "melee", "note": "30% ARM; hits apply Burn ×1." },
+        { "n": "Steam Wisp", "hp": 75, "atk": 0, "share": "25%", "speed": "standard", "range": "long", "note": "No damage; Chills ×1 whoever it hits." } ] },
+    { "id": "IV", "name": "Dessert", "kills": "750–999", "pourPerSecond": 9, "avgHp": 170, "avgAtk": 36,
+      "units": [
+        { "n": "Assistant", "hp": 155, "atk": 36, "share": "40%", "speed": "standard", "range": "melee", "note": "Standard melee, in numbers." },
+        { "n": "Food Photographer", "hp": 120, "atk": 12, "share": "15%", "speed": "standard", "range": "long", "note": "Marks a cook: every enemy targets them for 4 s." },
+        { "n": "Sommelier", "hp": 210, "atk": 34, "share": "25%", "speed": "standard", "range": "mid", "note": "Each hit strips one buff or shield." },
+        { "n": "Plate Spinner", "hp": 195, "atk": 31, "share": "20%", "speed": "swarm", "range": "melee", "note": "Reflects 10% of melee damage taken." } ] }
+  ],
+  "hordeBudget": { "totalHp": 90000, "byCourse": [10000, 13750, 23750, 42500], "pourTimeSeconds": 136, "clearNeeds": "500 usable damage per second over 180 s; the catalogue (Compendium v2) is cut so a table with two combos reaches 875 and a Menu reaches 999", "compendiumV2": "Courses III and IV +30% HP, +20% ATK over v1 to absorb the everything-is-OP catalogue" },
+  "champions": {
+    "rule": "One Champion every 100 kills. HP is set by the slot, identity by the daily shuffle; the Critic always takes slot 9 at 900 kills.",
+    "hpBySlot": [500, 625, 750, 875, 1000, 1125, 1250, 1375, 2000],
+    "scoreValue": 10,
+    "ingredients": 5,
+    "roster": [
+      { "n": "Giant Weevil", "arm": "10%", "trick": "Charges the nearest cook and knocks it back a tile." },
+      { "n": "The Dishwasher", "arm": "20%", "trick": "Pulls a back-row cook one tile forward every 8 s." },
+      { "n": "Pastry Titan", "arm": "30%", "trick": "Slow and huge; every hit on it splashes 20% to adjacent cooks." },
+      { "n": "Soup Kraken", "arm": "10%", "trick": "Three tentacles (a quarter of its HP each) count as separate kills; the body is untargetable until they are gone." },
+      { "n": "Grease Elemental", "arm": "10%", "trick": "Lifesteal aura: enemies within a tile heal 20% of their damage." },
+      { "n": "Cutlery Hydra", "arm": "20%", "trick": "Spawns two Cursed Cutlery every time it takes a crit." },
+      { "n": "Ghost of the Old Master", "arm": "0%", "trick": "Untargetable for 2 s every 10 s; hits Chill ×1." },
+      { "n": "The Health Inspector", "arm": "20%", "trick": "Issues a citation: one random augment on one cook switches off for 10 s." },
+      { "n": "The Critic", "arm": "40%", "fixedSlot": 9, "trick": "One of three moods. Bitter: hits strip Heat. Sour: heals the horde 5% on entry. Sweet: takes −30% until every other enemy on the field is dead." }
+    ]
+  },
+  "conditions": {
+    "rule": "Three conditions a day, one per tier, rolled at 00:00 and shown on the lobby card. Tier I from the bell, Tier II from 500 kills, Tier III from 750 kills.",
+    "triggers": { "I": "the bell", "II": "500 kills (Course III)", "III": "750 kills (Course IV)" },
+    "exclusions": [["Stale", "Grease Fire"], ["Closing Time", "Rush Hour"], ["Closing Time", "Late Delivery"], ["Double Booking", "Tasting Menu"]],
+    "list": [
+      { "tier": "I", "n": "Rush Hour", "t": "Pour rate +50%; enemies −20% HP." },
+      { "tier": "I", "n": "Fridge Open", "t": "Everything on the field is Chilled ×1, cooks included." },
+      { "tier": "I", "n": "Leftover Night", "t": "Fifty extra Cupcakes queue up; each scores 2." },
+      { "tier": "I", "n": "Sticky Floor", "t": "Everyone moves 15% slower." },
+      { "tier": "I", "n": "Heavy Cream", "t": "Enemies +25% HP, −10% SPD." },
+      { "tier": "I", "n": "Late Delivery", "t": "Every Course pours one a second faster." },
+      { "tier": "II", "n": "Grease Fire", "t": "The floor burns everyone 1% per second, both sides." },
+      { "tier": "II", "n": "Spice Storm", "t": "All damage +30%, both sides." },
+      { "tier": "II", "n": "Blackout", "t": "The back row is targetable by melee." },
+      { "tier": "II", "n": "Power Cut", "t": "No Heat from time." },
+      { "tier": "II", "n": "Sharp Knives", "t": "Enemies +20% ATK." },
+      { "tier": "II", "n": "Tasting Menu", "t": "Signatures cost 70 Heat; every cast brings the next Champion 5 kills early." },
+      { "tier": "III", "n": "Stale", "t": "Healing is halved." },
+      { "tier": "III", "n": "Silent Service", "t": "Orders lock at the bell." },
+      { "tier": "III", "n": "Double Booking", "t": "Two Champions per milestone." },
+      { "tier": "III", "n": "Health Inspection", "t": "Cooks below 50% HP deal −10%." },
+      { "tier": "III", "n": "Fire Alarm", "t": "At 1:00 and 2:00 every unit on the field is knocked back a tile." },
+      { "tier": "III", "n": "Closing Time", "t": "Course IV pours at 12 a second." }
+    ]
+  },
+  "augments": {
+    "prepWindows": ["00:00", "06:00", "12:00", "18:00"],
+    "offer": "Three cards: one Pantry, one Facet of your gem, one Signature of your class. Take one; it locks for the day. A held augment can be offered again and tiers up: Common → Rare → Epic, about ×1.7 a tier.",
+    "special": "Before the bell, one Special of three, fight only. Four in Leftovers hour.",
+    "pools": { "pantry": 36, "facetsPerGem": 10, "signaturesPerClass": 6, "specials": 16, "pairings": 16, "recipes": 12 },
+    "catalogue": "Table Wars Compendium v2.dc.html · Part C",
+    "compendiumEdits": ["Leftover Night and Last Word reference Service; Service is retired in v2 — Leftover Night scores 2 a Cupcake, Last Word fires the Signature once more on falling."]
+  },
+  "tuning": [
+    { "metric": "Fresh table kills (one augment, first fight)", "target": "600", "band": "550–650" },
+    { "metric": "Full-loadout median kills (five augments)", "target": "875", "band": "850–900" },
+    { "metric": "Clean Plate rate, full loadout", "target": "1 in 40", "band": "1 in 30–50" },
+    { "metric": "Time of a clear", "target": "2:50", "band": "2:40–3:00" },
+    { "metric": "Course reached by a fresh table", "target": "III", "band": "by 1:30–1:50" },
+    { "metric": "Full-loadout fights with a cook down before the end", "target": "50%", "band": "40–60%" },
+    { "metric": "Full-loadout fights with three or more down", "target": "<10%", "band": "—" },
+    { "metric": "Signature cadence", "target": "8 s", "band": "7–9 s" },
+    { "metric": "Class × gem kill share against the median", "target": "0", "band": "±15%" },
+    { "metric": "Augment take-rate when offered", "target": "40%", "band": "25–55%; flag above 60%" }
+  ]
+}

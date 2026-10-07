@@ -1,0 +1,33 @@
+.nav {
+  display: flex;
+  flex: none;
+  border-top: 1px solid var(--border);
+  background: var(--surface-raised);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab {
+  flex: 1;
+  /* The baseline prototype draws these tabs as divs, so min-height is content-box: 56 + 12 padding = 68 px tall.
+     BaD's buttons were border-box (58 px); the gate is the prototype. Phase 2's tab bar follows OraX-App.dc.html. */
+  box-sizing: content-box;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 6px 0;
+  color: var(--ink-muted);
+  font: var(--text-caption);
+}
+.tab:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+}
+.active {
+  color: var(--brand-text);
+  font-weight: 500;
+}

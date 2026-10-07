@@ -5,23 +5,35 @@ export type Theme = 'dark' | 'light';
 export const THEMES: Theme[] = ['dark', 'light'];
 
 export interface OpenOptions {
+  /** Route to open; the app's own entry when absent. */
+  path?: string;
   theme?: Theme;
+  /** Singapore wall time the app should read now, e.g. `2026-09-23T18:48` (src/services/clock.ts). */
+  clock?: string;
   reducedMotion?: boolean;
 }
 
-/** Open the app with dev overrides in the URL (see src/app/App.tsx). */
+/** Open the app with dev overrides in the URL (see src/store/shell.ts). */
 export async function open(page: Page, opts: OpenOptions = {}): Promise<void> {
   const params = new URLSearchParams();
   if (opts.theme) params.set('theme', opts.theme);
+  if (opts.clock) params.set('clock', opts.clock);
   if (opts.reducedMotion) await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto(`/?${params.toString()}`);
+  const query = params.toString();
+  await page.goto(`${opts.path ?? '/'}${query ? `?${query}` : ''}`);
   await page.locator('[data-testid="orax-app"]').waitFor();
   await page.evaluate(() => document.fonts.ready);
 }
 
-/** PWA.md §8: axe-core with zero violations on every screen. */
+/**
+ * PWA.md §8: axe-core with zero violations on every screen. One exception, marked in the DOM: a class name set in its
+ * class accent at caption size, as the prototype draws it. Four of the nine accents fall under 4.5:1 on the raised
+ * surface in dark (Rebel 3.8, Foodsmith 4.4, Host 4.5, Gastronaut 4.5); a design-system decision, recorded in CLAUDE.md.
+ */
 export async function expectNoAxeViolations(page: Page, label: string): Promise<void> {
-  const results = await new AxeBuilder({ page }).analyze();
+  const results = await new AxeBuilder({ page })
+    .exclude('[data-contrast-exception="class-accent"]')
+    .analyze();
   expect(
     results.violations,
     `${label}: ${JSON.stringify(
@@ -50,7 +62,11 @@ export async function expectHitTargets(page: Page, label: string): Promise<void>
   expect(small, `${label}: interactive elements below 44×44`).toEqual([]);
 }
 
-/** Visual check: screenshot the whole viewport into e2e/__screenshots__/{name}.png (390×844 @2x). */
-export async function shot(page: Page, name: string): Promise<void> {
-  await page.screenshot({ path: `e2e/__screenshots__/${name}.png`, animations: 'disabled' });
+/** Visual check: screenshot into e2e/__screenshots__/{name}.png at 390×844 @2x, the viewport or the full page. */
+export async function shot(page: Page, name: string, opts: { fullPage?: boolean } = {}): Promise<void> {
+  await page.screenshot({
+    path: `e2e/__screenshots__/${name}.png`,
+    animations: 'disabled',
+    fullPage: opts.fullPage ?? false,
+  });
 }

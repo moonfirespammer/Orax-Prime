@@ -1,0 +1,67 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-overlay);
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+.panel {
+  position: relative;
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-3) var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: orax-in var(--motion-base) var(--ease-standard);
+  outline: none;
+}
+.grabber {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--border-strong);
+  align-self: center;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.title {
+  margin: 0;
+  font: var(--text-heading-md);
+  letter-spacing: var(--tracking-heading-md);
+}
+.resets {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.caption {
+  margin: 0;
+  text-align: center;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+@keyframes orax-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

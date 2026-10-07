@@ -19,8 +19,10 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "handoff": "node scripts/serve-static.mjs docs/handoff 4174",
-    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test",
-    "check:full": "pnpm check && pnpm build && pnpm e2e"
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm check:abilities",
+    "check:full": "pnpm check && pnpm build && pnpm e2e",
+    "abilities": "node scripts/render-abilities.mjs",
+    "check:abilities": "node scripts/render-abilities.mjs --check"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

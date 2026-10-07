@@ -1,0 +1,85 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--touch-target);
+  flex: none;
+}
+.pixel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
+.unsortedRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.unsorted {
+  width: 96px;
+  height: 144px;
+  flex: none;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface-raised);
+}
+.unsortedLabel {
+  padding-bottom: var(--space-1);
+}
+.title {
+  margin: 0;
+  font: var(--text-display-lg);
+  letter-spacing: var(--tracking-display-lg);
+  text-wrap: pretty;
+}
+.lead {
+  margin: 0;
+  font: var(--text-body-lg);
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+.input {
+  min-height: 56px;
+  padding: 0 var(--space-4);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  font: var(--text-heading-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  /* The prototype's recess for this input: a lighter socket shadow than the token. */
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.25);
+  /* As the prototype's input: content-box, so 56 px inside the border; the column stretches it to full width. */
+  box-sizing: content-box;
+}
+.input::placeholder {
+  color: var(--ink-faint);
+  letter-spacing: 0.18em;
+}
+.input:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.hint {
+  margin: 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
