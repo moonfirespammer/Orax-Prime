@@ -1,0 +1,46 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+.cover {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 960px;
+  height: 288px;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transform-origin: top left;
+}
+.blocks {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.logo {
+  position: absolute;
+  left: 36px;
+  bottom: 60px;
+  height: 150px;
+  width: auto;
+  max-width: none;
+}
+.strip {
+  position: absolute;
+  left: 48px;
+  bottom: 28px;
+  margin: 0;
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.strip b {
+  color: var(--brand-text);
+  font-weight: 400;
+}

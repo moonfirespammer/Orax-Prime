@@ -5,16 +5,19 @@ export type Theme = 'dark' | 'light';
 export const THEMES: Theme[] = ['dark', 'light'];
 
 export interface OpenOptions {
+  /** Route to open; the app's own entry when absent. */
+  path?: string;
   theme?: Theme;
   reducedMotion?: boolean;
 }
 
-/** Open the app with dev overrides in the URL (see src/app/App.tsx). */
+/** Open the app with dev overrides in the URL (see src/store/shell.ts). */
 export async function open(page: Page, opts: OpenOptions = {}): Promise<void> {
   const params = new URLSearchParams();
   if (opts.theme) params.set('theme', opts.theme);
   if (opts.reducedMotion) await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto(`/?${params.toString()}`);
+  const query = params.toString();
+  await page.goto(`${opts.path ?? '/'}${query ? `?${query}` : ''}`);
   await page.locator('[data-testid="orax-app"]').waitFor();
   await page.evaluate(() => document.fonts.ready);
 }
@@ -50,7 +53,11 @@ export async function expectHitTargets(page: Page, label: string): Promise<void>
   expect(small, `${label}: interactive elements below 44×44`).toEqual([]);
 }
 
-/** Visual check: screenshot the whole viewport into e2e/__screenshots__/{name}.png (390×844 @2x). */
-export async function shot(page: Page, name: string): Promise<void> {
-  await page.screenshot({ path: `e2e/__screenshots__/${name}.png`, animations: 'disabled' });
+/** Visual check: screenshot into e2e/__screenshots__/{name}.png at 390×844 @2x, the viewport or the full page. */
+export async function shot(page: Page, name: string, opts: { fullPage?: boolean } = {}): Promise<void> {
+  await page.screenshot({
+    path: `e2e/__screenshots__/${name}.png`,
+    animations: 'disabled',
+    fullPage: opts.fullPage ?? false,
+  });
 }

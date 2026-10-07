@@ -23,6 +23,8 @@ export default tseslint.config(
       globals: { ...globals.browser, ...globals.node },
     },
     rules: {
+      // ClassCard's `role` prop is the role eyebrow (Fighter, Rogue, Mage), not an ARIA role.
+      'jsx-a11y/aria-role': ['error', { ignoreNonDOM: true }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       '@typescript-eslint/no-unnecessary-type-parameters': 'off',
