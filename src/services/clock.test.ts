@@ -3,10 +3,14 @@ import {
   cityTime,
   clockFromSearch,
   createClock,
+  dayPct,
   formatDate,
   isLeftoversHour,
+  nextPrepLabel,
   nextResetAt,
   resetIn,
+  resetsLabel,
+  timeLabel,
 } from './clock';
 
 const sgt = (iso: string): number => Date.parse(`${iso}+08:00`);
@@ -32,6 +36,23 @@ describe('city clock (spec §3.1)', () => {
     expect(isLeftoversHour(sgt('2026-09-24T00:00:00'))).toBe(false);
     expect(isLeftoversHour(sgt('2026-09-23T12:00:00'), 'on')).toBe(true);
     expect(isLeftoversHour(sgt('2026-09-23T22:00:00'), 'off')).toBe(false);
+  });
+  it('labels the daily header: Resets Nh MMm, HH:MM, the next Prep window, the day share', () => {
+    expect(resetsLabel(sgt('2026-09-23T18:48:00'))).toBe('Resets 5h 12m');
+    expect(resetsLabel(sgt('2026-09-23T23:59:30'))).toBe('Resets 0h 00m');
+    expect(resetsLabel(sgt('2026-09-23T00:00:00'))).toBe('Resets 24h 00m');
+    expect(timeLabel(sgt('2026-09-23T18:48:00'))).toBe('18:48');
+    expect(timeLabel(sgt('2026-09-23T09:05:59'))).toBe('09:05');
+    expect(nextPrepLabel(sgt('2026-09-23T05:59:00'))).toBe('Prep window 06:00');
+    expect(nextPrepLabel(sgt('2026-09-23T06:00:00'))).toBe('Prep window 12:00');
+    expect(nextPrepLabel(sgt('2026-09-23T17:30:00'))).toBe('Prep window 18:00');
+    expect(nextPrepLabel(sgt('2026-09-23T18:48:00'))).toBe('Prep window 00:00');
+    expect(dayPct(sgt('2026-09-23T12:00:00'))).toBe(50);
+    expect(dayPct(sgt('2026-09-23T18:48:00'))).toBe(78.3);
+    const clock = createClock({ source: () => sgt('2026-09-23T18:48:00') });
+    expect(clock.resetsLabel()).toBe('Resets 5h 12m');
+    expect(clock.timeLabel()).toBe('18:48');
+    expect(clock.nextPrepLabel()).toBe('Prep window 00:00');
   });
   it('formats dates as d Mon yyyy in city time', () => {
     expect(formatDate(sgt('2026-09-23T00:30:00'))).toBe('23 Sep 2026');

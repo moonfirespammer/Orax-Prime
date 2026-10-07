@@ -7,7 +7,7 @@ const OUT = 'e2e/__screenshots__/compare';
 
 test.describe('Phase 1c · baseline Play screen (MIGRATION §6 gate 1)', () => {
   test('renders the old BaD host shell Play screen at 390×844', async ({ page }) => {
-    await open(page, { theme: 'dark' });
+    await open(page, { path: '/dev/baseline', theme: 'dark' });
     await expect(page.getByRole('heading', { name: 'Your party' })).toBeVisible();
     await expect(page.getByText('Tiong Bahru Market')).toBeVisible();
     await expect(page.getByText('Singapore · 400 m · tonight 19:30')).toBeVisible();
@@ -29,7 +29,7 @@ test.describe('Phase 1c · baseline Play screen (MIGRATION §6 gate 1)', () => {
   });
 
   test('a tapped tab becomes the current one', async ({ page }) => {
-    await open(page, { theme: 'dark' });
+    await open(page, { path: '/dev/baseline', theme: 'dark' });
     const nav = page.getByRole('navigation', { name: 'Main' });
     await nav.getByRole('button', { name: 'You' }).click();
     await expect(nav.getByRole('button', { name: 'You' })).toHaveAttribute('aria-current', 'page');
@@ -37,7 +37,7 @@ test.describe('Phase 1c · baseline Play screen (MIGRATION §6 gate 1)', () => {
   });
 
   test('writes the gate sheet: the handoff shot beside the app', async ({ page, browser }) => {
-    await open(page, { theme: 'dark' });
+    await open(page, { path: '/dev/baseline', theme: 'dark' });
     await page.waitForTimeout(300);
     const app = await page.screenshot({ animations: 'disabled' });
     mkdirSync(OUT, { recursive: true });
@@ -46,7 +46,7 @@ test.describe('Phase 1c · baseline Play screen (MIGRATION §6 gate 1)', () => {
     await sheet.setContent(
       `<body style="margin:0;background:#888;font:700 13px sans-serif"><div style="display:flex;gap:16px;padding:8px">` +
         `<figure style="margin:0"><figcaption>Handoff · base-play.jpg</figcaption><img src="${img(readFileSync(REFERENCE), 'image/jpeg')}" width="390"></figure>` +
-        `<figure style="margin:0"><figcaption>App · / · dark</figcaption><img src="${img(app, 'image/png')}" width="390"></figure></div></body>`,
+        `<figure style="margin:0"><figcaption>App · /dev/baseline · dark</figcaption><img src="${img(app, 'image/png')}" width="390"></figure></div></body>`,
     );
     await sheet.screenshot({ path: `${OUT}/baseline-play-dark.png`, fullPage: true });
     await sheet.close();

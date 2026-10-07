@@ -1,0 +1,62 @@
+.nav {
+  display: flex;
+  align-items: flex-end;
+  flex: none;
+  border-top: 1px solid var(--border);
+  background: var(--surface-raised);
+  position: relative;
+}
+.tab {
+  flex: 1;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 6px 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--ink-muted);
+  font: var(--text-caption);
+}
+.tab:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+}
+.active {
+  color: var(--brand-text);
+  font-weight: 500;
+}
+.centre {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 56px;
+  position: relative;
+}
+.play {
+  position: absolute;
+  bottom: 14px;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--brand);
+  color: var(--on-brand);
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 0 0 6px var(--surface-raised);
+}
+.play:active {
+  background: var(--brand-deep);
+}
+.play:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}

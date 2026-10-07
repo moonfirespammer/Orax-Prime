@@ -31,6 +31,29 @@ export function resetIn(nowMs: number): string {
   return `${pad2(Math.floor(left / 36e5))}:${pad2(Math.floor(left / 6e4) % 60)}:${pad2(Math.floor(left / 1e3) % 60)}`;
 }
 
+/** `Resets Nh MMm` for the daily header and the Play sheet (the prototype's clock()). At 00:00 it reads 24h 00m. */
+export function resetsLabel(nowMs: number): string {
+  const left = DAY_MS - cityTime(nowMs).msSinceMidnight;
+  return `Resets ${Math.floor(left / 36e5)}h ${pad2(Math.floor((left % 36e5) / 6e4))}m`;
+}
+
+/** `HH:MM` in city time, 24-hour. */
+export function timeLabel(nowMs: number): string {
+  const t = cityTime(nowMs);
+  return `${pad2(t.hour)}:${pad2(Math.floor((t.msSinceMidnight % 36e5) / 6e4))}`;
+}
+
+/** The next HMD Prep window: 06:00, 12:00, 18:00, then 00:00 (PRODUCT_SPEC §3). */
+export function nextPrepLabel(nowMs: number): string {
+  const next = [6, 12, 18, 24].find((x) => x > cityTime(nowMs).hour) ?? 24;
+  return next === 24 ? 'Prep window 00:00' : `Prep window ${pad2(next)}:00`;
+}
+
+/** Share of the city day elapsed, to one decimal, for the 1b clock strip. */
+export function dayPct(nowMs: number): number {
+  return Math.round((cityTime(nowMs).msSinceMidnight / DAY_MS) * 1000) / 10;
+}
+
 /** Epoch ms of the next 00:00 city time. */
 export function nextResetAt(nowMs: number): number {
   return nowMs + (DAY_MS - cityTime(nowMs).msSinceMidnight);
@@ -56,6 +79,9 @@ export interface Clock {
   leftoversOverride: LeftoversOverride;
   city(): CityTime;
   resetIn(): string;
+  resetsLabel(): string;
+  timeLabel(): string;
+  nextPrepLabel(): string;
   leftovers(): boolean;
 }
 
@@ -77,6 +103,9 @@ export function createClock(opts: ClockOptions = {}): Clock {
     leftoversOverride: override,
     city: () => cityTime(now()),
     resetIn: () => resetIn(now()),
+    resetsLabel: () => resetsLabel(now()),
+    timeLabel: () => timeLabel(now()),
+    nextPrepLabel: () => nextPrepLabel(now()),
     leftovers: () => isLeftoversHour(now(), override),
   };
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ASSET_PATHS, asset } from './assets';
-import { CLASSES, CLASS_ORDER, GEMS, GEM_ORDER, TAGLINE, avatarCrop } from './data';
+import { CLASSES, CLASS_ORDER, GEMS, GEM_ORDER, TAGLINE, avatarCrop, kitCrop } from './data';
 
 describe('design-system data', () => {
   it('has nine classes in roster order, three per role (PRODUCT_SPEC §2)', () => {
@@ -31,6 +31,12 @@ describe('design-system data', () => {
     expect(c.backgroundImage).toContain('01-provider-board');
     expect(avatarCrop('host', 't2f').backgroundPosition).toBe('78.29% 60.93%');
     expect(avatarCrop('host', 't1f', 2).backgroundPosition).toBe('94.00% -32.00%');
+  });
+
+  it('crops a whole figure by quadrant at 200 %', () => {
+    expect(kitCrop('stirrer')).toMatchObject({ backgroundSize: '200%', backgroundPosition: '0% 0%' });
+    expect(kitCrop('stirrer', 't2f').backgroundPosition).toBe('100% 100%');
+    expect(kitCrop('rebel', 't1f').backgroundImage).toContain('07-rebel-board');
   });
 
   it('keeps the taglines fixed', () => {

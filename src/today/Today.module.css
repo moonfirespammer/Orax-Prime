@@ -1,0 +1,273 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--gutter) var(--space-4);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  min-height: 56px;
+  flex: none;
+}
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.city {
+  color: var(--ink-muted);
+}
+/* The screen's name for assistive tech; the prototype's Today has no visible title. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.rowHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* The match hero */
+.matchCard {
+  flex: none;
+  margin-bottom: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.matchTop {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) 0;
+}
+.figure {
+  flex: none;
+  width: 112px;
+  height: 140px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface-sunken);
+  cursor: pointer;
+  padding: 0;
+}
+.figure:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.matchText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.classLine {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.className {
+  font: var(--text-caption);
+  font-weight: 500;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.shared {
+  margin: 2px 0 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+.habits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: var(--space-3) var(--space-4) 0;
+}
+.quest {
+  margin: var(--space-3) var(--space-4) 0;
+  padding: var(--space-3);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+.questLabel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  color: var(--brand-text);
+}
+.questText {
+  margin: var(--space-1) 0 0;
+  font: var(--text-body);
+  text-wrap: pretty;
+}
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+/* The quest card */
+.questsCard {
+  flex: none;
+  margin-bottom: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.questRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  box-sizing: border-box;
+}
+.questRow:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.questRow:disabled {
+  color: var(--ink-faint);
+  cursor: default;
+}
+.questPicked {
+  padding: 11px;
+  background: var(--brand-subtle);
+  border: 2px solid var(--brand);
+}
+.box {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-strong);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-brand);
+  /* The prototype's box is a span: 22 px of content plus the 2 px border on each side, 26 px in all. */
+  box-sizing: content-box;
+}
+.boxPicked {
+  border-color: var(--brand);
+  background: var(--brand);
+}
+.questText2 {
+  flex: 1;
+  min-width: 0;
+}
+.questTitle {
+  display: block;
+  font: var(--text-body-strong);
+}
+.questMeta {
+  display: block;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.questState {
+  flex: none;
+  color: var(--ink-muted);
+}
+.done {
+  color: var(--success);
+}
+.questsFoot {
+  margin-top: var(--space-1);
+}
+
+/* Tonight */
+.tonight {
+  flex: none;
+  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.tonightHead {
+  padding: 0 0 var(--space-1);
+}
+
+/* The digest preview */
+.digestCard {
+  flex: none;
+  margin-bottom: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.wallLink {
+  min-height: var(--touch-target);
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-2));
+  padding: 0 var(--space-2);
+  background: transparent;
+  border: 0;
+  color: var(--brand-text);
+  font: var(--text-body-strong);
+  cursor: pointer;
+}
+.wallLink:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.digestItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.digestText {
+  flex: 1;
+  min-width: 0;
+}
+.digestLine {
+  display: block;
+  font: var(--text-body);
+}
+.digestMeta {
+  display: block;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}

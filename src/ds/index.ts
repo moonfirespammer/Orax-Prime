@@ -1,6 +1,16 @@
 // The OraX design system: tokens live in ./tokens (imported once by src/styles/app.css), everything else here.
 export { asset, ASSET_PATHS } from './assets';
-export { avatarCrop, CLASSES, CLASS_ORDER, FIGURES, GEMS, GEM_ORDER, TAGLINE } from './data';
+export {
+  avatarCrop,
+  kitCrop,
+  CLASSES,
+  CLASS_ORDER,
+  FIGURES,
+  GEMS,
+  GEM_ORDER,
+  QUADRANTS,
+  TAGLINE,
+} from './data';
 export type { ClassInfo, GemInfo } from './data';
 export type { ClassKey, Figure, Gem, Role } from './types';
 export { Avatar } from './components/Avatar';

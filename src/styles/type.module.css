@@ -1,0 +1,47 @@
+/* Type and surface utilities on the tokens, for screens built from the prototype's inline styles. */
+.overline {
+  font: var(--text-overline);
+  letter-spacing: var(--tracking-overline);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.pixel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+}
+.pixelMuted {
+  composes: pixel;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.caption {
+  margin: 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.bodyStrong {
+  font: var(--text-body-strong);
+}
+.headingSm {
+  margin: 0;
+  font: var(--text-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+}
+.headingMd {
+  margin: 0;
+  font: var(--text-heading-md);
+  letter-spacing: var(--tracking-heading-md);
+}
+.displayLg {
+  margin: 0;
+  font: var(--text-display-lg);
+  letter-spacing: var(--tracking-display-lg);
+  text-wrap: pretty;
+}
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+}

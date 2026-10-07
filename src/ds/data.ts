@@ -115,6 +115,14 @@ export const FIGURES: Readonly<Record<Figure, { x: number; y: number }>> = {
   t2f: { x: 0.72, y: 0.585 },
 };
 
+/** Each figure's quadrant of the board at 200 %: the kit crop for a Wardrobe or a match hero (MIGRATION §3.4). */
+export const QUADRANTS: Readonly<Record<Figure, string>> = {
+  t1m: '0% 0%',
+  t1f: '100% 0%',
+  t2m: '0% 100%',
+  t2f: '100% 100%',
+};
+
 /** The two taglines: always two lines, never joined, never reworded. */
 export const TAGLINE: readonly [string, string] = ['THE GAME IS LIFE', 'PLAY IT TOGETHER'];
 
@@ -126,6 +134,16 @@ export function avatarCrop(classKey: ClassKey, figure: Figure = 't1m', zoom = 4.
     backgroundImage: `url("${asset(CLASSES[classKey].board)}")`,
     backgroundSize: `${zoom * 100}%`,
     backgroundPosition: `${pos(f.x)} ${pos(f.y)}`,
+    backgroundRepeat: 'no-repeat',
+  };
+}
+
+/** CSS background props that show one whole figure: the board at 200 % positioned on its quadrant. */
+export function kitCrop(classKey: ClassKey, figure: Figure = 't1m'): CSSProperties {
+  return {
+    backgroundImage: `url("${asset(CLASSES[classKey].board)}")`,
+    backgroundSize: '200%',
+    backgroundPosition: QUADRANTS[figure],
     backgroundRepeat: 'no-repeat',
   };
 }

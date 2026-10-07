@@ -26,16 +26,32 @@ function initialTheme(): Theme {
   return themeFromSearch(window.location.search) ?? storedTheme() ?? 'dark';
 }
 
+export type Sheet = 'play' | null;
+
 interface ShellState {
   /** Dark first; light is a full peer (DESIGN_RULES). Applied to <html data-theme> by the App. */
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
+  /** The sheet over the current screen: the Play sheet from the centre tab button (MIGRATION §3.2). */
+  sheet: Sheet;
+  openSheet: (sheet: Exclude<Sheet, null>) => void;
+  closeSheet: () => void;
 }
 
-/** The shell slice (MIGRATION §2). Phase 1b holds the theme; tabs, the stack and the sheet arrive in phase 2. */
+/**
+ * The shell slice (MIGRATION §2): the theme and the sheet. Tabs and the sub-screen stack are the router's
+ * (`/today`, `/you`, sub-screens beneath them), so a tap on Back is a step back in history.
+ */
 export const useShell = create<ShellState>((set, get) => ({
   theme: initialTheme(),
+  sheet: null,
+  openSheet: (sheet) => {
+    set({ sheet });
+  },
+  closeSheet: () => {
+    set({ sheet: null });
+  },
   setTheme: (theme) => {
     try {
       localStorage.setItem(THEME_KEY, theme);
