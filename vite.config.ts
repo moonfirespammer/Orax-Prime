@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   server: { port: 5173, strictPort: true },
+  // Bound to IPv4 loopback explicitly: on GitHub runners `localhost` resolves to ::1 first and Playwright's
+  // webServer poll of http://127.0.0.1:4173 never connects.
+  preview: { host: '127.0.0.1', port: 4173, strictPort: true },
   test: {
     environment: 'jsdom',
     globals: true,
