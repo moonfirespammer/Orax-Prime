@@ -1,0 +1,123 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.plate {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.plate:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.plateHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.plateHead > :first-child {
+  white-space: nowrap;
+}
+.styleLabel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+}
+.chips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  min-height: 50px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.applyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  min-height: 36px;
+}
+.fling {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-2);
+  margin: -4px 0;
+  background: transparent;
+  border: 0;
+  color: var(--brand-text);
+  font: var(--text-caption);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+}
+.fling:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.buttonsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: -4px;
+}
+.prepButtons {
+  display: flex;
+  gap: var(--space-2);
+}
+.buttonsHint {
+  text-align: right;
+}
+.pantryHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.capText {
+  text-align: right;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.grid4 {
+  composes: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.subhead {
+  margin-top: var(--space-4);
+}
+.extrasCaption {
+  margin-top: 2px;
+}
+.footer {
+  flex: none;
+  padding: var(--space-3) var(--space-4) var(--space-3);
+  border-top: 1px solid var(--border);
+}
+.plateHint {
+  margin-top: var(--space-1);
+  text-align: center;
+}

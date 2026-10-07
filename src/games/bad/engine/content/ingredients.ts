@@ -1,0 +1,122 @@
+import type { Ingredient, Tag } from '../types';
+
+const I = (
+  id: string,
+  name: string,
+  assetKey: string,
+  cut: 0 | 1,
+  heat: 0 | 1,
+  tags: Tag[] = [],
+  extra = false,
+): Ingredient => ({
+  id,
+  name,
+  assetKey,
+  needsCut: cut === 1,
+  needsHeat: heat === 1,
+  tags,
+  ...(extra ? { extra } : {}),
+});
+
+/**
+ * Ids, attributes and stock seeds are BaD's spec table (the engine's content of record); the display names are the
+ * OraX prototype's ING table, the copy of record for the screens (short names that fit a Pantry card: Chicken, not
+ * Poached chicken). assetKey is from BaD's asset brief.
+ */
+export const INGREDIENTS: readonly Ingredient[] = [
+  I('chicken', 'Chicken', 'poached-chicken', 1, 1, ['protein']),
+  I('rice', 'Rice', 'chicken-rice', 0, 1, ['rice']),
+  I('ginger', 'Ginger', 'ginger-sauce', 0, 0, ['sauce']),
+  I('chilli-sauce', 'Chilli sauce', 'chilli-sauce', 0, 0, ['sauce', 'chilli']),
+  I('cucumber', 'Cucumber', 'cucumber', 1, 0),
+  I('dark-soy', 'Dark soy', 'dark-soy', 0, 0, ['sauce']),
+  I('spaghetti', 'Spaghetti', 'spaghetti', 0, 1, ['carb']),
+  I('garlic', 'Garlic', 'garlic', 1, 1),
+  I('olive-oil', 'Olive oil', 'olive-oil', 0, 1, ['sauce']),
+  I('chilli-flakes', 'Chilli flakes', 'chilli-flakes', 0, 0, ['chilli']),
+  I('parsley', 'Parsley', 'parsley', 1, 0),
+  I('parmesan', 'Parmesan', 'parmesan', 0, 0),
+  I('mutton', 'Mutton', 'mutton', 1, 1, ['protein']),
+  I('spices', 'Spices', 'soup-spices', 0, 1),
+  I('onion', 'Onion', 'onion', 1, 1),
+  I('coriander', 'Coriander', 'coriander', 1, 0),
+  I('baguette', 'Baguette', 'baguette', 1, 0),
+  I('roti', 'Roti', 'roti', 0, 1),
+  I('sourdough', 'Sourdough', 'sourdough', 1, 1),
+  I('coconut-rice', 'Coconut rice', 'coconut-rice', 0, 1, ['rice']),
+  I('sambal', 'Sambal', 'sambal', 0, 1, ['sauce', 'chilli']),
+  I('anchovies', 'Anchovies', 'fried-anchovies', 0, 1),
+  I('peanuts', 'Peanuts', 'peanuts', 0, 1),
+  I('egg', 'Egg', 'egg', 0, 1),
+  I('fish', 'Fish', 'fish-fillet', 1, 1, ['protein']),
+  I('batter', 'Batter', 'batter', 0, 1),
+  I('potato', 'Potato', 'potato', 1, 1),
+  I('peas', 'Peas', 'mushy-peas', 0, 1),
+  I('tartare', 'Tartare', 'tartare', 0, 0, ['sauce']),
+  I('lemon', 'Lemon', 'lemon', 1, 0),
+  I('chilli-padi', 'Chilli padi', 'chilli-padi', 1, 0, ['chilli'], true),
+  I('durian', 'Durian', 'durian', 0, 0, [], true),
+  I('cheddar', 'Cheddar', 'cheddar', 0, 0, [], true),
+  I('ice-cream', 'Ice cream', 'ice-cream', 0, 0, [], true),
+];
+
+export const INGREDIENT_MAP: Readonly<Record<string, Ingredient>> = Object.fromEntries(
+  INGREDIENTS.map((i) => [i.id, i]),
+);
+
+export const EXTRAS: readonly string[] = ['chilli-padi', 'durian', 'cheddar', 'ice-cream'];
+
+export function ingredient(id: string): Ingredient {
+  const g = INGREDIENT_MAP[id];
+  if (!g) throw new Error(`Unknown ingredient ${id}`);
+  return g;
+}
+
+/**
+ * Stock at 00:00 city time. The prototype's table was a mid-day snapshot (cucumber and roti at 0); owner decision
+ * after the Phase 1 review: every shelf starts the day above 25, so shelves run out only through play. Every change
+ * from the prototype's table is listed in docs/DECISIONS.md. Both cities start from the same numbers, in separate pools.
+ */
+const REQUIRED_STOCK0: Readonly<Record<string, number>> = {
+  chicken: 60,
+  rice: 64,
+  ginger: 88,
+  'chilli-sauce': 71,
+  cucumber: 58,
+  'dark-soy': 93,
+  spaghetti: 58,
+  garlic: 47,
+  'olive-oil': 80,
+  'chilli-flakes': 66,
+  parsley: 44,
+  parmesan: 36,
+  mutton: 56,
+  spices: 77,
+  onion: 52,
+  coriander: 38,
+  baguette: 41,
+  roti: 40,
+  sourdough: 63,
+  'coconut-rice': 55,
+  sambal: 48,
+  anchovies: 72,
+  peanuts: 84,
+  egg: 40,
+  fish: 60,
+  batter: 69,
+  potato: 76,
+  peas: 38,
+  tartare: 57,
+  lemon: 45,
+};
+
+/**
+ * Spec §3.3: extras are stocked at 2× so they never run dry before Leftovers hour. The seeds differ per shelf, so
+ * each extra gets twice the largest required shelf, which is 2× under any reading.
+ */
+const EXTRA_STOCK0 = 2 * Math.max(...Object.values(REQUIRED_STOCK0));
+
+export const STOCK0: Readonly<Record<string, number>> = {
+  ...REQUIRED_STOCK0,
+  ...Object.fromEntries(EXTRAS.map((id) => [id, EXTRA_STOCK0])),
+};

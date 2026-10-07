@@ -27,5 +27,7 @@ export type { GemSocketProps } from './components/GemSocket';
 export { Icon, ICON_NAMES } from './components/Icon';
 export type { IconName } from './components/Icon';
 export { Logo } from './components/Logo';
+export { StoneRow } from './components/StoneRow';
+export type { StoneRowProps } from './components/StoneRow';
 export type { LogoGround } from './components/Logo';
 export { Tagline } from './components/Tagline';

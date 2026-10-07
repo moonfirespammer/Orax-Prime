@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 import type { ClassKey, Figure, Gem } from '@/ds';
+import type { City } from '@/data/cities';
+import type { SavedVerdict } from '@/games/bad/engine/types';
 import { createStorage, type Storage } from '@/services/storage';
 
-export type City = 'SG' | 'KL';
+export type { City };
 
 export interface Me {
   name: string;
@@ -10,6 +12,8 @@ export interface Me {
   figure: Figure;
   gem: Gem;
   city: City;
+  /** The Signature Dish on the profile (PRODUCT_SPEC §4): the Bin's verdict the player chose to keep. */
+  signature?: SavedVerdict;
 }
 
 export const ME_KEY = 'orax:me';

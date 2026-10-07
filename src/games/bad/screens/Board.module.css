@@ -1,0 +1,125 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.cursed {
+  font: var(--text-body-strong);
+  color: var(--brand-text);
+  white-space: nowrap;
+}
+.leftovers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+.leftoversLabel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  color: var(--brand-text);
+}
+.youAreIn {
+  margin: 0;
+  font: var(--text-body-strong);
+  color: var(--brand-text);
+}
+.dish {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-4);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  box-sizing: border-box;
+}
+.dish:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.dishSelected {
+  padding: 15px;
+  border: 2px solid var(--brand);
+}
+.dishTinted {
+  background: var(--brand-subtle);
+}
+.dishTop {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+.dishText {
+  flex: 1;
+  min-width: 0;
+}
+.dishBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.stock {
+  flex: 1;
+  min-width: 0;
+  font: var(--text-caption);
+}
+.stock[data-stock='plenty'] {
+  color: var(--success);
+}
+.stock[data-stock='moderate'] {
+  color: var(--ink-muted);
+}
+.stock[data-stock='low'],
+.stock[data-stock='gone'] {
+  color: var(--warning);
+}
+.cooks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: none;
+}
+.avatars {
+  display: flex;
+  padding-left: 6px;
+}
+.avatar {
+  margin-left: -6px;
+}
+.footer {
+  margin: var(--space-3) 0 0;
+  text-align: center;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.cta {
+  flex: none;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-top: 1px solid var(--border);
+}

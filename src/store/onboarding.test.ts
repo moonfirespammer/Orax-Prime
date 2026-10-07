@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { classDesign } from '@/data/design';
 import { CLASS_ORDER } from '@/ds';
-import { QUIZ, cleanInviteCode, winnerOf } from '@/onboarding/data';
+import { CITIES, QUIZ, cleanInviteCode, winnerOf } from '@/onboarding/data';
 import { useOnboarding } from './onboarding';
 
 describe('onboarding · the identity test', () => {
@@ -37,6 +37,10 @@ describe('onboarding · the identity test', () => {
     expect(winnerOf({})).toBe('stirrer');
   });
 
+  it('offers Singapore alone on the city screen', () => {
+    expect(CITIES.map((c) => c.key)).toEqual(['SG']);
+  });
+
   it('moves on to the gem and the city, keeps both across a retake', () => {
     const t = useOnboarding.getState();
     for (let i = 0; i < 5; i++) t.answer('rebel');
@@ -44,10 +48,10 @@ describe('onboarding · the identity test', () => {
     t.next();
     expect(useOnboarding.getState().step).toBe(6);
     t.next();
-    t.pickCity('KL');
-    expect(useOnboarding.getState()).toMatchObject({ step: 7, gem: 'emerald', city: 'KL' });
+    t.pickCity('SG');
+    expect(useOnboarding.getState()).toMatchObject({ step: 7, gem: 'emerald', city: 'SG' });
     t.retake();
-    expect(useOnboarding.getState()).toMatchObject({ step: 0, votes: {}, gem: 'emerald', city: 'KL' });
+    expect(useOnboarding.getState()).toMatchObject({ step: 0, votes: {}, gem: 'emerald', city: 'SG' });
   });
 
   it('reveals the class with the motto the design data carries, the prototype’s own', () => {
