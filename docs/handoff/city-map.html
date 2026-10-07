@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OraX city map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+<style>
+  html,body{margin:0;height:100%;background:#161618;font-family:"Space Grotesk",system-ui,sans-serif}
+  #map{position:absolute;inset:0;background:#161618}
+  body.dark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.82) contrast(.9) saturate(.25)}
+  .leaflet-control-attribution{font:11px/14px system-ui,sans-serif;background:rgba(31,31,34,.85)!important;color:#a8a4b3!important}
+  .leaflet-control-attribution a{color:#b98fd9!important}
+  .pin{width:26px;height:26px;box-sizing:border-box;border:3px solid #f2f0f5;background:#8a4bc2;box-shadow:0 0 0 2px #161618;cursor:pointer}
+  .pin.raid{border-radius:50%}
+  .pin.cookoff{border-radius:6px}
+  .pin.landmark{border-radius:3px;transform:rotate(45deg)}
+  .pin.proposed{background:transparent;border-color:#7d788c;border-style:dashed}
+  .pin.rare{box-shadow:0 0 0 2px #161618,0 0 22px rgba(194,42,76,.6)}
+  .you{width:16px;height:16px;border-radius:50%;background:#f2f0f5;border:3px solid #1f1f22;box-shadow:0 0 0 2px #f2f0f5}
+  .leaflet-tooltip.orax{background:#2a2a2f;color:#f2f0f5;border:1px solid #3a3a41;border-radius:6px;font:500 12px/16px "Space Grotesk",system-ui,sans-serif;padding:3px 8px;box-shadow:none}
+  .leaflet-tooltip.orax::before{border-top-color:#3a3a41}
+  body.light #map{background:#e9e6ef}
+  body.light .pin{background:#4f1b72;border-color:#fff;box-shadow:0 0 0 2px #e9e6ef}
+  body.light .pin.proposed{background:transparent;border-color:#8a8597}
+  body.light .leaflet-tooltip.orax{background:#fff;color:#1a1a1a;border-color:#cfcbd8}
+  body.light .leaflet-control-attribution{background:rgba(255,255,255,.85)!important;color:#5c5866!important}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  document.body.className = q.get('theme') === 'light' ? 'light' : 'dark';
+  const map = L.map('map', { zoomControl: false }).setView([1.2900, 103.8100], 12);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap contributors', maxZoom: 19 }).addTo(map);
+  const layer = L.layerGroup().addTo(map);
+  const you = L.marker([1.2665, 103.8235], { icon: L.divIcon({ className: '', html: '<div class="you"></div>', iconSize: [16, 16], iconAnchor: [8, 8] }), interactive: false }).addTo(map);
+  let lastNode = null;
+  function render(d) {
+    layer.clearLayers();
+    if (d.you) you.setLatLng(d.you);
+    (d.places || []).forEach((v) => {
+      const cls = `pin ${v.kind}${v.status === 'proposed' ? ' proposed' : ''}${v.rare ? ' rare' : ''}`;
+      const m = L.marker(v.ll, { icon: L.divIcon({ className: '', html: `<div class="${cls}"></div>`, iconSize: [26, 26], iconAnchor: [13, 13] }) }).addTo(layer);
+      m.bindTooltip(v.name, { permanent: d.node !== 'SG', direction: 'top', offset: [0, -13], className: 'orax' });
+      m.on('click', () => parent.postMessage({ type: 'orax-venue', id: v.id }, '*'));
+    });
+    if (d.node !== lastNode) {
+      lastNode = d.node;
+      const pts = (d.places || []).map((v) => v.ll).concat(d.you ? [d.you] : []);
+      if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [28, 28], maxZoom: 16 });
+    }
+  }
+  window.addEventListener('message', (e) => { if (e.data && e.data.type === 'orax-sync') render(e.data); });
+  parent.postMessage({ type: 'orax-map-ready' }, '*');
+</script>
+</body>
+</html>

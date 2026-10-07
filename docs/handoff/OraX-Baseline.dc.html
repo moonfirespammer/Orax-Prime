@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/base.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/styles.css">
+  <script src="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/_ds_bundle.js"></script>
+  <style>body{margin:0;background:#141416;color:#f2f0f5;font-family:"Space Grotesk",system-ui,sans-serif}a{color:#b98fd9}a:hover{color:#d1b3ee}</style>
+</helmet>
+<div style="padding:{{ rootPad }};display:flex;flex-direction:column;gap:48px">
+
+  <div style="max-width:760px;display:{{ dIntro }};flex-direction:column;gap:10px">
+    <span style="font:700 11px/14px 'Space Grotesk',sans-serif;letter-spacing:0.12em;text-transform:uppercase;color:#a8a4b3">Baseline · what exists today</span>
+    <h1 style="margin:0;font:700 28px/32px 'Space Grotesk',sans-serif;letter-spacing:-0.02em">OraX as built, recreated from source</h1>
+    <p style="margin:0;font:400 15px/22px 'Space Grotesk',sans-serif;color:#a8a4b3;text-wrap:pretty">Four sources, read file by file: the BaD host shell (Play · Classes · You · Dish, on the OraX design system), OXP: Table Wars (HMD repo, oxp/), HMD Arena (HMD repo, game/) and the Alpha 1 Genesis mockup (OraX repo, design-mockup-modern.html). The superapp in <a href="OraX-App.dc.html">OraX-App</a> grows out of the first; the games keep their own HUD grammar inside it.</p>
+  </div>
+
+  <!-- ================= BaD host shell ================= -->
+  <sc-if value="{{ sA }}" hint-placeholder-val="{{ true }}">
+  <section style="display:{{ dA }};flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#f2f0f5;color:#1a1a1a;border-radius:4px">A</span><span style="font:600 13px/1.2 'Space Grotesk',sans-serif">BaD host shell · moonfirespammer/BaD · src/App.tsx, src/screens/*, src/components/TabBar.tsx</span></div>
+    <div style="display:flex;flex-wrap:{{ wrap }};gap:28px;align-items:flex-start">
+
+      <!-- Play -->
+      <div style="display:{{ dA1 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Play · screens/Play.tsx</span>
+        <div data-screen-label="Baseline Play" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="flex:1;min-height:0;overflow:auto;padding-bottom:16px;display:flex;flex-direction:column">
+            <header style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;flex:none">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="dark" hint-size="40px,32px"></x-import>
+              <span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;margin-right:-10px;color:var(--ink)"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="bell" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+            </header>
+            <section style="padding:0 16px;flex:none">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px">
+                <span style="color:var(--brand-text);display:inline-flex"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="map-pin" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+                <div style="flex:1;min-width:0"><div style="font:var(--text-body-strong)">Tiong Bahru Market</div><div style="font:var(--text-caption);color:var(--ink-muted)">Singapore · 400 m · tonight 19:30</div></div>
+                <span style="color:var(--ink-muted);display:inline-flex"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="chevron-right" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+              </div>
+            </section>
+            <section style="padding:0 16px;flex:none">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;margin-top:12px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px">
+                <span style="color:var(--brand-text);display:inline-flex"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="utensils" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+                <div style="flex:1;min-width:0"><div style="font:var(--text-body-strong)">Build-A-Dish</div><div style="font:var(--text-caption);color:var(--ink-muted)">128 cooking in Singapore · resets 5h 12m</div></div>
+                <span style="color:var(--ink-muted);display:inline-flex"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="chevron-right" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+              </div>
+            </section>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:24px 16px 12px;flex:none">
+              <h1 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md)">Your party</h1>
+              <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">ROUND 1 · LIMIT ×2</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding:0 16px;flex:none">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.ClassCard" class-key="stirrer" figure="t1m" slot="{{ 1 }}" current="{{ true }}" gems="{{ partyGems.stirrer }}" footer="Limit ×1.5 · Shift" width="100%" hint-size="100%,216px"></x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.ClassCard" class-key="taster" figure="t1f" slot="{{ 2 }}" gems="{{ partyGems.taster }}" footer="Limit ×1.5 · Break" width="100%" hint-size="100%,216px"></x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.ClassCard" class-key="provider" figure="t2m" slot="{{ 3 }}" gems="{{ partyGems.provider }}" footer="Limit ×2" width="100%" hint-size="100%,216px"></x-import>
+            </div>
+          </div>
+          <nav style="display:flex;flex:none;border-top:1px solid var(--border);background:var(--surface-raised)">
+            <sc-for list="{{ badTabs }}" as="t" hint-placeholder-count="4">
+              <div style="flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 0;font:var(--text-caption);color:{{ t.color }};font-weight:{{ t.weight }}"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="{{ t.icon }}" size="{{ 24 }}" hint-size="24px,24px"></x-import><span>{{ t.label }}</span></div>
+            </sc-for>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Classes -->
+      <div style="display:{{ dA1 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Classes · screens/Classes.tsx</span>
+        <div data-screen-label="Baseline Classes" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="flex:1;min-height:0;overflow:auto;padding:12px 16px 16px">
+            <h1 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md)">Choose your class</h1>
+            <p style="margin:8px 0 16px;font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Matched by who you are, not by skill</p>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+              <sc-for list="{{ tiles }}" as="c" hint-placeholder-count="9">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 8px;background:{{ c.bg }};border:2px solid {{ c.border }};border-radius:12px;min-width:0">
+                  <span style="width:56px;height:56px;border-radius:9999px;margin:3px;box-shadow:0 0 0 3px {{ c.accent }};background-image:url({{ c.board }});background-size:450%;background-position:21.71% -2.71%;background-repeat:no-repeat"></span>
+                  <span style="font:var(--text-body-strong);white-space:nowrap;color:{{ c.accent }}">{{ c.name }}</span>
+                  <span style="min-height:14px;font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">{{ c.role }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <section style="padding-top:24px">
+              <p style="margin:0 0 8px;font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Choose your gem</p>
+              <div style="display:flex;align-items:center;gap:16px;padding:16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px">
+                <div style="display:flex;gap:8px;flex:none">
+                  <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="ruby" size="{{ 64 }}" hint-size="64px,64px"></x-import>
+                  <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 64 }}" active="{{ true }}" hint-size="64px,64px"></x-import>
+                  <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="emerald" size="{{ 64 }}" hint-size="64px,64px"></x-import>
+                </div>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px">
+                  <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" variant="sapphire" hint-size="70px,22px"></x-import>
+                  <span style="font:var(--text-caption);color:var(--ink-muted)">Cushion · rounded-square setting</span>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div style="flex:none;padding:12px 16px 16px;border-top:1px solid var(--border)"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Play as Stirrer</x-import></div>
+          <nav style="display:flex;flex:none;border-top:1px solid var(--border);background:var(--surface-raised)">
+            <sc-for list="{{ badTabs2 }}" as="t" hint-placeholder-count="4">
+              <div style="flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 0;font:var(--text-caption);color:{{ t.color }};font-weight:{{ t.weight }}"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="{{ t.icon }}" size="{{ 24 }}" hint-size="24px,24px"></x-import><span>{{ t.label }}</span></div>
+            </sc-for>
+          </nav>
+        </div>
+      </div>
+
+      <!-- You -->
+      <div style="display:{{ dA1 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">You · screens/You.tsx</span>
+        <div data-screen-label="Baseline You" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="flex:1;min-height:0;overflow:auto;padding:0 16px 16px;display:flex;flex-direction:column;gap:16px">
+            <header style="display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;flex:none">
+              <h1 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md)">You</h1>
+              <span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;margin-right:-10px"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="settings" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+            </header>
+            <section style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px;flex:none">
+              <span style="width:96px;height:96px;border-radius:9999px;margin:3px;box-shadow:0 0 0 3px var(--class-stirrer);background-image:url(assets/boards/08-stirrer-board-480.png);background-size:450%;background-position:21.71% -2.71%;background-repeat:no-repeat"></span>
+              <div style="text-align:center">
+                <div style="font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">Wen</div>
+                <div style="display:flex;align-items:baseline;justify-content:center;gap:8px;margin-top:4px"><span style="font:var(--text-caption);font-weight:500;color:var(--class-stirrer)">Stirrer</span><span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Mage</span></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px">
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" variant="sapphire" hint-size="70px,22px"></x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="80px,22px">Singapore</x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="100px,22px">Hawker regular</x-import>
+              </div>
+              <p style="margin:0;text-align:center;width:100%;font:var(--text-caption);color:var(--ink-muted)">Sapphire Stirrer · 12 plates this month</p>
+            </section>
+            <section style="display:flex;flex-direction:column;gap:8px;flex:none">
+              <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Signature Dish</span>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px">
+                <span style="font:var(--text-caption);color:var(--ink-muted)">No Signature Dish yet. Cook one and keep it.</span>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" hint-size="120px,44px">Today's dishes</x-import>
+              </div>
+            </section>
+            <section style="display:flex;flex-direction:column;gap:8px;flex:none">
+              <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Your habits</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="140px,22px">Doubles the chilli ×4</x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="90px,22px">Raw rice ×1</x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="130px,22px">Unhinged plates ×2</x-import>
+              </div>
+            </section>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:8px;flex:none">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="secondary" block="{{ true }}" hint-size="100%,44px">Wardrobe</x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" block="{{ true }}" hint-size="100%,44px">Change class</x-import>
+            </div>
+          </div>
+          <nav style="display:flex;flex:none;border-top:1px solid var(--border);background:var(--surface-raised)">
+            <sc-for list="{{ badTabs3 }}" as="t" hint-placeholder-count="4">
+              <div style="flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 0;font:var(--text-caption);color:{{ t.color }};font-weight:{{ t.weight }}"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="{{ t.icon }}" size="{{ 24 }}" hint-size="24px,24px"></x-import><span>{{ t.label }}</span></div>
+            </sc-for>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Board -->
+      <div style="display:{{ dA1 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Dish · Board · screens/Board.tsx</span>
+        <div data-screen-label="Baseline Board" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="flex:1;min-height:0;overflow:auto;padding:0 16px 16px">
+            <header style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;min-height:56px">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="dark" hint-size="40px,32px"></x-import>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase"><span>RESETS 5H 12M</span><span style="color:var(--ink-muted)">Singapore</span></div>
+            </header>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px">
+              <h1 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md)">Today's dishes</h1>
+              <span style="min-height:44px;display:inline-flex;align-items:center;padding:0 8px;color:var(--brand-text);font:var(--text-body-strong);white-space:nowrap">Cursed Plates · 2</span>
+            </div>
+            <p style="margin:4px 0 16px;font:var(--text-caption);color:var(--ink-muted)">One shelf for all of Singapore. One dish a day, swap once.</p>
+            <p style="margin:0 0 12px;font:var(--text-body-strong);color:var(--brand-text)">You are in. 41 cooking chicken rice right now.</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ dishes }}" as="d" hint-placeholder-count="5">
+                <div style="padding:{{ d.pad }};background:{{ d.bg }};border:{{ d.border }};border-radius:12px">
+                  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+                    <div style="flex:1;min-width:0"><div style="font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">{{ d.name }}</div><div style="font:var(--text-caption);color:var(--ink-muted)">{{ d.local }}</div></div>
+                    <sc-if value="{{ d.picked }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" hint-size="100px,22px">Cooking today</x-import></sc-if>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px">
+                    <div style="flex:1;min-width:0;font:var(--text-caption);color:{{ d.stockColor }}">{{ d.stock }}</div>
+                    <div style="display:flex;align-items:center;gap:8px;flex:none">
+                      <div style="display:flex;padding-left:6px">
+                        <span style="width:24px;height:24px;border-radius:9999px;margin-left:-6px;box-shadow:0 0 0 2px var(--class-provider),0 0 0 4px var(--surface-raised);background-image:url(assets/boards/01-provider-board-480.png);background-size:450%;background-position:21.71% -2.71%"></span>
+                        <span style="width:24px;height:24px;border-radius:9999px;margin-left:-6px;box-shadow:0 0 0 2px var(--class-spark),0 0 0 4px var(--surface-raised);background-image:url(assets/boards/03-spark-board-480.png);background-size:450%;background-position:78.29% -2.71%"></span>
+                        <span style="width:24px;height:24px;border-radius:9999px;margin-left:-6px;box-shadow:0 0 0 2px var(--class-host),0 0 0 4px var(--surface-raised);background-image:url(assets/boards/09-host-board-480.png);background-size:450%;background-position:21.71% 60.93%"></span>
+                      </div>
+                      <span style="font:var(--text-body-strong)">{{ d.count }}</span><span style="font:var(--text-caption);color:var(--ink-muted)">cooking</span>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin:24px 0 0;text-align:center;font:var(--text-caption);color:var(--ink-muted)">The Bin has eaten 1,204 plates in Singapore today.</p>
+          </div>
+          <div style="flex:none;padding:12px 16px 16px;border-top:1px solid var(--border)"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Cook chicken rice</x-import></div>
+          <nav style="display:flex;flex:none;border-top:1px solid var(--border);background:var(--surface-raised)">
+            <sc-for list="{{ badTabs4 }}" as="t" hint-placeholder-count="4">
+              <div style="flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 0;font:var(--text-caption);color:{{ t.color }};font-weight:{{ t.weight }}"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="{{ t.icon }}" size="{{ 24 }}" hint-size="24px,24px"></x-import><span>{{ t.label }}</span></div>
+            </sc-for>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Station -->
+      <div style="display:{{ dA2 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Dish · Station · screens/Station.tsx (immersive, tab bar hidden)</span>
+        <div data-screen-label="Baseline Station" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="display:flex;align-items:center;gap:4px;padding:8px 16px 8px 4px;border-bottom:1px solid var(--border);min-height:56px;flex:none">
+            <span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="arrow-left" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+            <div style="flex:1;min-width:0"><h1 style="margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Hainanese chicken rice</h1></div>
+            <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;flex:none">RESETS 5H 12M</span>
+          </div>
+          <div style="flex:1;min-height:0;overflow:auto;padding:12px 16px 16px;display:flex;flex-direction:column;gap:12px">
+            <section style="padding:12px 16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">YOUR PLATE</span><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;text-align:right">NEAT · FLAIR ×1</span></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:8px;min-height:50px;overflow-x:auto">
+                <span style="display:inline-flex;flex-direction:column;align-items:flex-start;min-height:44px;padding:3px 11px;border-radius:6px;background:var(--brand-subtle);border:2px solid var(--brand);flex:none"><span style="font:var(--text-body-strong)">Chicken ×1</span><span style="font:var(--text-caption);color:var(--ink-muted)">cut · cooked</span></span>
+                <span style="display:inline-flex;flex-direction:column;align-items:flex-start;min-height:44px;padding:4px 12px;border-radius:6px;background:var(--surface-sunken);border:1px solid var(--border);flex:none"><span style="font:var(--text-body-strong)">Rice ×2</span><span style="font:var(--text-caption);color:var(--ink-muted)">raw</span></span>
+                <span style="display:inline-flex;flex-direction:column;align-items:flex-start;min-height:44px;padding:4px 12px;border-radius:6px;background:var(--surface-sunken);border:1px solid var(--border);flex:none"><span style="font:var(--text-body-strong)">Ginger ×1</span><span style="font:var(--text-caption);color:var(--ink-muted)">diced</span></span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;min-height:36px">
+                <span style="font:var(--text-caption);color:var(--ink-muted)">Strokes apply to <strong style="color:var(--ink);font-weight:500">Chicken</strong></span>
+                <span style="min-height:44px;display:inline-flex;align-items:center;padding:0 8px;margin:-4px 0;color:var(--brand-text);font:var(--text-caption);font-weight:500;white-space:nowrap">Fling to the Bin</span>
+              </div>
+            </section>
+            <div style="position:relative;height:150px;flex:none;border-radius:22px;background:var(--surface-sunken);box-shadow:inset 0 3px 8px rgba(0,0,0,.45),0 0 0 1px var(--border);overflow:hidden">
+              <span style="position:absolute;top:10px;left:14px;font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted)">SIGIL PAD</span>
+              <span style="position:absolute;top:10px;right:14px;font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--warning);text-align:right">MESS ×1 · SWEEP TO WIPE</span>
+              <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:var(--text-tagline);letter-spacing:var(--tracking-tagline);text-transform:uppercase;color:var(--brand-text)">CUT</span>
+              <span style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted)">SLASH TO CUT · SPIRAL TO HEAT · FLICK UP TO PLATE</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:-4px">
+              <span></span>
+              <span style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;color:var(--ink-muted);font:var(--text-caption)"><span>Prefer buttons</span><span style="position:relative;width:36px;height:20px;border-radius:9999px;background:var(--surface-sunken);box-shadow:inset 0 0 0 1px var(--border-strong)"><span style="position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:9999px;background:var(--ink-muted)"></span></span></span>
+            </div>
+            <section>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px"><span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">PANTRY · SINGAPORE</span><span style="font:var(--text-caption);color:var(--ink-muted);text-align:right">Cap 3 portions · leftovers hour 21:00</span></div>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px">
+                <sc-for list="{{ pantry }}" as="p" hint-placeholder-count="6">
+                  <div style="position:relative;display:flex;flex-direction:column;padding:{{ p.pad }};min-height:100px;border-radius:12px;background:{{ p.bg }};border:{{ p.border }};color:{{ p.color }};min-width:0">
+                    <span style="font:var(--text-body-strong);line-height:20px;overflow-wrap:anywhere">{{ p.name }}</span>
+                    <span style="font:var(--text-caption);color:var(--ink-muted)">{{ p.prep }}</span>
+                    <span style="margin-top:auto;min-height:28px;display:flex;align-items:center;font:var(--text-caption);color:{{ p.stateColor }}">{{ p.state }}</span>
+                    <sc-if value="{{ p.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-8px;right:-8px;min-width:24px;height:24px;padding:0 6px;border-radius:9999px;background:var(--brand);color:var(--on-brand);font:var(--text-caption);font-weight:700;display:flex;align-items:center;justify-content:center">{{ p.badge }}</span></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:16px;font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">PANTRY EXTRAS</div>
+              <p style="margin:2px 0 0;font:var(--text-caption);color:var(--ink-muted)">Shared across all five dishes. Use responsibly, or do not.</p>
+            </section>
+          </div>
+          <div style="flex:none;padding:12px 16px 12px;border-top:1px solid var(--border)"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Plate it</x-import><p style="margin:4px 0 0;text-align:center;font:var(--text-caption);color:var(--ink-muted)">or flick up on the sigil pad</p></div>
+        </div>
+      </div>
+
+      <!-- Verdict -->
+      <div style="display:{{ dA2 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Dish · Verdict · screens/Verdict.tsx</span>
+        <div data-screen-label="Baseline Verdict" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="display:flex;align-items:center;gap:4px;padding:8px 16px 8px 4px;border-bottom:1px solid var(--border);min-height:56px;flex:none">
+            <span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="x" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+            <h1 style="flex:1;margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">The Bin's verdict</h1>
+            <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">RESETS 5H 09M</span>
+          </div>
+          <div style="flex:1;min-height:0;overflow:auto;padding:16px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:16px">
+            <div style="width:140px;height:140px;border-radius:9999px;background:var(--surface-raised);border:1px dashed var(--border-strong);display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font:var(--text-caption);color:var(--ink-muted)">The Bin, character art</div>
+            <section style="width:100%;border-radius:22px;padding:16px;background:var(--surface-raised);border:1px solid var(--border)">
+              <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">THE BIN</span>
+              <p style="margin:4px 0 0;font:var(--text-body-lg);text-wrap:pretty">Acceptable. Do not let it go to your head.</p>
+            </section>
+            <div style="text-align:center;width:100%">
+              <h2 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md);text-wrap:pretty">Seared Chicken Rice with too much confidence</h2>
+              <p style="margin:4px 0 0;font:var(--text-body-strong)">Academy acceptable</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 56 }}" active="{{ true }}" hint-size="56px,56px"></x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 56 }}" active="{{ true }}" hint-size="56px,56px"></x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 56 }}" hint-size="56px,56px"></x-import>
+              </div>
+              <span style="font:var(--text-caption);color:var(--ink-muted)">2 of 3 sapphires</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="50px,22px">Neat</x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="150px,22px">Neat plater, apparently</x-import>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-top:auto">
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Share to your party</x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="secondary" block="{{ true }}" hint-size="100%,44px">Set as Signature Dish</x-import>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" block="{{ true }}" hint-size="100%,44px">See who else made chicken rice</x-import>
+            </div>
+            <p style="margin:0;text-align:center;font:var(--text-caption);color:var(--ink-muted)">The Bin has eaten 1,205 plates in Singapore today.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share -->
+      <div style="display:{{ dA2 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Dish · Share card · screens/Share.tsx</span>
+        <div data-screen-label="Baseline Share" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font:var(--text-body)">
+          <div style="display:flex;align-items:center;gap:4px;padding:8px 16px 8px 4px;border-bottom:1px solid var(--border);min-height:56px;flex:none">
+            <span style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Icon" name="arrow-left" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+            <h1 style="flex:1;margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">Share card</h1>
+          </div>
+          <div style="flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:column;align-items:center">
+            <div style="margin:auto 0;width:326px;max-width:100%;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:12px;background:var(--surface-raised);border:1px solid var(--border)">
+              <div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="dark" hint-size="40px,32px"></x-import><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted)">BUILD-A-DISH</span></div>
+              <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">SINGAPORE · 30 SEP 2026</span>
+              <h2 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md);text-wrap:pretty">Seared Chicken Rice with too much confidence</h2>
+              <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">Acceptable. Do not let it go to your head.</p>
+              <div style="display:flex;align-items:center;gap:8px">
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 44 }}" active="{{ true }}" hint-size="44px,44px"></x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 44 }}" active="{{ true }}" hint-size="44px,44px"></x-import>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 44 }}" hint-size="44px,44px"></x-import>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding-top:8px;border-top:1px solid var(--border)">
+                <span style="width:44px;height:44px;border-radius:9999px;box-shadow:0 0 0 3px var(--class-stirrer);background-image:url(assets/boards/08-stirrer-board-480.png);background-size:450%;background-position:21.71% -2.71%"></span>
+                <div style="flex:1;min-width:0"><div style="font:var(--text-body-strong)">Wen</div><div style="font:var(--text-caption);font-weight:500;color:var(--class-stirrer)">Stirrer</div></div>
+                <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" variant="sapphire" hint-size="70px,22px"></x-import>
+              </div>
+              <x-import component-from-global-scope="OraXDesignSystem_d465f6.Tagline" size="md" hint-size="100%,44px"></x-import>
+            </div>
+          </div>
+          <div style="flex:none;padding:12px 16px 16px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px">
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Send to your party</x-import>
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="secondary" block="{{ true }}" hint-size="100%,44px">Save image</x-import>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro -->
+      <div style="display:{{ dA2 }};flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Dish · Intro · screens/Intro.tsx</span>
+        <div data-screen-label="Baseline Intro" style="width:390px;height:844px;background:var(--surface);color:var(--ink);border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;gap:24px;padding:16px;box-sizing:border-box;font:var(--text-body)">
+          <div style="display:flex;align-items:center;justify-content:space-between;min-height:44px;flex:none"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="dark" hint-size="40px,32px"></x-import><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted)">BUILD-A-DISH</span></div>
+          <div style="display:flex;flex-direction:column;gap:24px;flex:1">
+            <div style="width:100%;height:220px;border-radius:12px;background:var(--surface-raised);border:1px dashed var(--border-strong);display:flex;align-items:center;justify-content:center;font:var(--text-caption);color:var(--ink-muted)">Illustration: the city shelf</div>
+            <h1 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">Five dishes a day. One shelf for the whole city.</h1>
+            <p style="margin:0;font:var(--text-body-lg);color:var(--ink-muted);text-wrap:pretty">Everyone in Singapore cooks from the same Pantry. When the ginger sauce runs out, it is out.</p>
+          </div>
+          <div style="display:flex;justify-content:center;gap:8px;flex:none"><span style="width:8px;height:8px;border-radius:9999px;background:var(--brand)"></span><span style="width:8px;height:8px;border-radius:9999px;background:var(--border-strong)"></span><span style="width:8px;height:8px;border-radius:9999px;background:var(--border-strong)"></span></div>
+          <div style="display:flex;flex-direction:column;gap:8px;flex:none">
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" hint-size="100%,44px">Next</x-import>
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" block="{{ true }}" hint-size="100%,44px">Skip</x-import>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ================= OXP Table Wars ================= -->
+  <sc-if value="{{ sB }}" hint-placeholder-val="{{ true }}">
+  <section style="display:{{ dB }};flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#f2f0f5;color:#1a1a1a;border-radius:4px">B</span><span style="font:600 13px/1.2 'Space Grotesk',sans-serif">OXP: Table Wars · moonfirespammer/HMD · oxp/index.html, oxp/style.css (its own palette: #2E2420 ink, #F3E9D8 paper, gold #E3A008)</span></div>
+    <div style="display:flex;flex-wrap:{{ wrap }};gap:28px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Combat · #layout: HUD · stage + plate · panel</span>
+        <div data-screen-label="Baseline OXP combat" style="width:390px;height:844px;background:#2E2420;color:#F3E9D8;border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">
+          <div style="display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 10px;background:rgba(46,36,32,.96);border-bottom:1px solid rgba(0,0,0,.35);font-size:13px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="display:inline-flex;align-items:center;min-height:28px;padding:0 8px;border-radius:999px;background:#1F1815;font-weight:600;white-space:nowrap">Round 3/10</span>
+              <span style="display:inline-flex;align-items:center;min-height:28px;padding:0 8px;border-radius:999px;background:#1F1815;font-weight:600;white-space:nowrap">Turn 1/3</span>
+              <span style="display:inline-flex;align-items:center;min-height:28px;padding:0 8px;border-radius:999px;background:#1F1815;font-weight:600;color:#E25858;letter-spacing:.1em">♥♥</span>
+            </div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="display:inline-flex;align-items:center;min-height:28px;padding:0 8px;border-radius:999px;background:#1F1815;font-weight:600;color:#F6C445;white-space:nowrap">450 pts</span>
+              <span style="min-width:40px;min-height:40px;padding:0 8px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:inline-flex;align-items:center;justify-content:center;font-size:18px">⋮</span>
+            </div>
+          </div>
+          <div style="position:relative;flex:1 1 auto;min-height:120px;overflow:hidden;background:#B8A68A">
+            <span role="img" aria-label="Sourdough Ghoul" style="position:absolute;right:6%;bottom:8%;width:200px;height:192px;background-image:url(assets/monsters/sourdough-ghoul.webp);background-size:400% 500%;background-position:0 0;background-repeat:no-repeat"></span>
+            <div style="position:absolute;left:8px;right:8px;top:6px;padding:6px 10px 7px;border-radius:12px;background:rgba(46,36,32,.7);border:1px solid rgba(0,0,0,.25)">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px"><span style="font-weight:700;font-size:15px;letter-spacing:.03em">Sourdough Ghoul</span><span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#F6C445">attacks in 3</span></div>
+              <div style="position:relative;height:12px;margin-top:5px;border-radius:6px;background:#1F1815;overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;width:78%;border-radius:6px;background:#F3E9D8;opacity:.55"></span><span style="position:absolute;left:0;top:0;bottom:0;width:62%;border-radius:6px;background:linear-gradient(90deg,#C8302A,#E25858)"></span><span style="position:absolute;left:0;right:0;top:-1px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.6)">248 / 400</span></div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:4px;font-size:11px;color:rgba(243,233,216,.7)"><span>Defense 20%</span><span>Weak <b style="color:#7BE38F">G</b> · Resist <b style="color:#FF8B8B">R</b></span></div>
+            </div>
+            <span style="position:absolute;right:8px;top:84px;padding:3px 8px;border-radius:999px;background:rgba(46,36,32,.8);font-size:10px;font-weight:700;letter-spacing:.08em;color:#F6C445">BUFF +30% · 2</span>
+          </div>
+          <div style="flex:0 0 auto;display:flex;flex-direction:column;gap:6px;padding:6px 8px 8px;background:rgba(46,36,32,.97);border-top:1px solid rgba(0,0,0,.35)">
+            <div style="display:flex;align-items:center;gap:6px;min-height:12px;font-size:10px;font-weight:800;letter-spacing:.1em;color:rgba(243,233,216,.6)"><span>NERVE</span><span style="position:relative;flex:1;height:6px;border-radius:3px;background:#1F1815;overflow:hidden"><span style="display:block;height:100%;width:80%;border-radius:3px;background:linear-gradient(90deg,#3FB65C,#7BE38F)"></span></span><span style="min-width:24px;text-align:right;color:#F3E9D8">80</span></div>
+            <div style="display:flex;align-items:center;gap:8px;min-height:22px;font-size:12px"><span style="font-weight:800;letter-spacing:.12em"><span style="color:#FF8B8B">R</span> <span style="color:#7BE38F">G</span> <span style="color:rgba(243,233,216,.35)">—</span></span><span style="font-weight:700;white-space:nowrap">Crosscut Drive</span><span style="flex:1;min-width:0;font-size:11px;color:rgba(243,233,216,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">300 · one more colour to name it</span></div>
+            <div style="display:flex;gap:6px">
+              <sc-for list="{{ oxpSeats }}" as="s" hint-placeholder-count="3">
+                <div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px;padding:5px;border-radius:12px;background:#1F1815;border:2px solid {{ s.color }}">
+                  <div style="display:flex;align-items:center;gap:5px;min-width:0"><span style="width:36px;height:36px;flex:0 0 36px;border-radius:50%;border:2px solid {{ s.color }};background-color:#B8A68A;background-image:url({{ s.board }});background-size:450%;background-position:{{ s.pos }}"></span><div style="display:flex;flex-direction:column;min-width:0;line-height:1.15"><span style="font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.name }}</span><span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:rgba(243,233,216,.6)">{{ s.cls }}</span></div><span style="font-size:10px;font-weight:800;color:rgba(243,233,216,.45);margin-left:auto">{{ s.n }}</span></div>
+                  <div style="display:flex;gap:4px">
+                    <sc-for list="{{ s.hand }}" as="g" hint-placeholder-count="3">
+                      <span style="flex:1 1 0;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;opacity:{{ g.opacity }};transform:{{ g.scale }}"><span role="img" aria-label="{{ g.alt }}" style="width:34px;height:34px;background-image:url({{ g.src }});background-size:contain;background-repeat:no-repeat;background-position:center;filter:{{ g.filter }}"></span></span>
+                    </sc-for>
+                  </div>
+                  <span style="min-height:30px;padding:0 6px;border-radius:8px;border:1px dashed rgba(246,196,69,.5);color:#F6C445;font-size:11px;font-weight:700;letter-spacing:.06em;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden">{{ s.limit }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="position:relative;flex:1;height:14px;border-radius:7px;background:#1F1815;overflow:hidden"><span style="position:absolute;left:0;top:0;bottom:0;width:45%;background:linear-gradient(90deg,#7A2E3A,#E3A008)"></span><span style="position:absolute;left:0;right:0;top:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;line-height:14px;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.6)">GAUGE 45</span></span><span style="display:flex;gap:4px"><span style="width:16px;height:16px;border:2px solid #fff;background:#F6C445;transform:rotate(45deg);border-radius:3px;box-shadow:0 0 8px rgba(246,196,69,.8)"></span><span style="width:16px;height:16px;border:2px solid rgba(246,196,69,.5);transform:rotate(45deg);border-radius:3px"></span></span></div>
+            <div style="display:flex;gap:8px;align-items:stretch;justify-content:center">
+              <span style="position:relative;overflow:hidden;flex:1 1 auto;min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:#1F1815;border:3px solid #16A34A;box-shadow:0 0 16px rgba(22,163,74,.35)"><span style="position:absolute;left:0;top:0;bottom:0;width:70%;background:rgba(22,163,74,.34)"></span><span style="position:relative;font-size:11px;font-weight:800;letter-spacing:.06em;color:#7BE38F">21</span><span style="position:relative;font-size:16px;font-weight:900;letter-spacing:.18em;text-shadow:0 2px 6px rgba(0,0,0,.6)">READY</span></span>
+              <span style="position:relative;flex:0 0 46px;min-height:46px;border-radius:10px;background:#1F1815;border:2px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h16M4 17h8"></path><circle cx="18" cy="17" r="3"></circle><path d="M18 15.6v1.6l1.1 0.7"></path></svg><span style="position:absolute;top:-7px;right:-7px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#E3A008;color:#2E2420;font-size:10px;font-weight:900;line-height:18px;text-align:center">4</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Party screen · #partyScreen .panel.wide</span>
+        <div data-screen-label="Baseline OXP party" style="width:390px;height:844px;background:#2E2420;color:#F3E9D8;border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;position:relative">
+          <div style="position:absolute;inset:0;background:rgba(30,22,18,.62)"></div>
+          <div style="position:relative;width:min(96%,560px);margin:8px;padding:16px 18px 18px;border-radius:16px;background:#2E2420;border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 40px rgba(0,0,0,.45)">
+            <h1 style="margin:0 0 4px;font-size:26px;letter-spacing:.04em">OXP: Table Wars</h1>
+            <p style="margin:0 0 12px;color:rgba(243,233,216,.65);font-size:13px">Three cooks, one colour each, twenty-seven combos, ten monsters. Seat order is the combo's name; the colours are its maths.</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-for list="{{ oxpSeats }}" as="s" hint-placeholder-count="3">
+                <div style="display:grid;grid-template-columns:84px 1fr auto;gap:8px;align-items:center;padding:6px;border-radius:12px;background:#1F1815;border:2px solid {{ s.color }}">
+                  <span style="width:84px;height:96px;border-radius:10px;background-color:#B8A68A;background-image:url({{ s.board }});background-size:200%;background-position:{{ s.full }}"></span>
+                  <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:6px;font-size:12px"><span style="font-weight:900;color:#F6C445">{{ s.n }}</span><span style="font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:{{ s.hi }}">{{ s.cls }}</span></div>
+                    <span style="width:100%;min-height:40px;padding:0 8px;border:1px solid rgba(255,255,255,.16);border-radius:8px;background:#2E2420;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between">{{ s.name }}<span>▾</span></span>
+                    <span style="font-size:11px;color:rgba(243,233,216,.65)">{{ s.handText }}</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px"><span style="min-width:40px;min-height:40px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:16px">▲</span><span style="min-width:40px;min-height:40px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:16px">▼</span></div>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin:8px 0 0;font-size:12px;line-height:1.4;color:rgba(243,233,216,.7)"><b style="color:#7BE38F">Trinity</b>: Fighter + Rogue + Mage. ×1.04, the secret track.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px"><label style="display:flex;align-items:center;gap:6px;min-height:32px"><input type="checkbox" checked style="width:18px;height:18px"> Academy weakness / resist colours</label><label style="display:flex;align-items:center;gap:6px;min-height:32px"><input type="checkbox" checked style="width:18px;height:18px"> 30 s turn timer</label></div>
+            <div style="display:flex;gap:8px;margin-top:12px"><span style="flex:1;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Tutorial</span><span style="flex:1;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Codex</span><span style="flex:1;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Random</span></div>
+            <div style="display:flex;gap:8px;margin-top:12px"><span style="flex:1;min-height:44px;border:1px solid #F6C445;border-radius:10px;background:#E3A008;color:#2E2420;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Fight</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ================= HMD Arena ================= -->
+  <sc-if value="{{ sC }}" hint-placeholder-val="{{ true }}">
+  <section style="display:{{ dC }};flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#f2f0f5;color:#1a1a1a;border-radius:4px">C</span><span style="font:600 13px/1.2 'Space Grotesk',sans-serif">HMD Arena · moonfirespammer/HMD · game/index.html, game/style.css</span></div>
+    <div style="display:flex;flex-wrap:{{ wrap }};gap:28px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">In the fight · #hud, canvas, #castBar</span>
+        <div data-screen-label="Baseline HMD fight" style="width:390px;height:844px;background:#2E2420;color:#F3E9D8;border:1px solid #3a3a41;border-radius:8px;overflow:hidden;position:relative;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">
+          <div style="position:absolute;inset:0;background:#B8A68A"></div>
+          <div style="position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:4px 10px;background:rgba(46,36,32,.92);border-bottom:1px solid rgba(0,0,0,.35);font-size:14px;line-height:1">
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:44px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.6)">Cakes</span><span style="font-size:16px;font-weight:600;white-space:nowrap">612 / 999</span></div>
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:44px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.6)">Time</span><span style="font-size:16px;font-weight:600">2:41.3</span></div>
+            <div style="flex:1"></div>
+            <span style="min-width:56px;min-height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">1×</span>
+            <span style="min-width:56px;min-height:44px;padding:0 14px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Pause</span>
+          </div>
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:10px 22px;border-radius:12px;background:rgba(46,36,32,.85);font-size:20px;font-weight:700;letter-spacing:.2em">PAUSED</div>
+          <div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:10px;padding:6px 10px;background:rgba(46,36,32,.92);border-top:1px solid rgba(0,0,0,.35)">
+            <sc-for list="{{ casts }}" as="c" hint-placeholder-count="3">
+              <span style="position:relative;overflow:hidden;width:92px;height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px solid {{ c.border }};border-radius:12px;background:#4A3B33;font-size:12px;font-weight:600;box-shadow:{{ c.shadow }}"><span style="width:40px;height:40px;border-radius:50%;background-color:#2E2420;background-image:url({{ c.board }});background-size:450%;background-position:21.71% -2.71%"></span><span style="line-height:1">{{ c.name }}</span><span style="position:absolute;top:4px;right:6px;font-size:10px;color:rgba(243,233,216,.55)">{{ c.key }}</span><span style="position:absolute;left:0;right:0;bottom:0;height:{{ c.cd }};background:rgba(20,14,12,.72)"></span></span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">End screen · #endScreen .panel</span>
+        <div data-screen-label="Baseline HMD end" style="width:390px;height:844px;background:#2E2420;color:#F3E9D8;border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">
+          <div style="position:absolute;inset:0;background:rgba(30,22,18,.55)"></div>
+          <div style="position:relative;width:min(92%,400px);margin:8px;padding:18px 20px 20px;border-radius:16px;background:#2E2420;border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 40px rgba(0,0,0,.45)">
+            <h1 style="margin:0 0 4px;color:#E3A008;text-align:center;font-size:34px;letter-spacing:.12em">VICTORY</h1>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <div style="flex:1;display:flex;flex-direction:column;gap:3px;padding:8px 10px;background:#1F1815;border-radius:10px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.6)">Time</span><span style="font-size:16px;font-weight:600">4:12.8</span></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:3px;padding:8px 10px;background:#1F1815;border-radius:10px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.6)">Killed</span><span style="font-size:16px;font-weight:600">999 / 999</span></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:3px;padding:8px 10px;background:#1F1815;border-radius:10px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.6)">Seed</span><span style="font-size:16px;font-weight:600">48213</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:12px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,233,216,.55)"><span style="width:70px"></span><span style="flex:1">HP</span><span style="width:82px"></span><span style="width:64px;text-align:right">Damage</span></div>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ cooks }}" as="c" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:10px;font-size:14px"><span style="width:70px;font-weight:600">{{ c.name }}</span><span style="flex:1;height:8px;border-radius:4px;background:#1F1815;overflow:hidden"><span style="display:block;height:100%;width:{{ c.hpPct }};background:#3FB950;border-radius:4px"></span></span><span style="width:82px;text-align:right;color:rgba(243,233,216,.85)">{{ c.hp }}</span><span style="width:64px;min-height:28px;display:flex;align-items:center;justify-content:flex-end;font-weight:700;color:#F6C445;border-bottom:1px dotted rgba(246,196,69,.55)">{{ c.dmg }}</span></div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:16px"><span style="flex:1;min-height:44px;border:1px solid #F6C445;border-radius:10px;background:#E3A008;color:#2E2420;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Again</span><span style="flex:1;min-height:44px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:#4A3B33;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Setup</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- ================= Alpha 1 Genesis mockup ================= -->
+  <sc-if value="{{ sD }}" hint-placeholder-val="{{ true }}">
+  <section style="display:{{ dD }};flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#f2f0f5;color:#1a1a1a;border-radius:4px">D</span><span style="font:600 13px/1.2 'Space Grotesk',sans-serif">Alpha 1 Genesis mockup · moonfirespammer/OraX · design-mockup-modern.html (TFT style: sharp corners, inner borders, gold and fuchsia)</span></div>
+    <div style="display:flex;flex-wrap:{{ wrap }};gap:28px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Mobile · top bar, the Real Match card, bottom nav with the LFG hero</span>
+        <div data-screen-label="Baseline Alpha-1" style="width:390px;height:844px;background:radial-gradient(ellipse at 20% 20%,rgba(155,89,182,.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(74,124,201,.06) 0%,transparent 50%),#0a0a0f;color:#f0f0f5;border:1px solid #3a3a41;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;position:relative">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;height:72px;background:linear-gradient(180deg,rgba(18,18,26,.95) 0%,rgba(10,10,15,.9) 100%);border-bottom:1px solid rgba(255,255,255,.06)">
+            <img src="assets/orax-logo-on-dark.png" alt="OraX" style="width:90px;height:auto;filter:drop-shadow(0 0 12px rgba(155,89,182,.5))">
+            <div style="display:flex;flex-direction:column;gap:2px"><div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:2px;background:#c746d7;box-shadow:0 0 8px #c746d7"></span><span style="font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.2em;text-transform:uppercase">Alpha 1</span></div><span style="font-size:22px;font-weight:900;font-style:italic;letter-spacing:-.02em;text-shadow:0 2px 8px rgba(0,0,0,.5)">GENESIS</span></div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <span style="position:relative;width:40px;height:40px;background:linear-gradient(180deg,#1a1a24 0%,#0d0d14 100%);border:2px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center"><span style="position:absolute;inset:3px;border:2px solid rgba(255,255,255,.12)"></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8a8a9a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg><span style="position:absolute;top:-3px;right:-3px;width:10px;height:10px;background:#e74c3c;border-radius:50%;border:2px solid #0a0a0f;box-shadow:0 0 8px #e74c3c"></span></span>
+              <span style="position:relative;width:40px;height:40px;background:linear-gradient(180deg,#1a1a24 0%,#0d0d14 100%);border:2px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center"><span style="position:absolute;inset:3px;border:2px solid rgba(255,255,255,.12)"></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8a8a9a" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle></svg></span>
+            </div>
+          </div>
+          <div style="position:absolute;top:84px;right:16px;z-index:5"><span style="position:relative;display:block;width:100px;height:100px;border:3px solid rgba(201,162,39,.3);border-radius:50%;overflow:hidden;box-shadow:0 0 30px rgba(201,162,39,.3),inset 0 0 20px rgba(0,0,0,.5);background-image:url(assets/boards/07-rebel-board-480.png);background-size:450%;background-position:21.71% -2.71%"><span style="position:absolute;inset:4px;border:4px solid rgba(201,162,39,.8);border-radius:50%"></span><span style="position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(to top,rgba(0,0,0,.95),rgba(0,0,0,.7),transparent);display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:9px;font-weight:900;color:#c9a227;letter-spacing:.15em">LVL 50</span></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;padding:24px 0">
+            <div style="flex:1;position:relative;overflow:hidden;padding:0 24px;display:flex;justify-content:center">
+              <div style="width:85%;max-width:380px;height:100%;max-height:580px;background:linear-gradient(180deg,#12121a 0%,#0a0a0f 100%);padding:32px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;scrollbar-width:none">
+                <div style="text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12)">
+                  <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(0,0,0,.5);border:1px solid rgba(199,70,215,.4);font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px"><span style="width:6px;height:6px;background:#c746d7;border-radius:50%;box-shadow:0 0 8px #c746d7"></span>MATCH FOUND</span>
+                  <h2 style="margin:0 0 4px;font-size:28px;font-weight:900;font-style:italic;letter-spacing:-.02em;text-shadow:0 2px 8px rgba(0,0,0,.5)">Real Match</h2>
+                  <p style="margin:0;font-size:12px;color:#8a8a9a;letter-spacing:.05em">Daily Destiny Quest</p>
+                </div>
+                <div style="position:relative;width:100%;max-width:300px;height:220px;margin:0 auto;border:2px solid rgba(199,70,215,.3);overflow:hidden;box-shadow:0 0 30px rgba(199,70,215,.25);background-color:#12121a;background-image:url(assets/boards/03-spark-board-480.png);background-size:200%;background-position:100% 0%">
+                  <span style="position:absolute;inset:4px;border:2px solid rgba(199,70,215,.7);z-index:5"></span>
+                  <span style="position:absolute;bottom:12px;right:12px;width:64px;height:64px;border:2px solid rgba(199,70,215,.3);border-radius:50%;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.6);background-image:url(assets/boards/03-spark-board-480.png);background-size:450%;background-position:78.29% -2.71%"></span>
+                  <span style="position:absolute;bottom:12px;left:12px;padding:8px 14px;background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;font-size:11px;font-weight:800;letter-spacing:.05em;box-shadow:0 4px 12px rgba(155,89,182,.4)">96% MATCH</span>
+                </div>
+                <div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:24px">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.15em;text-transform:uppercase">Daily Quest</span></div>
+                  <p style="margin:0;font-size:13px;font-style:italic;line-height:1.6;font-family:Georgia,serif">"The Rogue wants to steal the dragon's egg. Do you help them or stop them?"</p>
+                </div>
+                <span style="position:relative;display:block;width:100%;padding:14px 24px;background:linear-gradient(180deg,rgba(201,162,39,.15) 0%,rgba(201,162,39,.05) 100%);border:2px solid rgba(201,162,39,.3);color:#c9a227;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;text-align:center"><span style="position:absolute;inset:4px;border:2px solid rgba(201,162,39,.7)"></span>Connect Now →</span>
+              </div>
+            </div>
+          </div>
+          <div style="height:88px;background:linear-gradient(180deg,rgba(18,18,26,.98) 0%,rgba(10,10,15,.98) 100%);border-top:1px solid rgba(255,255,255,.06)">
+            <div style="max-width:500px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+              <sc-for list="{{ tftNav }}" as="n" hint-placeholder-count="5">
+                <sc-if value="{{ n.hero }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:relative;top:-20px"><span style="position:relative;width:72px;height:72px;background:linear-gradient(180deg,#1a1a24 0%,#0d0d14 100%);border:3px solid rgba(199,70,215,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;box-shadow:0 0 30px rgba(199,70,215,.4)"><span style="position:absolute;inset:5px;border:4px solid rgba(199,70,215,.8);border-radius:50%"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="#c746d7" style="margin-left:4px;filter:drop-shadow(0 0 8px rgba(199,70,215,.6))"><path d="M8 5v14l11-7z"></path></svg><span style="font-size:9px;font-weight:900;letter-spacing:.15em;color:#c746d7;margin-top:2px">LFG</span></span></div>
+                </sc-if>
+                <sc-if value="{{ n.plain }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px"><span style="position:relative;width:44px;height:44px;background:linear-gradient(180deg,#1a1a24 0%,#0d0d14 100%);border:2px solid {{ n.border }};display:flex;align-items:center;justify-content:center;box-shadow:{{ n.shadow }}"><span style="position:absolute;inset:3px;border:2px solid {{ n.inner }}"></span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="{{ n.color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.d }}"></path></svg></span><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ n.color }}">{{ n.label }}</span></div>
+                </sc-if>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font:400 11px/1.3 'Space Grotesk',sans-serif;color:#a8a4b3">Cards 2 and 3 of the carousel · Profile, LFG</span>
+        <div style="display:flex;gap:16px">
+          <div data-screen-label="Baseline Alpha-1 Profile card" style="width:300px;background:linear-gradient(180deg,#12121a 0%,#0a0a0f 100%);color:#f0f0f5;padding:32px;display:flex;flex-direction:column;gap:24px;font-family:'Segoe UI',-apple-system,sans-serif;border:1px solid #3a3a41">
+            <div style="text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12)"><h2 style="margin:0 0 4px;font-size:28px;font-weight:900;font-style:italic;letter-spacing:-.02em">Profile</h2><p style="margin:0;font-size:12px;color:#8a8a9a;letter-spacing:.05em">Your gaming identity</p></div>
+            <div style="text-align:center"><span style="position:relative;display:block;width:100%;max-width:240px;height:260px;margin:0 auto 24px;border:3px solid rgba(201,162,39,.3);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5);background-image:url(assets/boards/07-rebel-board-480.png);background-size:200%;background-position:0% 0%;background-color:#12121a"><span style="position:absolute;inset:5px;border:2px solid rgba(201,162,39,.8)"></span></span><div style="font-size:18px;font-weight:700;margin-bottom:4px">PlayerOne</div><div style="font-size:11px;color:#8a8a9a;text-transform:uppercase;letter-spacing:.1em">Warrior • Level 50</div></div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px"><div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:16px;text-align:center"><div style="font-size:22px;font-weight:900;color:#c9a227;margin-bottom:2px">127</div><div style="font-size:9px;font-weight:700;color:#8a8a9a;text-transform:uppercase;letter-spacing:.1em">Games</div></div><div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:16px;text-align:center"><div style="font-size:22px;font-weight:900;color:#c9a227;margin-bottom:2px">68%</div><div style="font-size:9px;font-weight:700;color:#8a8a9a;text-transform:uppercase;letter-spacing:.1em">Win Rate</div></div></div>
+            <span style="position:relative;display:block;width:100%;padding:14px 24px;background:linear-gradient(180deg,rgba(201,162,39,.15) 0%,rgba(201,162,39,.05) 100%);border:2px solid rgba(201,162,39,.3);color:#c9a227;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;text-align:center"><span style="position:absolute;inset:4px;border:2px solid rgba(201,162,39,.7)"></span>Edit Profile →</span>
+          </div>
+          <div data-screen-label="Baseline Alpha-1 LFG card" style="width:300px;background:linear-gradient(180deg,#12121a 0%,#0a0a0f 100%);color:#f0f0f5;padding:32px;display:flex;flex-direction:column;gap:24px;font-family:'Segoe UI',-apple-system,sans-serif;border:1px solid #3a3a41">
+            <div style="text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12)"><h2 style="margin:0 0 4px;font-size:28px;font-weight:900;font-style:italic;letter-spacing:-.02em">LFG</h2><p style="margin:0;font-size:12px;color:#8a8a9a;letter-spacing:.05em">Play • Plan • Connect</p></div>
+            <div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:24px"><div style="font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Quick Play</div><p style="margin:0 0 16px;font-size:12px;color:#8a8a9a">Jump into a game right now</p><span style="position:relative;display:block;width:100%;padding:14px 24px;background:linear-gradient(180deg,rgba(155,89,182,.15) 0%,rgba(155,89,182,.05) 100%);border:2px solid rgba(155,89,182,.3);color:#c9a0dc;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;text-align:center"><span style="position:absolute;inset:4px;border:2px solid rgba(155,89,182,.7)"></span>Find Match →</span></div>
+            <div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:24px"><div style="font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Plan Session</div><p style="margin:0 0 16px;font-size:12px;color:#8a8a9a">Schedule a meetup with friends</p><span style="position:relative;display:block;width:100%;padding:14px 24px;background:linear-gradient(180deg,rgba(46,204,135,.15) 0%,rgba(46,204,135,.05) 100%);border:2px solid rgba(46,204,135,.3);color:#5dd9a8;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;text-align:center"><span style="position:absolute;inset:4px;border:2px solid rgba(46,204,135,.7)"></span>Create Event →</span></div>
+            <div style="position:relative;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:24px"><div style="font-size:9px;font-weight:800;color:#c746d7;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">Online Friends</div><div style="display:flex;gap:8px;margin-top:16px"><span style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#4a7cc9);border:2px solid #2ecc87"></span><span style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#4a7cc9);border:2px solid #2ecc87"></span><span style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#4a7cc9);border:2px solid #2ecc87"></span><span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.06);color:#5a5a6a;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">+5</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;part&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;&quot;,&quot;options&quot;:[&quot;&quot;,&quot;A1&quot;,&quot;A2&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;],&quot;tsType&quot;:&quot;'' | 'A1' | 'A2' | 'B' | 'C' | 'D'&quot;,&quot;section&quot;:&quot;Boards&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G = (g, active) => ({ gem: g, active: !!active });
+    const tabs = (active) => [
+      { key: 'play', label: 'Play', icon: 'sparkles' }, { key: 'classes', label: 'Classes', icon: 'shirt' },
+      { key: 'you', label: 'You', icon: 'user' }, { key: 'dish', label: 'Dish', icon: 'utensils' },
+    ].map((t) => ({ ...t, color: t.key === active ? 'var(--brand-text)' : 'var(--ink-muted)', weight: t.key === active ? 500 : 400 }));
+    const CL = [['provider', 'Provider', 'Fighter', '01-provider'], ['foodsmith', 'Foodsmith', '', '02-foodsmith'], ['spark', 'Spark', '', '03-spark'], ['gastronaut', 'Gastronaut', '', '04-gastronaut'], ['taster', 'Taster', 'Rogue', '05-taster'], ['purist', 'Purist', '', '06-purist'], ['rebel', 'Rebel', '', '07-rebel'], ['stirrer', 'Stirrer', 'Mage', '08-stirrer'], ['host', 'Host', '', '09-host']];
+    const tiles = CL.map(([k, name, role, f]) => ({ name, role, accent: `var(--class-${k})`, board: `assets/boards/${f}-board-480.png`, bg: k === 'stirrer' ? 'var(--brand-subtle)' : 'var(--surface-sunken)', border: k === 'stirrer' ? 'var(--brand)' : 'var(--border)' }));
+    const D = (name, local, stock, stockColor, count, picked) => ({ name, local, stock, stockColor, count, picked, pad: picked ? '15px' : '16px', bg: picked ? 'var(--brand-subtle)' : 'var(--surface-raised)', border: picked ? '2px solid var(--brand)' : '1px solid var(--border)' });
+    const dishes = [D('Hainanese chicken rice', '', 'plenty', 'var(--success)', 41, true), D('Spaghetti aglio e olio', '', 'moderate', 'var(--ink-muted)', 17, false), D('Mutton soup', 'Sup kambing', 'running low', 'var(--warning)', 9, false), D('Nasi lemak', '', 'plenty', 'var(--success)', 33, false), D('Fish and chips', '', 'moderate', 'var(--ink-muted)', 12, false)];
+    const P = (name, prep, state, badge, sel, gone) => ({ name, prep, state, badge, pad: sel ? '9px 9px 5px' : '10px 10px 6px', bg: gone ? 'var(--surface-sunken)' : 'var(--surface-raised)', border: sel ? '2px solid var(--brand)' : gone ? '1px solid transparent' : '1px solid var(--border)', color: gone ? 'var(--ink-faint)' : 'var(--ink)', stateColor: state === 'Running low' ? 'var(--warning)' : gone ? 'inherit' : 'var(--ink-faint)' });
+    const pantry = [P('Chicken', 'cut · cooked', '', '×1', true), P('Rice', '', '', '×2'), P('Ginger', 'diced', 'Running low', '×1'), P('Chilli sauce', '', '', ''), P('Cucumber', '', 'Gone', '', false, true), P('Dark soy', '', '', '')];
+    const gem = (g) => `assets/gems/${g}.svg`;
+    const H = (g, picked, spent) => ({ src: gem(g), alt: g, opacity: spent ? 0.3 : 1, scale: picked ? 'scale(1.1)' : 'none', filter: picked ? `drop-shadow(0 0 7px ${g === 'ruby' ? '#ff4444' : g === 'emerald' ? '#44ff44' : '#4a6aff'})` : 'drop-shadow(0 2px 4px rgba(0,0,0,.5))' });
+    const oxpSeats = [
+      { n: 1, name: 'Foodsmith ♂ T1', cls: 'Fighter', color: '#DC2626', hi: '#FF8B8B', board: 'assets/boards/02-foodsmith-board-480.png', pos: '21.71% -2.71%', full: '0% 0%', hand: [H('ruby', true), H('ruby'), H('emerald')], handText: 'Hand R R G · Bloodlust ×2', limit: 'LIMIT ×2' },
+      { n: 2, name: 'Gastronaut ♀ T1', cls: 'Rogue', color: '#16A34A', hi: '#7BE38F', board: 'assets/boards/04-gastronaut-board-480.png', pos: '78.29% -2.71%', full: '100% 0%', hand: [H('emerald', true), H('emerald'), H('sapphire')], handText: 'Hand G G B · Exploit ×1.5', limit: 'LIMIT ×1.5' },
+      { n: 3, name: 'Stirrer ♂ T2', cls: 'Mage', color: '#2563EB', hi: '#8FB4FF', board: 'assets/boards/08-stirrer-board-480.png', pos: '21.71% 60.93%', full: '0% 100%', hand: [H('sapphire'), H('sapphire'), H('ruby')], handText: 'Hand B B R · Prismatic Shift ×1.5', limit: 'LIMIT ×1.5' },
+    ];
+    const casts = [
+      { name: 'Sweep', key: '1', board: 'assets/boards/01-provider-board-480.png', border: '#F6C445', shadow: '0 0 0 2px rgba(246,196,69,.35),0 0 14px rgba(227,160,8,.45)', cd: '0%' },
+      { name: 'Cut', key: '2', board: 'assets/boards/06-purist-board-480.png', border: 'rgba(255,255,255,.14)', shadow: 'none', cd: '55%' },
+      { name: 'Feast', key: '3', board: 'assets/boards/03-spark-board-480.png', border: 'rgba(255,255,255,.14)', shadow: 'none', cd: '20%' },
+    ];
+    const cooks = [{ name: 'Purist', hpPct: '64%', hp: '640 / 1000', dmg: '12,480' }, { name: 'Provider', hpPct: '88%', hp: '880 / 1000', dmg: '9,120' }, { name: 'Spark', hpPct: '31%', hp: '310 / 1000', dmg: '15,905' }];
+    const N = (label, d, active) => ({ label, d, plain: true, hero: false, color: active ? '#c9a227' : '#5a5a6a', border: active ? 'rgba(201,162,39,.3)' : 'rgba(255,255,255,.06)', inner: active ? 'rgba(201,162,39,.8)' : 'rgba(255,255,255,.12)', shadow: active ? '0 0 16px rgba(201,162,39,.3)' : 'none' });
+    const tftNav = [N('Shop', 'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0'), N('Friends', 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M13 7a4 4 0 11-8 0 4 4 0 018 0M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75', true), { hero: true, plain: false }, N('Chat', 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z'), N('Medals', 'M18 8a6 6 0 11-12 0 6 6 0 0112 0zM15.477 12.89L17 22l-5-3-5 3 1.523-9.11')];
+    return {
+      badTabs: tabs('play'), badTabs2: tabs('classes'), badTabs3: tabs('you'), badTabs4: tabs('dish'),
+      partyGems: { stirrer: [G('sapphire'), G('sapphire'), G('sapphire', true)], taster: [G('emerald'), G('emerald'), G('sapphire')], provider: [G('ruby'), G('ruby'), G('emerald', true)] },
+      tiles, dishes, pantry, oxpSeats, casts, cooks, tftNav,
+      ...this.partVals(),
+    };
+  }
+  partVals() {
+    const part = this.props.part || '';
+    const on = (k) => (!part || part === k || (k === 'A' && (part === 'A1' || part === 'A2')) ? 'flex' : 'none');
+    return { rootPad: part ? '0' : '40px 44px 60px', wrap: part ? 'nowrap' : 'wrap', dIntro: part ? 'none' : 'flex', sA: on('A') === 'flex', sB: on('B') === 'flex', sC: on('C') === 'flex', sD: on('D') === 'flex', dA: on('A'), dA1: !part || part === 'A1' ? 'flex' : 'none', dA2: !part || part === 'A2' ? 'flex' : 'none', dB: on('B'), dC: on('C'), dD: on('D') };
+  }
+}
+</script>
+</body>
+</html>

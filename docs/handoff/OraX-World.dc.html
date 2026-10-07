@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/tokens/base.css">
+  <link rel="stylesheet" href="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/styles.css">
+  <script src="_ds/orax-design-system-d465f658-44e2-4d20-8f69-4eb374b02b90/_ds_bundle.js"></script>
+  <style>body{margin:0;background:#1f1f22;font-family:"Space Grotesk",system-ui,sans-serif}a{color:var(--brand-text,#b98fd9);text-decoration:none}a:hover{color:var(--ink,#f2f0f5)}button,input{font-family:inherit}</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--surface);color:var(--ink);font:var(--text-body)">
+
+  <header style="position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--border)">
+    <div style="max-width:1120px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px">
+      <x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="auto" hint-size="40px,32px"></x-import>
+      <nav style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-left:auto">
+        <a href="#rooms" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font:var(--text-body-strong);color:var(--ink-muted);white-space:nowrap">Three rooms</a>
+        <a href="#city" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font:var(--text-body-strong);color:var(--ink-muted);white-space:nowrap">Real tables</a>
+        <a href="#finite" style="display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font:var(--text-body-strong);color:var(--ink-muted);white-space:nowrap">No doomscrolling</a>
+        <a href="#invite" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;background:var(--brand);color:var(--on-brand);font:var(--text-body-strong);white-space:nowrap">Ask for an invite</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero · the two worlds painting, framed, with a solid caption plate -->
+  <section data-screen-label="Hero" style="max-width:1120px;margin:0 auto;padding:24px 24px 0">
+    <div style="position:relative;min-height:560px;border-radius:12px;border:1px solid var(--border-strong);overflow:hidden;background-color:#161618;background-image:url(assets/site/orax-banner.webp);background-size:cover;background-position:50% 45%">
+      <span role="img" aria-label="A hooded figure walks a lit path toward the line between two worlds: a castle under a violet sky on the left, a glowing city on the right" style="position:absolute;inset:0"></span>
+      <div style="position:absolute;right:24px;top:24px;display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:6px"><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">Left · the game</span><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">Right · the life</span></div>
+      <div style="position:absolute;left:24px;bottom:24px;max-width:min(300px,30%);display:flex;flex-direction:column;gap:6px;padding:14px 16px;background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;box-sizing:border-box">
+        <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">Singapore alpha · invite only</span>
+        <h1 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md);text-wrap:balance">Make plans, not posts.</h1>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:start;padding:24px 4px 0">
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <p style="margin:0;font:var(--text-body-lg);color:var(--ink-muted);text-wrap:pretty">One daily app, three games that read who you are, and a map of Singapore where the payoff is a real table. Everything resets at 00:00. Nothing scrolls forever.</p>
+        <span style="font:var(--text-caption);color:var(--ink-muted)">The person on the path is you, before the identity test gives you a face.</span>
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.Tagline" size="md" hint-size="240px,44px"></x-import>
+      </div>
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <input type="email" value="{{ email }}" onChange="{{ onEmail }}" placeholder="Your email" aria-label="Email" required style="flex:1 1 200px;min-width:0;min-height:44px;padding:0 14px;background:var(--surface-sunken);border:1px solid var(--border-strong);border-radius:12px;color:var(--ink);font:var(--text-body);box-shadow:var(--shadow-socket)">
+          <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" onClick="{{ submit }}" hint-size="160px,44px">Ask for an invite</x-import>
+        </div>
+        <p style="margin:0;font:var(--text-caption);color:var(--ink-muted);text-wrap:pretty">Signed up on the old orax.world? Same email. Your place is kept and you are a founder.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Two worlds, one seam -->
+  <section data-screen-label="Two worlds" style="max-width:1120px;margin:0 auto;padding:56px 24px 24px;display:grid;grid-template-columns:minmax(0,1fr) 2px minmax(0,1fr);gap:0 40px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">The game</span>
+      <h2 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md);text-wrap:pretty">A class, a gem, three rooms.</h2>
+      <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">An identity test gives you one of nine classes. A gem a day gives you a role. OXP, HMD and Build-A-Dish are built to show who you are, not how good you are.</p>
+      <div style="display:flex;gap:12px;padding-top:4px;overflow:hidden"><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-19.jpg);background-size:cover;background-position:top"></div><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-23.jpg);background-size:cover;background-position:top"></div><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-06.jpg);background-size:cover;background-position:top"></div></div>
+    </div>
+    <div style="align-self:stretch;background:var(--brand);border-radius:1px"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">The life</span>
+      <h2 style="margin:0;font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md);text-wrap:pretty">A match, a venue, a table.</h2>
+      <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">One match a day by habits and palate. Malls hold raids, canteens hold cook-offs, and NUS and SMU are nodes inside one Singapore. The line between the two worlds is a 400 m check-in.</p>
+      <div style="display:flex;gap:12px;padding-top:4px;overflow:hidden"><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-01.jpg);background-size:cover;background-position:top"></div><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-15.jpg);background-size:cover;background-position:top"></div><div style="flex:1 1 0;min-width:0;max-width:120px;aspect-ratio:390/844;border-radius:12px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-16.jpg);background-size:cover;background-position:top"></div></div>
+    </div>
+  </section>
+
+  <!-- Cover band -->
+  <section style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-raised);overflow:hidden">
+    <div style="max-width:1120px;margin:0 auto;padding:24px;display:flex;justify-content:center"><x-import component-from-global-scope="OraXDesignSystem_d465f6.Cover" theme="{{ theme }}" scale="{{ coverScale }}" hint-size="960px,288px"></x-import></div>
+  </section>
+
+  <!-- Identity · opens with the castle half of the painting -->
+  <section data-screen-label="Identity" style="max-width:1120px;margin:0 auto;padding:72px 24px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div role="img" aria-label="The castle world, left half of the painting" style="height:180px;border-radius:12px;border:1px solid var(--border-strong);background-color:#161618;background-image:url(assets/site/orax-banner.webp);background-size:200% auto;background-position:0% 40%"></div>
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Matched by who you are</span>
+      <h2 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">Nine classes. One gem a day. No score.</h2>
+      <p style="margin:0;font:var(--text-body-lg);color:var(--ink-muted);text-wrap:pretty">A five-question identity test gives you a class. Your gem is your role for the day: Ruby strikes, Sapphire holds, Emerald mends. Your match is the person whose habits argue well with yours. Nothing in OraX ranks a person by skill.</p>
+      <div style="display:flex;gap:12px;align-items:center;padding-top:8px">
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="ruby" size="{{ 56 }}" active="{{ true }}" hint-size="56px,56px"></x-import>
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="sapphire" size="{{ 56 }}" active="{{ true }}" hint-size="56px,56px"></x-import>
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.GemSocket" gem="emerald" size="{{ 56 }}" active="{{ true }}" hint-size="56px,56px"></x-import>
+        <span style="font:var(--text-caption);color:var(--ink-muted)">Striker · Warden · Mender</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <sc-for list="{{ classes }}" as="c" hint-placeholder-count="9">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 12px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px;min-width:0">
+          <span style="width:72px;height:72px;border-radius:9999px;margin:3px;box-shadow:0 0 0 3px {{ c.accent }};background-image:url({{ c.board }});background-size:450%;background-position:21.71% -2.71%"></span>
+          <span style="font:var(--text-body-strong);color:{{ c.accent }};white-space:nowrap">{{ c.name }}</span>
+          <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">{{ c.role }}</span>
+          <span style="font:var(--text-caption);color:var(--ink-muted);text-align:center;text-wrap:pretty">{{ c.motto }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Three rooms -->
+  <section id="rooms" data-screen-label="Three rooms" style="max-width:1120px;margin:0 auto;padding:72px 24px 24px;display:flex;flex-direction:column;gap:24px">
+    <div style="max-width:640px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Three rooms</span>
+      <h2 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">Games built to get to know people, not to beat them.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:12px;padding:20px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px;min-width:0">
+          <div style="display:flex;justify-content:center;background:var(--surface-sunken);border-radius:12px;padding:20px 20px 0;overflow:hidden"><div style="width:200px;aspect-ratio:390/700;border-radius:18px 18px 0 0;border:1px solid var(--border-strong);border-bottom:0;background-color:#1a1a1a;background-image:url({{ r.shot }});background-size:200px auto;background-position:top;background-repeat:no-repeat"></div></div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px"><h3 style="margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">{{ r.title }}</h3><span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap">{{ r.tag }}</span></div>
+          <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">{{ r.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Real tables -->
+  <section id="city" data-screen-label="Real tables" style="max-width:1120px;margin:0 auto;padding:72px 24px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center">
+    <div style="display:flex;justify-content:center;gap:20px;order:0">
+      <div style="width:min(240px,45%);aspect-ratio:390/844;border-radius:22px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-16.jpg);background-size:cover;background-position:top"></div>
+      <div style="width:min(240px,45%);aspect-ratio:390/844;border-radius:22px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-17.jpg);background-size:cover;background-position:top;margin-top:40px"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div role="img" aria-label="The city world, right half of the painting" style="height:180px;border-radius:12px;border:1px solid var(--border-strong);background-color:#161618;background-image:url(assets/site/orax-banner.webp);background-size:200% auto;background-position:100% 40%"></div>
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Real tables · Singapore · NUS · SMU</span>
+      <h2 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">The payoff is a table, not a feed.</h2>
+      <p style="margin:0;font:var(--text-body-lg);color:var(--ink-muted);text-wrap:pretty">Malls hold raids with a rare Champion. Canteens and hawker centres hold cook-offs. Students mark the places that matter; a pin opens when three others check in. NUS and SMU are nodes inside one Singapore: plan with anyone, sit down in person.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="120px,22px">Check in within 400 m</x-import>
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="120px,22px">Nodes are places, not walls</x-import>
+        <x-import component-from-global-scope="OraXDesignSystem_d465f6.Chip" appearance="subtle" hint-size="120px,22px">Patches, never power</x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- Finite -->
+  <section id="finite" data-screen-label="Finite" style="max-width:1120px;margin:0 auto;padding:72px 24px 24px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Finite by design</span>
+      <h2 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">No doomscrolling. Ever.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <sc-for list="{{ finite }}" as="f" hint-placeholder-count="4">
+          <div style="padding:16px;background:var(--surface-raised);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;gap:4px"><span style="font:var(--text-heading-md);letter-spacing:var(--tracking-heading-md)">{{ f.n }}</span><span style="font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">{{ f.t }}</span></div>
+        </sc-for>
+      </div>
+      <p style="margin:0;font:var(--text-caption);color:var(--ink-muted)">The digest ends with four words: that's all for today.</p>
+    </div>
+    <div style="display:flex;justify-content:center"><div style="width:min(260px,70%);aspect-ratio:390/844;border-radius:22px;border:1px solid var(--border-strong);background-color:#1a1a1a;background-image:url(assets/shots/dark-12.jpg);background-size:cover;background-position:top"></div></div>
+  </section>
+
+  <!-- Invite -->
+  <section id="invite" data-screen-label="Invite" style="max-width:1120px;margin:48px auto 0;padding:0 24px 72px">
+    <div style="padding:40px;background:var(--surface-raised);border:1px solid var(--border);border-radius:22px;display:flex;flex-wrap:wrap;gap:32px 40px;align-items:center">
+      <div style="flex:none;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:200px;height:300px;border-radius:12px;border:1px solid var(--border-strong);background-color:#161618;background-image:url(assets/site/orax-banner.webp);background-size:380%;background-position:46.5% 66%" role="img" aria-label="The Unsorted: the hooded figure from the painting, close up"></div>
+        <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--ink-muted)">The Unsorted · no class yet</span>
+      </div>
+      <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">
+        <span style="font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--ink-muted)">Invite only · Singapore alpha</span>
+        <h2 style="margin:0;font:var(--text-display-lg);letter-spacing:var(--tracking-display-lg);text-wrap:pretty">Walk the line.</h2>
+        <p style="margin:0;font:var(--text-body-lg);color:var(--ink-muted);text-wrap:pretty">Everyone arrives hooded. Five questions later you have a class, a face and a kit. Codes go out by node as tables open; if you joined the list on the old orax.world, you are already a founder: same email, first code.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:4px"><sc-for list="{{ nodes }}" as="n" hint-placeholder-count="3"><button type="button" onClick="{{ n.pick }}" aria-pressed="{{ n.selected }}" style="min-height:44px;padding:0 16px;border-radius:12px;background:{{ n.bg }};border:1px solid {{ n.border }};color:var(--ink);font:var(--text-body-strong);cursor:pointer;white-space:nowrap">{{ n.label }}</button></sc-for></div>
+      </div>
+      <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">
+        <sc-if value="{{ isIdle }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:8px">
+            <input type="email" value="{{ email }}" onChange="{{ onEmail }}" placeholder="Your email" aria-label="Email" required style="min-height:52px;padding:0 16px;background:var(--surface-sunken);border:1px solid var(--border-strong);border-radius:12px;color:var(--ink);font:var(--text-body-lg);box-shadow:var(--shadow-socket)">
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" block="{{ true }}" onClick="{{ submit }}" hint-size="100%,44px">Ask for an invite</x-import>
+            <p style="margin:0;font:var(--text-caption);color:var(--ink-muted)">One email, no newsletter. We write once, with your code.</p>
+          </form>
+        </sc-if>
+        <sc-if value="{{ isFounder }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:20px;border:1px dashed var(--border-strong);border-radius:12px;display:flex;flex-direction:column;gap:8px">
+            <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--brand-text)">Founder · you were here first</span>
+            <p style="margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">{{ email }} is on the original list.</p>
+            <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">Your founding invite is on its way to that address, with a Founder patch for your kit. Open it on your phone and the install begins at the code.</p>
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" onClick="{{ reset }}" hint-size="140px,44px">Use another email</x-import>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isJoined }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:20px;border:1px dashed var(--border-strong);border-radius:12px;display:flex;flex-direction:column;gap:8px">
+            <span style="font:var(--text-pixel-label);letter-spacing:var(--tracking-pixel-label);text-transform:uppercase;color:var(--brand-text)">On the list · {{ nodeLabel }}</span>
+            <p style="margin:0;font:var(--text-heading-sm);letter-spacing:var(--tracking-heading-sm)">You are in the queue.</p>
+            <p style="margin:0;font:var(--text-body);color:var(--ink-muted);text-wrap:pretty">Codes go out by node as tables open. A bondmate with a code can move you up; nothing else can.</p>
+            <x-import component-from-global-scope="OraXDesignSystem_d465f6.Button" variant="ghost" onClick="{{ reset }}" hint-size="140px,44px">Use another email</x-import>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--border);background:var(--surface-raised)">
+    <div style="max-width:1120px;margin:0 auto;padding:32px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+      <x-import component-from-global-scope="OraXDesignSystem_d465f6.Logo" height="32px" ground="auto" hint-size="40px,32px"></x-import>
+      <x-import component-from-global-scope="OraXDesignSystem_d465f6.Tagline" size="md" hint-size="240px,44px"></x-import>
+      <span style="font:var(--text-caption);color:var(--ink-muted)">orax.world · Singapore · 2026</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dark&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;tsType&quot;:&quot;'dark' | 'light'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;live&quot;,&quot;options&quot;:[&quot;live&quot;,&quot;idle&quot;,&quot;founder&quot;,&quot;joined&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+class Component extends DCLogic {
+  state = { email: '', status: 'idle', node: 'NUS' };
+  componentDidMount() { this._onR = () => this.forceUpdate(); window.addEventListener('resize', this._onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this._onR); }
+  renderVals() {
+    const st = this.state, p = this.props, status = p.state && p.state !== 'live' ? p.state : st.status;
+    const FOUNDERS = ['founder@example.com', 'wen@u.nus.edu'];
+    const CL = [['provider', 'Provider', 'Fighter', '01-provider', 'Everyone eats. Everyone helps.'], ['foodsmith', 'Foodsmith', 'Fighter', '02-foodsmith', 'Every plate carries a signature.'], ['spark', 'Spark', 'Mage', '03-spark', 'Start the feast.'], ['gastronaut', 'Gastronaut', 'Rogue', '04-gastronaut', 'Look where no one else is looking.'], ['taster', 'Taster', 'Rogue', '05-taster', 'Test first, so others need not.'], ['purist', 'Purist', 'Rogue', '06-purist', 'Keep the craft honest.'], ['rebel', 'Rebel', 'Fighter', '07-rebel', 'People before rules.'], ['stirrer', 'Stirrer', 'Mage', '08-stirrer', 'Waste nothing. Miss nothing.'], ['host', 'Host', 'Mage', '09-host', 'The right seat can change a life.']];
+    const w = typeof window !== 'undefined' ? Math.min(window.innerWidth, 1120) - 48 : 960;
+    return {
+      theme: p.theme || 'dark', coverScale: Math.min(1, Math.max(0.35, w / 960)),
+      email: st.email, onEmail: (e) => this.setState({ email: e.target.value }),
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); const em = st.email.trim().toLowerCase(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return; this.setState({ status: FOUNDERS.includes(em) || em.endsWith('@founder.test') ? 'founder' : 'joined', email: em }); },
+      reset: () => this.setState({ status: 'idle', email: '' }),
+      isIdle: status === 'idle', isFounder: status === 'founder', isJoined: status === 'joined', nodeLabel: { NUS: 'NUS node', SMU: 'SMU node', SG: 'Singapore' }[st.node],
+      nodes: [['NUS', 'NUS'], ['SMU', 'SMU'], ['SG', 'Elsewhere in SG']].map(([k, label]) => ({ k, label, selected: st.node === k, bg: st.node === k ? 'var(--brand-subtle)' : 'var(--surface)', border: st.node === k ? 'var(--brand)' : 'var(--border-strong)', pick: () => this.setState({ node: k }) })),
+      classes: CL.map(([k, name, role, f, motto]) => ({ name, role, motto, accent: `var(--class-${k})`, board: `assets/boards/${f}-board-480.png` })),
+      rooms: [
+        { title: 'OXP · Table Wars', tag: '3 seats · 10 rounds', shot: 'assets/shots/dark-19.jpg', text: 'Three cooks, one colour each, twenty-seven combos, ten monsters. Your gem is your hand; the order you sit in names the combo.' },
+        { title: 'HMD · the last stand', tag: '5 cooks · 999', shot: 'assets/shots/dark-21.jpg', text: 'Five at a table against a horde of 999 in four courses. Prep windows through the day, one Special per fight, Champions every hundred.' },
+        { title: 'Build-A-Dish', tag: 'solo · daily', shot: 'assets/shots/dark-23.jpg', text: 'One shelf for all of Singapore, one dish a day, judged by the Bin. The plate you make says more about you than a bio ever did.' },
+      ],
+      finite: [{ n: 'One', t: 'match a day, by habits and palate. No percentage.' }, { n: 'Two', t: 'quests picked from five. The rest expire at 00:00.' }, { n: 'Seven', t: 'moments in the digest. Then it tells you to go and cook something.' }, { n: '00:00', t: 'the city wall wipes. Messages fade in seven days unless kept.' }],
+    };
+  }
+}
+</script>
+</body>
+</html>
