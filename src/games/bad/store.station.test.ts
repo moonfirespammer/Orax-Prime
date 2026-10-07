@@ -1,0 +1,282 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { useGame, type GameDeps } from './store';
+import { useToast } from '@/store/toast';
+import { MockPoolService } from '@/games/bad/services/MockPoolService';
+import { createClock } from '@/services/clock';
+import { ProfileStore } from '@/games/bad/services/profile';
+import { createMemoryStorage, type Storage } from '@/services/storage';
+
+const sgt = (iso: string): number => Date.parse(`${iso}+08:00`);
+
+async function boot(
+  iso = '2026-09-23T10:00:00',
+  storage: Storage = createMemoryStorage(),
+): Promise<GameDeps> {
+  const clock = createClock({ source: () => sgt(iso) });
+  const profileStore = new ProfileStore(storage);
+  const service = new MockPoolService({ city: 'SG', clock, storage, profile: profileStore });
+  const deps: GameDeps = { city: 'SG', service, clock, profileStore };
+  await useGame.getState().init(deps);
+  await service.pick('chicken-rice');
+  useGame.setState({ refusals: 0, flings: 0, selectedIng: null, flash: null });
+  return deps;
+}
+
+/** Collect every remark the Bin makes. */
+function listen(): { remarks: string[]; off: () => void } {
+  const remarks: string[] = [];
+  let last: string | null = null;
+  const off = useToast.subscribe((t) => {
+    if (t.text && t.text !== last) remarks.push(t.text);
+    last = t.text;
+  });
+  return { remarks, off };
+}
+
+const g = () => useGame.getState();
+const n = (id: string) => g().plate.items.find((i) => i.ingredientId === id)?.n ?? 0;
+
+describe('Station store actions', () => {
+  afterEach(() => {
+    useToast.getState().clear();
+    g().dispose();
+  });
+
+  it('tap adds a portion and selects it; the 4th tap is refused with the three cap lines in rotation', async () => {
+    await boot();
+    const { remarks, off } = listen();
+    for (let i = 0; i < 3; i++) await g().tapIngredient('ginger');
+    expect(n('ginger')).toBe(3);
+    expect(g().selectedIng).toBe('ginger');
+    await g().tapIngredient('rice');
+    for (let i = 0; i < 4; i++) {
+      await g().tapIngredient('ginger');
+      useToast.getState().clear();
+    }
+    off();
+    expect(n('ginger')).toBe(3);
+    expect(g().selectedIng).toBe('ginger'); // a refused tap still selects
+    expect(remarks).toEqual([
+      'Three is plenty. Come back at leftovers hour.',
+      'The whole city eats from this shelf. Three.',
+      'No. Leftovers hour starts at 21:00.',
+      'Three is plenty. Come back at leftovers hour.',
+    ]);
+  });
+
+  it('a Gone tap says so with the city name and still selects the ingredient', async () => {
+    const deps = await boot();
+    vi.spyOn(deps.service, 'takePortion').mockResolvedValueOnce({ ok: false, reason: 'gone', stock: 0 });
+    const { remarks, off } = listen();
+    await g().tapIngredient('cucumber');
+    off();
+    expect(remarks).toEqual(['Gone. Singapore ate it all before you.']);
+    expect(g().selectedIng).toBe('cucumber');
+    expect(n('cucumber')).toBe(0);
+  });
+
+  it('Leftovers hour: the 4th and 10th portions get their remarks and ten portions fit', async () => {
+    await boot('2026-09-23T21:30:00');
+    const { remarks, off } = listen();
+    for (let i = 0; i < 10; i++) await g().tapIngredient('ginger');
+    off();
+    expect(n('ginger')).toBe(10);
+    expect(remarks).toEqual([
+      'Leftovers hour. Go on, then. I am watching.',
+      'Ten portions of ginger sauce. Ten. I am counting.',
+    ]);
+  });
+
+  it('Leftovers hour: a Running-low shelf keeps its cap, refused with the one neutral line (owner ruling)', async () => {
+    await boot('2026-09-23T21:30:00'); // cucumber is Running low by then
+    const { remarks, off } = listen();
+    for (let i = 0; i < 5; i++) {
+      await g().tapIngredient('cucumber');
+      useToast.getState().clear();
+    }
+    off();
+    expect(n('cucumber')).toBe(3);
+    expect(remarks).toEqual([
+      'The whole city eats from this shelf. Three.',
+      'The whole city eats from this shelf. Three.',
+    ]);
+    expect(g().refusals).toBe(0); // the rotation counter is left alone
+  });
+
+  it('minus removes one portion and drops the chip at zero', async () => {
+    await boot();
+    await g().tapIngredient('ginger');
+    await g().tapIngredient('ginger');
+    await g().removeIngredient('ginger');
+    expect(n('ginger')).toBe(1);
+    await g().removeIngredient('ginger');
+    expect(g().plate.items).toEqual([]);
+    await g().removeIngredient('ginger'); // nothing held: no-op
+    expect(g().plate.items).toEqual([]);
+  });
+
+  it('strokes: no target asks for one; heat to burnt adds mess; the word flashes; the draft is saved', async () => {
+    const deps = await boot();
+    const save = vi.spyOn(deps.service, 'saveDraft');
+    const { remarks, off } = listen();
+    await g().stroke('heat', true);
+    expect(g().flash?.word).toBe('HEAT');
+    expect(g().plate.flair).toBe(1);
+    await g().tapIngredient('chicken');
+    for (let i = 0; i < 3; i++) await g().stroke('heat', false);
+    off();
+    expect(g().plate.items[0]).toMatchObject({ ingredientId: 'chicken', heat: 3 });
+    expect(g().plate.mess).toBe(1);
+    expect(remarks).toEqual([
+      'Strokes need a target. Tap something first.',
+      'You burnt the poached chicken. It did nothing to you.',
+    ]);
+    expect(save).toHaveBeenLastCalledWith(g().plate);
+    const seq = g().flash?.seq ?? 0;
+    await g().stroke('clean', false);
+    expect(g().plate.mess).toBe(0);
+    expect(g().flash).toEqual({ word: 'CLEAN', seq: seq + 1 });
+  });
+
+  it('PLATE flashes and plates: the verdict comes back; a service failure still surfaces', async () => {
+    const deps = await boot();
+    const plate = vi.spyOn(deps.service, 'plate');
+    const v = await g().stroke('plate', false);
+    expect(g().flash?.word).toBe('PLATE');
+    expect(plate).toHaveBeenCalledTimes(1);
+    expect(v?.name).toBe('Empty Plate of unknown origin');
+    vi.spyOn(deps.service, 'plate').mockRejectedValueOnce(new Error('boom'));
+    await expect(g().plateNow()).rejects.toThrow('boom');
+  });
+
+  it('fling removes the selected item with the rotating lines, clears the selection, and needs a target', async () => {
+    await boot();
+    const { remarks, off } = listen();
+    await g().fling(); // nothing selected: no-op
+    for (const id of ['ginger', 'rice', 'egg', 'dark-soy']) {
+      await g().tapIngredient(id);
+      await g().fling();
+      useToast.getState().clear();
+    }
+    off();
+    expect(g().plate.items).toEqual([]);
+    expect(g().plate.mess).toBe(4);
+    expect(g().selectedIng).toBeNull();
+    expect(remarks).toEqual([
+      'Rude. Delicious, but rude.',
+      'I was going to eat that anyway.',
+      'Noted. Everything is noted.',
+      'Rude. Delicious, but rude.',
+    ]);
+  });
+
+  it('Prefer buttons persists on the profile', async () => {
+    await boot();
+    expect(g().profile?.preferButtons).toBe(false);
+    await g().setPreferButtons(true);
+    expect(g().profile?.preferButtons).toBe(true);
+  });
+
+  it('the plate (portions, prep, flair, mess) survives a reload', async () => {
+    const storage = createMemoryStorage();
+    await boot('2026-09-23T10:00:00', storage);
+    await g().tapIngredient('chicken');
+    await g().stroke('cut', true);
+    await g().stroke('heat', false);
+    await g().tapIngredient('ginger');
+    const before = g().plate;
+    g().dispose();
+    const clock = createClock({ source: () => sgt('2026-09-23T10:05:00') });
+    const profileStore = new ProfileStore(storage);
+    const service = new MockPoolService({ city: 'SG', clock, storage, profile: profileStore });
+    await g().init({ city: 'SG', service, clock, profileStore });
+    expect(g().plate).toEqual(before);
+    expect(before).toMatchObject({
+      flair: 1,
+      items: [
+        { ingredientId: 'chicken', n: 1, cut: 1, heat: 1 },
+        { ingredientId: 'ginger', n: 1 },
+      ],
+    });
+  });
+});
+
+// Regression tests for the Phase 2 review findings: the midnight window (spec §3.1) and the double fling.
+describe('Station store at the day rollover and under double taps', () => {
+  afterEach(() => {
+    useToast.getState().clear();
+    g().dispose();
+    vi.useRealTimers();
+  });
+
+  /** Boot at 23:59:58 with a cooked plate; the service's 1 s emit timer is held so the rollover is not yet seen. */
+  async function bootBeforeMidnight() {
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] });
+    let now = sgt('2026-09-23T23:59:58');
+    const storage = createMemoryStorage();
+    const clock = createClock({ source: () => now });
+    const profileStore = new ProfileStore(storage);
+    const service = new MockPoolService({ city: 'SG', clock, storage, profile: profileStore });
+    await g().init({ city: 'SG', service, clock, profileStore });
+    g().selectDish('chicken-rice');
+    await g().pickSelected();
+    await g().tapIngredient('chicken');
+    await g().stroke('cut', true);
+    await g().tapIngredient('rice');
+    await g().fling();
+    await g().tapIngredient('ginger');
+    expect(g().plate).toMatchObject({ flair: 1, mess: 1 });
+    now = sgt('2026-09-24T00:00:00') + 300;
+    return { service, storage, clock, profileStore };
+  }
+
+  it.each([
+    ['a Pantry tap', () => g().tapIngredient('durian')],
+    ['a stroke', () => g().stroke('cut', true)],
+    ['a fling', () => g().fling()],
+    ['a minus', () => g().removeIngredient('ginger')],
+  ])(
+    '%s in the moment after 00:00 leaks nothing into the new day and sends the Station back to the Board',
+    async (_, act) => {
+      const { service, storage, clock, profileStore } = await bootBeforeMidnight();
+      await act();
+      expect(g().board?.date).toBe('2026-09-24');
+      expect(g().pick).toBeNull(); // the Station redirects to the Board
+      expect(g().plate).toEqual({ items: [], flair: 0, mess: 0 });
+      expect(g().selectedIng).toBeNull();
+      // A reload sees a clean day, and a fresh pick starts from an empty plate.
+      const reloaded = new MockPoolService({ city: 'SG', clock, storage, profile: profileStore });
+      expect(await reloaded.getPlate()).toEqual({ items: [], flair: 0, mess: 0 });
+      await service.pick('nasi-lemak');
+      expect(await service.getPlate()).toEqual({ items: [], flair: 0, mess: 0 });
+    },
+  );
+
+  it('drops a take that lands after the rollover instead of adding it to the new day', async () => {
+    const deps = await boot();
+    const take = deps.service.takePortion.bind(deps.service);
+    vi.spyOn(deps.service, 'takePortion').mockImplementationOnce(async (id) => {
+      const r = await take(id);
+      const board = g().board;
+      if (board)
+        useGame.setState({
+          board: { ...board, date: '2026-09-24' },
+          plate: { items: [], flair: 0, mess: 0 },
+        });
+      return r;
+    });
+    await g().tapIngredient('ginger');
+    expect(g().plate.items).toEqual([]);
+  });
+
+  it('a double tap on Fling to the Bin flings once', async () => {
+    await boot();
+    const { remarks, off } = listen();
+    await g().tapIngredient('ginger');
+    await Promise.all([g().fling(), g().fling()]);
+    off();
+    expect(g().plate).toMatchObject({ items: [], mess: 1 });
+    expect(g().flings).toBe(1);
+    expect(remarks).toEqual(['Rude. Delicious, but rude.']);
+  });
+});

@@ -19,7 +19,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       // PWA.md §8: ≥ 90 % on engines and services.
-      include: ['src/games/*/engine/**', 'src/services/**'],
+      include: ['src/games/*/engine/**', 'src/games/*/services/**', 'src/services/**'],
       exclude: ['**/*.test.*', '**/types.ts'],
       thresholds: { lines: 90 },
       reporter: ['text', 'text-summary'],

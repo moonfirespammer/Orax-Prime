@@ -1,0 +1,334 @@
+import { create } from 'zustand';
+import type { City, DayBoard, Pick, Plate, Profile, Verdict } from '@/games/bad/engine/types';
+import { PoolError, type PoolService } from '@/games/bad/services/PoolService';
+import type { Clock } from '@/services/clock';
+import type { ProfileStore } from '@/games/bad/services/profile';
+import { dish } from '@/games/bad/engine/content/dishes';
+import { ingredient } from '@/games/bad/engine/content/ingredients';
+import { CITY_NAME } from '@/data/cities';
+import { COPY, fill } from '@/games/bad/engine/content/copy';
+import type { SigilKind } from '@/games/bad/engine/sigils';
+import { applySigil, flingItem, rotating } from '@/games/bad/engine/station';
+import { say, useToast } from '@/store/toast';
+
+/** The Bin's voice (the prototype's say('The Bin', …)). */
+const remark = (text: string): void => {
+  say('The Bin', text);
+};
+
+export interface GameDeps {
+  city: City;
+  service: PoolService;
+  clock: Clock;
+  profileStore: ProfileStore;
+}
+
+interface GameState {
+  ready: boolean;
+  deps: GameDeps | null;
+  profile: Profile | null;
+  board: DayBoard | null;
+  pick: Pick | null;
+  plate: Plate;
+  selectedDish: string | null;
+  /** True while a pick or swap is in flight: the CTA is disabled so a double tap does nothing. */
+  busy: boolean;
+  /** Ticks once a second for the countdown. */
+  now: number;
+  /** Station: the ingredient strokes apply to (set by any Pantry tap or plate chip). */
+  selectedIng: string | null;
+  /** Station: the sigil word to flash; `seq` restarts the flash for a repeated word. */
+  flash: { word: string; seq: number } | null;
+  /** Session counters that drive the rotating remarks (spec §3.3 refusals, §3.4 flings). */
+  refusals: number;
+  flings: number;
+  /** The Bin's verdict on the last plate this session (spec §3.5–3.8); null until Plate it. */
+  verdict: Verdict | null;
+  /** Share card: `Send to your party` has been pressed for this verdict (spec §3.12). */
+  sent: boolean;
+  init: (deps: GameDeps) => Promise<void>;
+  dispose: () => void;
+  selectDish: (dishId: string | null) => void;
+  pickSelected: () => Promise<void>;
+  swapToSelected: () => Promise<void>;
+  tapIngredient: (ingredientId: string) => Promise<void>;
+  removeIngredient: (ingredientId: string) => Promise<void>;
+  selectItem: (ingredientId: string) => void;
+  /** Resolves with the verdict when the stroke plated the dish. */
+  stroke: (kind: SigilKind, fast: boolean) => Promise<Verdict | null>;
+  fling: () => Promise<void>;
+  plateNow: () => Promise<Verdict | null>;
+  setSignature: () => Promise<void>;
+  sendToParty: () => void;
+  setPreferButtons: (on: boolean) => Promise<void>;
+  markIntroSeen: () => Promise<void>;
+  updateProfile: (patch: Partial<Profile>) => Promise<void>;
+}
+
+let unsubscribe: (() => void) | null = null;
+let unsubscribeProfile: (() => void) | null = null;
+let tick: ReturnType<typeof setInterval> | null = null;
+/** Bumped by every init and dispose; an init that finds a newer generation after its awaits gives up. */
+let generation = 0;
+
+/** True while a fling or a plate is in flight, so a double tap flings, or plates, once. */
+let flinging = false;
+let plating = false;
+
+/** A refused action (already picked, no swaps left, ...) is a no-op for the player; anything else is a bug. */
+function ignorePoolError(e: unknown): void {
+  if (!(e instanceof PoolError)) throw e;
+}
+
+/** Day rollover: the pool, pick and plate reset together (spec §3.1), so reload all three from the service. */
+async function resyncDay(): Promise<void> {
+  const { deps } = useGame.getState();
+  if (!deps) return;
+  const mine = generation;
+  const [board, pick, plate] = await Promise.all([
+    deps.service.getToday(deps.city),
+    deps.service.getPick(),
+    deps.service.getPlate(),
+  ]);
+  if (mine === generation) {
+    useGame.setState({
+      board,
+      pick,
+      plate,
+      selectedDish: pick?.dishId ?? null,
+      selectedIng: null,
+      verdict: null,
+    });
+  }
+}
+
+/**
+ * Run a Station write. A refusal resolves to null; a refusal for want of a pick means the day rolled over, so the
+ * Station catches up at once. A result that lands after the rollover is dropped: yesterday's plate is gone.
+ */
+async function write<T>(run: () => Promise<T>): Promise<T | null> {
+  const day = useGame.getState().board?.date;
+  try {
+    const r = await run();
+    return useGame.getState().board?.date === day ? r : null;
+  } catch (e) {
+    ignorePoolError(e);
+    if (e instanceof PoolError && e.code === 'not-picked') await resyncDay();
+    return null;
+  }
+}
+
+/** Send the plate to the judge and keep the verdict. Callers hold the `plating` guard. */
+async function judgeNow(): Promise<Verdict | null> {
+  const { deps, plate } = useGame.getState();
+  if (!deps) return null;
+  const verdict = await write(() => deps.service.plate(plate));
+  if (!verdict) return null;
+  useToast.getState().clear(); // plating clears the Bin toast (prototype)
+  useGame.setState({ verdict, sent: false });
+  return verdict;
+}
+
+export const useGame = create<GameState>((set, get) => ({
+  ready: false,
+  deps: null,
+  profile: null,
+  board: null,
+  pick: null,
+  plate: { items: [], flair: 0, mess: 0 },
+  selectedDish: null,
+  busy: false,
+  now: Date.now(),
+  selectedIng: null,
+  flash: null,
+  refusals: 0,
+  flings: 0,
+  verdict: null,
+  sent: false,
+  init: async (deps) => {
+    get().dispose();
+    const mine = ++generation;
+    const profile = await deps.profileStore.load(deps.clock.city().month);
+    const [board, pick, plate] = await Promise.all([
+      deps.service.getToday(deps.city),
+      deps.service.getPick(),
+      deps.service.getPlate(),
+    ]);
+    if (mine !== generation) return; // disposed or re-initialised meanwhile (React StrictMode double mount)
+    set({
+      deps,
+      profile,
+      board,
+      pick,
+      plate,
+      selectedDish: pick?.dishId ?? null,
+      busy: false,
+      now: deps.clock.now(),
+      ready: true,
+      verdict: null,
+      sent: false,
+    });
+    unsubscribe = deps.service.subscribe(deps.city, (b) => {
+      const prev = get().board;
+      if (prev && prev.date !== b.date) {
+        void resyncDay();
+        return;
+      }
+      set({ board: b });
+    });
+    unsubscribeProfile = deps.profileStore.subscribe((p) => set({ profile: p }));
+    tick = setInterval(() => set({ now: deps.clock.now() }), 1000);
+  },
+  dispose: () => {
+    generation += 1;
+    flinging = false;
+    plating = false;
+    unsubscribe?.();
+    unsubscribeProfile?.();
+    if (tick) clearInterval(tick);
+    unsubscribe = null;
+    unsubscribeProfile = null;
+    tick = null;
+  },
+  selectDish: (dishId) => set({ selectedDish: dishId }),
+  pickSelected: async () => {
+    const { deps, selectedDish, busy } = get();
+    if (!deps || !selectedDish || busy) return;
+    set({ busy: true });
+    try {
+      const pick = await deps.service.pick(selectedDish);
+      set({ pick, selectedDish: pick.dishId });
+      remark(fill(COPY.bin.picked, { Dish: dish(pick.dishId).short }));
+    } catch (e) {
+      ignorePoolError(e);
+    } finally {
+      set({ busy: false });
+    }
+  },
+  swapToSelected: async () => {
+    const { deps, selectedDish, busy } = get();
+    if (!deps || !selectedDish || busy) return;
+    set({ busy: true });
+    try {
+      const pick = await deps.service.swap(selectedDish);
+      const plate = await deps.service.getPlate();
+      set({ pick, plate, selectedDish: pick.dishId, selectedIng: null, verdict: null });
+      remark(fill(COPY.bin.swapped, { dish: dish(pick.dishId).short.toLowerCase() }));
+    } catch (e) {
+      ignorePoolError(e);
+    } finally {
+      set({ busy: false });
+    }
+  },
+  tapIngredient: async (ingredientId) => {
+    const { deps } = get();
+    if (!deps) return;
+    // Every Pantry tap selects the ingredient, including refused and Gone taps (prototype behaviour).
+    set({ selectedIng: ingredientId });
+    const r = await write(() => deps.service.takePortion(ingredientId));
+    if (!r) return;
+    if (!r.ok) {
+      if (r.reason === 'gone') remark(fill(COPY.bin.gone, { City: CITY_NAME[deps.city] }));
+      else if (get().board?.leftoversHour) {
+        // Owner ruling (Phase 2 review): a Running-low shelf keeps its cap in Leftovers hour, and the Bin uses the
+        // one cap line that does not point at Leftovers hour. The rotation counter is left alone.
+        remark(COPY.bin.cap[1]);
+      } else {
+        const n = get().refusals;
+        set({ refusals: n + 1 });
+        remark(rotating(COPY.bin.cap, n));
+      }
+      return;
+    }
+    set((s) => {
+      const items = s.plate.items.some((i) => i.ingredientId === ingredientId)
+        ? s.plate.items.map((i) => (i.ingredientId === ingredientId ? { ...i, n: i.n + 1 } : i))
+        : [...s.plate.items, { ingredientId, n: 1, cut: 0 as const, heat: 0 as const }];
+      return { plate: { ...s.plate, items } };
+    });
+    if (r.note === 'leftovers4') remark(COPY.bin.leftovers4);
+    if (r.note === 'leftovers10') {
+      remark(fill(COPY.bin.leftovers10, { ingredient: ingredient(ingredientId).name.toLowerCase() }));
+    }
+  },
+  removeIngredient: async (ingredientId) => {
+    const { deps } = get();
+    if (!deps || !get().plate.items.some((i) => i.ingredientId === ingredientId && i.n > 0)) return;
+    if (!(await write(() => deps.service.returnPortion(ingredientId)))) return;
+    set((s) => ({
+      plate: {
+        ...s.plate,
+        items: s.plate.items
+          .map((i) => (i.ingredientId === ingredientId ? { ...i, n: i.n - 1 } : i))
+          .filter((i) => i.n > 0),
+      },
+    }));
+  },
+  selectItem: (ingredientId) => set({ selectedIng: ingredientId }),
+  stroke: async (kind, fast) => {
+    const { deps, plate, selectedIng, flash } = get();
+    if (!deps) return null;
+    const o = applySigil(plate, selectedIng, kind, fast);
+    // A PLATE already on its way (the draft is saving, or the judge is judging) makes a second one a no-op.
+    if (o.plateNow && plating) return null;
+    set({ plate: o.plate, flash: { word: o.word, seq: (flash?.seq ?? 0) + 1 } });
+    if (o.remark) remark(o.remark);
+    if (!o.plateNow) {
+      await write(() => deps.service.saveDraft(o.plate));
+      return null;
+    }
+    plating = true;
+    try {
+      const saved = await write(() => deps.service.saveDraft(o.plate).then(() => true));
+      return saved ? await judgeNow() : null;
+    } finally {
+      plating = false;
+    }
+  },
+  fling: async () => {
+    const { deps, plate, selectedIng } = get();
+    if (flinging || !deps || !selectedIng) return;
+    if (!plate.items.some((i) => i.ingredientId === selectedIng && i.n > 0)) return;
+    flinging = true;
+    try {
+      if (!(await write(() => deps.service.fling(selectedIng).then(() => true)))) return;
+      const n = get().flings;
+      const next = flingItem(get().plate, selectedIng);
+      set({ plate: next, selectedIng: null, flings: n + 1 });
+      remark(rotating(COPY.bin.fling, n));
+      await write(() => deps.service.saveDraft(next));
+    } finally {
+      flinging = false;
+    }
+  },
+  plateNow: async () => {
+    if (plating) return null;
+    plating = true;
+    try {
+      return await judgeNow();
+    } finally {
+      plating = false;
+    }
+  },
+  setSignature: async () => {
+    const { deps, verdict } = get();
+    if (!deps || !verdict) return;
+    await deps.service.setSignature(verdict);
+  },
+  sendToParty: () => set({ sent: true }),
+  setPreferButtons: async (on) => {
+    const { deps } = get();
+    if (!deps) return;
+    await deps.profileStore.update({ preferButtons: on });
+  },
+  markIntroSeen: async () => {
+    const { deps } = get();
+    if (!deps) return;
+    await deps.profileStore.update({ introSeen: true });
+  },
+  updateProfile: async (patch) => {
+    const { deps } = get();
+    if (!deps) return;
+    await deps.profileStore.update(patch);
+  },
+}));

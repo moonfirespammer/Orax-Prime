@@ -6,6 +6,8 @@ export interface GemInfo {
   name: string;
   /** The gem's role in OXP and HMD (PRODUCT_SPEC §2). */
   role: 'Striker' | 'Warden' | 'Mender';
+  /** `{n} of 3 rubies` on a verdict. */
+  plural: string;
   cut: string;
   setting: string;
   file: string;
@@ -15,6 +17,7 @@ export interface GemInfo {
 export const GEMS: Readonly<Record<Gem, GemInfo>> = {
   ruby: {
     name: 'Ruby',
+    plural: 'rubies',
     role: 'Striker',
     cut: 'round brilliant',
     setting: 'round',
@@ -22,6 +25,7 @@ export const GEMS: Readonly<Record<Gem, GemInfo>> = {
   },
   sapphire: {
     name: 'Sapphire',
+    plural: 'sapphires',
     role: 'Warden',
     cut: 'rounded square',
     setting: 'rounded square',
@@ -29,6 +33,7 @@ export const GEMS: Readonly<Record<Gem, GemInfo>> = {
   },
   emerald: {
     name: 'Emerald',
+    plural: 'emeralds',
     role: 'Mender',
     cut: 'wide lozenge',
     setting: 'diamond',
