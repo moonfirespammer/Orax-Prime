@@ -130,6 +130,7 @@ export function Today() {
             picked={picked.includes(q.id)}
             done={!!done[q.id]}
             full={full}
+            radius="sm"
             onToggle={() => {
               togglePick(q.id);
             }}

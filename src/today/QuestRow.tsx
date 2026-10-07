@@ -15,18 +15,20 @@ export interface QuestRowProps {
   done: boolean;
   /** Two are picked: the others are let go at 00:00 and cannot be picked. */
   full: boolean;
+  /** The prototype rounds the rows by 12 px on the Quests screen and by 6 px inside Today's card. */
+  radius?: 'md' | 'sm';
   onToggle: () => void;
 }
 
 /** One quest (the prototype's QUESTS rows): a 22 px box, the title over room and reward, the state word. */
-export function QuestRow({ quest: q, picked, done, full, onToggle }: QuestRowProps) {
+export function QuestRow({ quest: q, picked, done, full, radius = 'md', onToggle }: QuestRowProps) {
   const disabled = !picked && full;
   return (
     <button
       type="button"
       aria-pressed={picked}
       disabled={disabled}
-      className={`${styles.row} ${picked ? styles.picked : ''}`}
+      className={`${styles.row} ${radius === 'sm' ? styles.rowSm : ''} ${picked ? styles.picked : ''}`}
       onClick={onToggle}
     >
       <span className={`${styles.box} ${picked ? styles.boxPicked : ''}`}>

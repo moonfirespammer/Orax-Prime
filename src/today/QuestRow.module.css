@@ -13,6 +13,9 @@
   font: inherit;
   box-sizing: border-box;
 }
+.rowSm {
+  border-radius: var(--radius-sm);
+}
 .row:focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
