@@ -1,0 +1,77 @@
+{
+  "version": "v2 · 7 October 2026",
+  "clock": {
+    "reset": "00:00 city time, Singapore and Kuala Lumpur, all three games. If server load ever bites, the hour moves for all three together.",
+    "prepWindows": ["00:00", "06:00", "12:00", "18:00"],
+    "leftoversHour": "21:00–00:00",
+    "day": [
+      { "time": "00:00", "t": "Reset. The app asks for today’s gem. BaD deals five dishes and one Pantry per city; HMD rolls Today’s Service and the Champion order; OXP rolls the Daily Gauntlet map. The first Prep window opens." },
+      { "time": "06:00", "t": "Second Prep window. Missed windows queue: a cook who opens the app at 20:00 picks four in a row." },
+      { "time": "12:00", "t": "Third Prep window." },
+      { "time": "18:00", "t": "Fourth Prep window. From here every HMD cook carries all four permanent augments; the evening is when the horde falls." },
+      { "time": "21:00", "t": "Leftovers hour. More on the table in every room until midnight." },
+      { "time": "Any time", "t": "Play. A plate takes three minutes, an HMD fight exactly three, an OXP run about fifteen. Bots fill empty seats with a random class and the day’s average loadout." }
+    ]
+  },
+  "leftovers": [
+    { "game": "BaD", "t": "The portion cap lifts on shelves that are still plentiful (built)." },
+    { "game": "HMD", "t": "The Special offer before the bell is four wide instead of three." },
+    { "game": "OXP", "t": "Every relic offer gains a fourth option, a Leftover relic that melts after a few fights." }
+  ],
+  "habits": [
+    { "g": "BaD", "n": "Doubles the chilli ×n", "t": "Built. Chilli portions at two or more." },
+    { "g": "BaD", "n": "Unhinged plates ×n", "t": "Built. Any item at five portions, or twice the recipe count." },
+    { "g": "BaD", "n": "Feeds the table ×n (and eight more)", "t": "The class palate fired on a non-cursed plate." },
+    { "g": "HMD", "n": "Front-row regular ×n", "t": "Took a front slot." },
+    { "g": "HMD", "n": "Stands by the Mender ×n", "t": "Placed adjacent to an Emerald cut." },
+    { "g": "HMD", "n": "Late shift ×n", "t": "Rang the bell during Leftovers hour." },
+    { "g": "HMD", "n": "Same table ×n", "t": "Fought with the same four friends as the last time." },
+    { "g": "OXP", "n": "Trinity table ×n", "t": "One gem per seat." },
+    { "g": "OXP", "n": "Mono table ×n", "t": "Three seats, one gem." },
+    { "g": "OXP", "n": "Takes the hot node ×n", "t": "Chose the row’s heaviest node." },
+    { "g": "OXP", "n": "Rings the Limit early ×n", "t": "Spent a Limit Token on turn one." }
+  ],
+  "cityTable": {
+    "counters": ["Plates today", "Kills today", "Rows cleared today"],
+    "perks": [
+      { "n": "Early leftovers", "t": "When the city passes its plate mark, Leftovers hour opens at 20:00 for everyone in the city.", "mark": "Launch guess 1,500 plates Singapore · 1,200 Kuala Lumpur; reset to the trailing-week median every Monday." },
+      { "n": "Open kitchen", "t": "When the city passes its kill mark, the next Prep window’s offer is four wide for everyone in the city.", "mark": "Launch guess 60,000 kills Singapore · 50,000 Kuala Lumpur; same weekly reset." }
+    ]
+  },
+  "gifts": [
+    { "dir": "BaD → HMD", "n": "Packed Lunch", "t": "Plated today: the Special offer before the bell is four wide.", "why": "Widens a choice; adds no stat." },
+    { "dir": "BaD → OXP", "n": "House Pantry", "t": "Plated today: the run’s first relic offer is four wide.", "why": "Widens a choice; adds no stat." },
+    { "dir": "HMD or OXP → BaD", "n": "Second Sitting", "t": "Fought today: one more dish swap.", "why": "More room to express; the judge is untouched." },
+    { "dir": "HMD ↔ OXP", "n": "Same table", "t": "A party that plays both combat games together on one day earns the Same table chip.", "why": "A chip, nothing else." }
+  ],
+  "bin": {
+    "register": "Warm, still short. The Bin likes you and will not say so directly.",
+    "rules": [
+      "Sentence case, full stops, no exclamation marks, no emoji. Fourteen words or fewer a line.",
+      "About the plate, the fight or the run; never about the player’s rank or skill.",
+      "One line per moment. The Bin never praises a cursed plate or an empty table.",
+      "Numbers are written as the player would say them: 612, not six hundred and twelve.",
+      "About thirty lines per game per moment type; seeded from the result so the same result gets the same line."
+    ],
+    "where": ["BaD verdict", "HMD lobby card (Today’s Service)", "HMD results", "OXP map card", "OXP results", "Every share card headline"],
+    "lines": [
+      { "m": "HMD · lobby", "l": "Sticky floor tonight and the knives are sharp. Bring a Warden." },
+      { "m": "HMD · Clean Plate", "l": "All 999 before the bell. The floor is a disgrace and I would not change it." },
+      { "m": "HMD · a long stand", "l": "612 before the fall. The rest were finished for you. I counted every one." },
+      { "m": "HMD · an early fall", "l": "206. The horde barely noticed. Come back after the six o’clock pick." },
+      { "m": "OXP · map", "l": "Three roads. The middle one is hot and pays for it." },
+      { "m": "OXP · a clear", "l": "Ten courses. The Colossus is toffee now. Sit down, you have earned the chair." },
+      { "m": "OXP · Game Over", "l": "Row nine. The Colossus called you bland. It is wrong, but it is big." },
+      { "m": "OXP · the Critic", "l": "The Critic came and you did not embarrass me. That is the whole review." },
+      { "m": "Any · share card", "l": "The Bin’s line is the headline of every card, in all three rooms." }
+    ]
+  },
+  "shareCard": "BaD’s 326px card for all three games: logo and pixel label, city and date, the dish or fight or run, the Bin’s line, the result in your gem (three stones; kills before the end; rows cleared), avatar and class, the two-line tagline.",
+  "dataFiles": [
+    { "f": "data/classes.json", "t": "Budget rule, gem modifiers, Heat base, the three gems with their OXP kits, nine classes with derived stats, kits and cuts." },
+    { "f": "data/hmd.json", "t": "Fight constants, Courses and units with mix shares, horde budget, Champions by slot, conditions with triggers and exclusions, augment pool counts, tuning targets." },
+    { "f": "data/oxp.json", "t": "Seat rules, map generation, augment layers, TTK targets, the pool of twenty plus the Critic, abilities, modifiers, relics, scoring, tuning targets." },
+    { "f": "data/bad.json", "t": "As built, the judge, the class and gem ruling, nine palates." },
+    { "f": "data/shared.json", "t": "The clock, Leftovers hour, habits, City Table, gifts, the Bin, the share card, this list." }
+  ]
+}

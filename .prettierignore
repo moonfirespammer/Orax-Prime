@@ -10,3 +10,6 @@ e2e/__screenshots__
 # Verbatim copies of the design system (docs/handoff/_ds); keep them byte-identical to the source.
 src/ds/tokens
 src/ds/styles.css
+
+# The design data is the handoff's own JSON, kept byte-identical to docs/design/README.md's source.
+src/data/design/*.json

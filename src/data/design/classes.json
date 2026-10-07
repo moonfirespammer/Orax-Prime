@@ -1,0 +1,147 @@
+{
+  "version": "v2 · 7 October 2026",
+  "budget": {
+    "rule": "Crowd DPS = ATK × SPD × targets. The budget sets crowd DPS by weight; ATK is derived and never hand-tuned.",
+    "weights": { "Damage": 38, "Balanced": 34, "Support": 30, "Scaler": "30 at the bell, 40 at full stacks" },
+    "hp": { "Frontline melee": "1100–1300", "Finisher melee": 950, "Mid": "850–950", "Long": "750–850" },
+    "gemMods": {
+      "ruby": { "atk": "+10%", "arm": "−10%", "threat": "×1", "heat": "+5 per kill" },
+      "sapphire": { "hp": "+25%", "arm": "+15%", "atk": "−10%", "threat": "×2", "heat": "+4 per hit taken" },
+      "emerald": { "hp": "+15%", "regen": "+1% per second", "atk": "−5%", "healingThreat": "×1.5", "heat": "+4 whenever any ally takes a hit" }
+    },
+    "heatBase": { "perHitLanded": 10, "perHitTaken": 6, "perSecond": 2, "signatureAt": 100 }
+  },
+  "gems": [
+    { "key": "ruby", "name": "Ruby", "role": "Striker", "keyword": "Burn", "job": "Kill things, fast. The Striker is the table’s knife.",
+      "keywordDef": "Burn: 6 damage per second per stack for 4 s, max 3 stacks. Burn ticks ignore ARM.",
+      "lean": "+10% ATK, −10% ARM. Threat ×1.", "heat": "+5 Heat per kill on top of the base gains.",
+      "oxp": { "hand": "R R G", "limitName": "Bloodlust", "limit": "The next combo deals ×2.", "passiveName": "Sear", "passive": "Every combo leaves a Burn on the monster worth 15% of the damage dealt, paid at the start of the next turn and ignoring Defense. A second Ruby seat makes it 20%, a third 25%." } },
+    { "key": "sapphire", "name": "Sapphire", "role": "Warden", "keyword": "Chill", "job": "Get hit instead of everyone else. The Warden is the table itself.",
+      "keywordDef": "Chill: −20% SPD per stack; 3 stacks = Freeze for 1.5 s. Shields are temporary HP that take damage first.",
+      "lean": "+25% max HP, +15% ARM, −10% ATK. Threat ×2.", "heat": "+4 Heat per hit taken on top of the base gains.",
+      "oxp": { "hand": "B B R", "limitName": "Prismatic Shift", "limit": "×1.5, and the seat may recolour the action it committed after seeing the others.", "passiveName": "Ward", "passive": "The party starts every encounter with a Ward of 30 over its Nerve; Counter hits the Ward first, and every kill refreshes it. A second Sapphire seat makes it 45, a third 60." } },
+    { "key": "emerald", "name": "Emerald", "role": "Mender", "keyword": "Grow", "job": "Keep the table standing and scale as the fight goes on. The Mender is the pot that never empties.",
+      "keywordDef": "Grow: a permanent stack for the rest of the fight (HMD) or the run (OXP). Grow never decays.",
+      "lean": "+15% max HP, +1% HP regen per second, −5% ATK. Healing generates 1.5× threat.", "heat": "+4 Heat whenever any ally takes a hit, on top of the base gains.",
+      "oxp": { "hand": "G G B", "limitName": "Exploit", "limit": "×1.5, ignores all Defense, and the seat may swap position for the turn.", "passiveName": "Second Helping", "passive": "Every kill restores Nerve in full instead of +30 and grants a Grow stack: +2% damage for the rest of the run, max ten. A second Emerald seat makes stacks +3%, a third +4%." } }
+  ],
+  "classes": [
+    { "key": "provider", "num": "01", "name": "Provider", "role": "Guardian", "station": "Frontline", "range": "Melee", "weight": "Balanced", "hp": 1300, "atk": 21, "spd": 0.8, "targets": 2.0, "crowdDps": 33.6, "arm": "25%", "board": "01-provider-board.png",
+      "motto": "Everyone eats. Everyone helps.", "mirror": "Taster: the Provider cares, the Taster scrutinises.",
+      "weaponM": "♂ serving tongs with a cast-iron pan shield", "weaponF": "♀ two-handed rolling pin",
+      "cue": "♂ plants the shield and raises the tongs in a serving salute; three cream dots gather above the pan. ♀ sets the pin upright and traces one warm ring at its barrel.",
+      "desc": "The caretaker at the front of the line: broad apron, crossed straps, three keys at the hip. The Provider holds the front and feeds whoever stands beside them. Every part of the kit is about serving; damage, protection and healing all come out of the pot.",
+      "kit": [
+        { "k": "Basic", "n": "Serve", "t": "A tongs or rolling-pin swing that hits the target and one adjacent enemy." },
+        { "k": "Passive", "n": "Ration Ring", "t": "Allies in adjacent slots take 10% less damage. Every 25 kills by the party, the Provider serves a bowl: the most-damaged adjacent ally heals 5%." },
+        { "k": "Signature", "n": "Second Helping", "t": "Slams the pot. Every ally heals 15% and every enemy in melee range is knocked back one tile." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Hearthfire", "basic": "The swing cleaves every enemy in a short arc and applies Burn ×1.", "passive": "Ration Ring instead gives adjacent allies +8% ATK; the Provider gains +2% ATK per Burning enemy on the field (max +30%).", "signature": "Boil Over. 180% to every enemy in melee range, Burn ×2, and the ground burns for 3 s at 8/s." },
+        { "gem": "sapphire", "role": "Warden", "name": "Head of the Table", "basic": "2× threat and Chill ×1.", "passive": "Ration Ring is 15%, and the Provider takes what the allies don’t.", "signature": "Lock the Doors. A shield of 40% max HP and an ice wall one tile ahead for 3 s; enemies cannot pass it, and melee enemies that touch it are Frozen." },
+        { "gem": "emerald", "role": "Mender", "name": "Stewpot", "basic": "Every 3rd swing serves a bowl instead: the most-damaged ally heals 8%.", "passive": "Ration Ring also regenerates adjacent allies 1% per second; every bowl served grants its ally +1% max HP for the fight (Grow).", "signature": "Second Helping heals 25% and grants every ally +5% max HP for the fight (Grow)." } ] },
+    { "key": "foodsmith", "num": "02", "name": "Foodsmith", "role": "Finisher", "station": "Knife roll", "range": "Melee", "weight": "Damage", "hp": 950, "atk": 26, "spd": 0.8, "targets": 1.8, "crowdDps": 37.4, "arm": "10%", "board": "02-foodsmith-board.png",
+      "motto": "Every plate should carry a signature.", "mirror": "Purist: the Foodsmith bursts, the Purist grinds.",
+      "weaponM": "♂ straight chef’s knife, a body-height long", "weaponF": "♀ two-handled mezzaluna crescent",
+      "cue": "♂ presents the knife flat on a palm; a cream plating stroke runs along its edge. ♀ holds the mezzaluna level; a plating arc pulses in its crescent.",
+      "desc": "Whites, a standing collar, one knife roll across the back. The Foodsmith does one thing perfectly and then does it again: every fourth cut is the Signature Strike, and the whole kit revolves around landing it in a crowd. Targets 1.8 is the average of three single cuts and one line crit.",
+      "kit": [
+        { "k": "Basic", "n": "Cut", "t": "A knife or mezzaluna stroke. Every 4th is the Signature Strike: a guaranteed crit that hits every enemy in the line of the cut." },
+        { "k": "Passive", "n": "Mise en Place", "t": "Starts the fight at 40 Heat. Every Signature Strike that kills refunds 10 Heat." },
+        { "k": "Signature", "n": "Flourish", "t": "Dashes to the densest cluster and cuts through it for 200% in a line. A killing blow chains the cut to the next enemy, up to five." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Flambé", "basic": "Signature Strikes apply Burn ×2.", "passive": "Each chain kill gives +10% ATK for 3 s, stacking to three.", "signature": "Flourish leaves a fire trail: enemies crossing it take 60% and Burn ×1." },
+        { "gem": "sapphire", "role": "Warden", "name": "Showpiece", "basic": "2× threat. Signature Strikes taunt every enemy they hit for 2 s.", "passive": "Above 70% HP the Foodsmith has +25% ARM; every crit taken gives +20 Heat.", "signature": "Showpiece. For 3 s the Foodsmith is the only legal target and takes −50%; when it ends, deals 100% of the damage taken to every attacker." },
+        { "gem": "emerald", "role": "Mender", "name": "Consommé", "basic": "Each Signature Strike plates a Dish on the most-damaged ally. It bursts when they drop below 50% HP or after 3 s, healing 12% and cleansing one debuff.", "passive": "Every Dish that bursts makes future Dishes +1% stronger (Grow).", "signature": "Tasting Menu. A Dish on every ally, then Flourish at 120%." } ] },
+    { "key": "spark", "num": "03", "name": "Spark", "role": "Igniter", "station": "Pastry bench", "range": "Mid", "weight": "Balanced", "hp": 850, "atk": 12, "spd": 1.4, "targets": 2.0, "crowdDps": 33.6, "arm": "5%", "board": "03-spark-board.png",
+      "motto": "Start the feast.", "mirror": "Rebel: the Spark speeds allies, the Rebel disrupts enemies.",
+      "weaponM": "♂ balloon whisk with five wire loops", "weaponF": "♀ linen piping bag, cradled in both hands",
+      "cue": "♂ holds the whisk upright and turns it; three ochre seasoning dots gather above the balloon. ♀ lifts the nozzle and squeezes a small cream spiral.",
+      "desc": "Cropped jacket, two ribbon tails, a bandolier of spice shakers. The Spark gets everyone moving. Whatever the gem, allies beside the Spark are faster; the gem decides what the Spark does while they are.",
+      "kit": [
+        { "k": "Basic", "n": "Fling", "t": "Spice from the whisk or piping bag at up to two enemies in mid range." },
+        { "k": "Passive", "n": "Ignition", "t": "Adjacent allies gain +10% SPD. Every ally Signature gives the Spark +15 Heat." },
+        { "k": "Signature", "n": "Start the Feast", "t": "The party gains +40% SPD for 4 s and +10 Heat." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Firecracker", "basic": "Hits three enemies; Burn ×1 on the primary.", "passive": "The Spark deals +10% to Burning enemies.", "signature": "While Start the Feast lasts, the Spark’s flings explode for 60% in a small area." },
+        { "gem": "sapphire", "role": "Warden", "name": "Centre Stage", "basic": "A tray-bash at mid range, 2× threat, Chill ×1.", "passive": "While two or more enemies target the Spark it takes −20% and Ignition is +15% instead of +10%.", "signature": "Spotlight. Every enemy in mid range attacks the Spark for 3 s; the Spark gains a 35% shield and adjacent allies +20 Heat." },
+        { "gem": "emerald", "role": "Mender", "name": "Plus One", "basic": "Unchanged.", "passive": "Ignition also regenerates adjacent allies 1.5% per second. A Guest (150 HP, 12 ATK) joins in slot 6 at the bell and gains +5% all stats per 50 party kills (Grow).", "signature": "Toast. Every ally gains +10 Heat and +25% SPD for 3 s, and heals 3% per hit they land while it lasts." } ] },
+    { "key": "gastronaut", "num": "04", "name": "Gastronaut", "role": "Skirmisher", "station": "Noodle stall", "range": "Long", "weight": "Damage", "hp": 750, "atk": 29, "spd": 1.2, "targets": 1.1, "crowdDps": 38.3, "arm": "5%", "board": "04-gastronaut-board.png",
+      "motto": "Look where no one else is looking.", "mirror": "Stirrer: the Gastronaut finds things, the Stirrer takes them.",
+      "weaponM": "♂ two bamboo chopsticks carried as walking poles", "weaponF": "♀ spider strainer on a long bamboo handle",
+      "cue": "♂ plants both chopsticks and lifts the head; three path-like cream dots rise between the sticks. ♀ presents the strainer level; three cream dots gather over the bowl.",
+      "desc": "Pack, creel, map tube and a three-tier tiffin. The Gastronaut fights from the back and brings things home: enemy deaths drop Ingredients the party eats for a permanent edge.",
+      "kit": [
+        { "k": "Basic", "n": "Jab", "t": "A chopstick jab or strainer scoop at long range; +20% against the farthest enemy." },
+        { "k": "Passive", "n": "Forage", "t": "Enemies killed by anyone drop an Ingredient 10% of the time (Gastronaut kills 25%). The nearest cook eats it: +1% ATK for the fight (Grow), to +30%. Champions shower five." },
+        { "k": "Signature", "n": "Volley", "t": "Three shots at the three farthest enemies, 120% each." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Pepper", "basic": "Pierces one enemy behind the target.", "passive": "An eaten Ingredient Burns ×1 every enemy near where it fell.", "signature": "Volley applies Burn ×2 and gains one more shot per 250 party kills, up to six." },
+        { "gem": "sapphire", "role": "Warden", "name": "Lure", "basic": "2× threat.", "passive": "Bramble Pack. Melee attackers take 15% of their damage back as thorns; enemies walking toward the Gastronaut are slowed 20%.", "signature": "Scent Lure. Every enemy on the field must attack the Gastronaut for 3 s along a thorn path that deals 20 per second to anything crossing it." },
+        { "gem": "emerald", "role": "Mender", "name": "Herbalist", "basic": "Every 3rd shot instead drops a Herb Pouch on the most-damaged ally: a 6% heal and +1% max HP for the fight (Grow).", "passive": "Ingredients also heal the eater 5%.", "signature": "Seed Cache. Plants a cache in the back row that grows a stage every 5 s (max 5). At each Course boundary it bursts: every ally heals 4% and gains +2% all stats per stage (Grow)." } ] },
+    { "key": "taster", "num": "05", "name": "Taster", "role": "Analyst", "station": "Assay bench", "range": "Long", "weight": "Support", "hp": 850, "atk": 30, "spd": 1.0, "targets": 1.0, "crowdDps": 30.0, "arm": "10%", "board": "05-taster-board.png",
+      "motto": "I test first, so others do not have to.", "mirror": "Provider: the Taster scrutinises, the Provider cares.",
+      "weaponM": "♂ pivot fan of three chef’s spoons", "weaponF": "♀ giant microplane rasp",
+      "cue": "♂ raises the spoon fan to the light; one amber dot pulses above the centre spoon. ♀ holds the microplane vertical and inspects a falling amber shaving.",
+      "desc": "One enlarged gauntlet, a diagonal row of vials, a loupe at the brow. The Taster marks what matters. Every cut Analyses the biggest threat in range so the whole party hits it harder; that mark is worth about four points of the budget, which is why the Taster’s own DPS is Support weight.",
+      "kit": [
+        { "k": "Basic", "n": "Sample", "t": "A spoon or microplane throw at long range." },
+        { "k": "Passive", "n": "Analyse", "t": "The highest-HP enemy in range is always Analysed: it takes +20% from the party. When it dies, the mark jumps to the next." },
+        { "k": "Signature", "n": "Verdict", "t": "Every enemy within long range is Analysed for 5 s, and the Taster’s next five samples crit." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Hot Verdict", "basic": "Burn ×1.", "passive": "Burn ticks on Analysed enemies deal double.", "signature": "While Verdict lasts, every party hit on an Analysed enemy applies Burn ×1." },
+        { "gem": "sapphire", "role": "Warden", "name": "Inspector", "basic": "2× threat.", "passive": "Under Inspection. Enemies attacking the Taster deal −15%; the Taster has +5% ARM per Analysed enemy alive, max +25%.", "signature": "Inspection. Every enemy in long range must attack the Taster for 3 s and has 0 ARM while doing so." },
+        { "gem": "emerald", "role": "Mender", "name": "Antidote", "basic": "Poison 3 per second for 3 s; half the poison damage returns as healing to the most-damaged ally.", "passive": "Quality Control. Allies adjacent to the Taster are immune to Burn and poison; whenever an ally is cleansed by anyone they heal 5%.", "signature": "Remedy. Every ally is cleansed, heals 10% and is immune to debuffs for 3 s." } ] },
+    { "key": "purist", "num": "06", "name": "Purist", "role": "Duelist", "station": "Trim bench", "range": "Melee", "weight": "Damage", "hp": 1100, "atk": 38, "spd": 0.9, "targets": 1.1, "crowdDps": 37.6, "arm": "20%", "board": "06-purist-board.png",
+      "motto": "Keep the craft honest.", "mirror": "Foodsmith: the Purist grinds, the Foodsmith bursts.",
+      "weaponM": "♂ long plating tweezers, gripped like a fencing tool", "weaponF": "♀ closed kitchen shears, one long point",
+      "cue": "♂ closes the tweezer tips around one floating cream leaf and lifts it. ♀ opens and closes the shears around one floating cream thread.",
+      "desc": "An ankle-length wrap with one seam, a sealed case, the tool held away from the body. The Purist refuses: no debuff sticks and no strike misses. Targets 1.1 is the worth of never missing and ignoring a fifth of the armour.",
+      "kit": [
+        { "k": "Basic", "n": "Exact Cut", "t": "A tweezers or shears thrust that never misses and ignores 20% ARM." },
+        { "k": "Passive", "n": "Uncompromised", "t": "Immune to every debuff: Burn, Chill, poison, stun, knockback and pulls." },
+        { "k": "Signature", "n": "The Standard", "t": "For 4 s every Exact Cut deals true damage and executes enemies below 15% HP." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Clean Sear", "basic": "+10% ATK while above 80% HP.", "passive": "Kills refund 15 Heat.", "signature": "Clean Sear replaces The Standard: a 300% strike. If it kills, regain 100 Heat and strike the next target, chaining up to three." },
+        { "gem": "sapphire", "role": "Warden", "name": "Hold the Line", "basic": "2× threat, Chill ×1.", "passive": "Standard. −10% damage taken per debuff on the attacker, max −30%.", "signature": "Hold the Line. For 3 s the Purist is immovable, takes −50%, and every enemy in melee range must attack it." },
+        { "gem": "emerald", "role": "Mender", "name": "Preserve", "basic": "Every 3rd cut instead Preserves the most-damaged ally: a shield of 8% max HP.", "passive": "Sealed Case. Purist shields cannot be stripped and last until spent; an ally holding one is immune to Burn.", "signature": "Tradition. Every ally gains a 15% shield and +2% ARM for the fight (Grow). Nothing is ever healed by this cut; nothing gets through in the first place." } ] },
+    { "key": "rebel", "num": "07", "name": "Rebel", "role": "Disruptor", "station": "Pounding bench", "range": "Melee", "weight": "Balanced", "hp": 1250, "atk": 34, "spd": 1.0, "targets": 1.0, "crowdDps": 34.0, "arm": "15%", "board": "07-rebel-board.png",
+      "motto": "People before rules.", "mirror": "Spark: the Rebel disrupts enemies, the Spark speeds allies.",
+      "weaponM": "♂ waffle-face tenderising mallet", "weaponF": "♀ stone mortar cradled in one arm, pestle in the other",
+      "cue": "♂ taps the mallet by the communal pot; a cream ring appears above it. ♀ stirs the pestle and lifts a warm ring from the bowl.",
+      "desc": "A cropped academy jacket with three patches, a short sash, the communal pot on the hip. The Rebel gets in the way on purpose. Every cut reacts when an ally is in trouble; the gem decides how loud the reaction is.",
+      "kit": [
+        { "k": "Basic", "n": "Pound", "t": "A mallet or pestle strike. Every 4th knocks the target back one tile." },
+        { "k": "Passive", "n": "People Before Rules", "t": "When an ally drops below 30% HP, enemies attacking them must attack the Rebel for 2 s (once per ally every 20 s)." },
+        { "k": "Signature", "n": "Kick the Table", "t": "Every enemy in melee range is knocked back two tiles for 120%. Enemies knocked into others deal 60% to them." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Firebrand", "basic": "The 4th strike also applies Burn ×1.", "passive": "+20% ATK while any ally is below 50% HP.", "signature": "Kick the Table applies Burn ×2 and gives the Rebel +5% ATK per enemy hit for 5 s." },
+        { "gem": "sapphire", "role": "Warden", "name": "Barricade", "basic": "2× threat.", "passive": "Human Shield. The taunt lasts 3 s and the Rebel has +20% ARM while it holds.", "signature": "Picket Line. Every enemy within a tile of melee must attack the Rebel for 3 s; when it ends, the Rebel deals 100% of the damage taken to every adjacent enemy." },
+        { "gem": "emerald", "role": "Mender", "name": "Communal Pot", "basic": "Every 3rd strike instead Takes the Wound: the most-damaged ally heals 10% and the Rebel loses 5%.", "passive": "Share the Pot. The Rebel regenerates 2% per second while below 50% HP.", "signature": "Rally. Every ally below 50% heals 15% and gains +15% ATK for 4 s; the Rebel gains +4% max HP per ally rallied (Grow)." } ] },
+    { "key": "stirrer", "num": "08", "name": "Stirrer", "role": "Trickster", "station": "Street stall", "range": "Mid", "weight": "Scaler", "hp": 900, "atk": 12, "spd": 1.3, "targets": 2.0, "crowdDps": "31 → 41", "arm": "5%", "board": "08-stirrer-board.png",
+      "motto": "Waste nothing. Miss nothing.", "mirror": "Gastronaut: the Stirrer takes things, the Gastronaut finds them.",
+      "weaponM": "♂ deep-bowled ladle staff", "weaponF": "♀ broad wok turner",
+      "cue": "♂ tips the ladle in a controlled pour; one steam curl rises. ♀ circles the turner once from the wrist; one steam curl follows.",
+      "desc": "Half-apron over trousers, rolled sleeves, a headband with two tails. The Stirrer profits from the mess: every death on the field is a Leftover, and Leftovers are power. The Stirrer starts under budget and ends over it.",
+      "kit": [
+        { "k": "Basic", "n": "Flick", "t": "A ladle sweep or turner flick at up to two enemies." },
+        { "k": "Passive", "n": "Waste Nothing", "t": "Every death on the field gives a Leftover stack (max 10): +1.5% ATK and +1.5% SPD each. Stacks decay one per 5 s without a kill." },
+        { "k": "Signature", "n": "Skewer Toss", "t": "Skewers at three random enemies for 110% each, plus one skewer per three Leftover stacks." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Skewer", "basic": "Burn ×1 on the second target.", "passive": "Each stack also gives +2% Burn damage.", "signature": "Skewers apply Burn ×1 and deal +50% to enemies already Burning." },
+        { "gem": "sapphire", "role": "Warden", "name": "Stall", "basic": "2× threat, thrown from behind the folding stall.", "passive": "Folding Stall. Starts with a 20% shield that rebuilds 1% per Leftover stack gained; while it holds, adjacent allies take −10%.", "signature": "Slip Away. Vanishes for 2 s (every enemy attacking the Stirrer is Frozen), reappears with a 25% shield and throws the Toss." },
+        { "gem": "emerald", "role": "Mender", "name": "Leftovers", "basic": "40% of the damage is skimmed off and given as healing to the most-damaged ally.", "passive": "At every 50-kill milestone every ally heals 1% per Leftover stack.", "signature": "Leftovers. Consumes all stacks: allies heal 3% per stack and every three stacks spawn a Scrap (60 HP, 8 ATK) that fights until it dies." } ] },
+    { "key": "host", "num": "09", "name": "Host", "role": "Coordinator", "station": "Oven mouth", "range": "Mid", "weight": "Support", "hp": 950, "atk": 15, "spd": 1.0, "targets": 2.0, "crowdDps": 30.0, "arm": "10%", "board": "09-host-board.png",
+      "motto": "The right seat can change a life.", "mirror": "None. The Host sits in the middle and makes placement matter.",
+      "weaponM": "♂ round metal turning peel on a long shaft", "weaponF": "♀ broad wooden launch peel",
+      "cue": "Keeps the peel planted and sweeps the cloth-bearing forearm in a gracious invitation; a small warm ring opens before the palm.",
+      "desc": "A tailcoat with two tails, a folded cloth over the forearm, three place cards at the breast. The Host makes the seating plan matter: something good passes between allies who stand together. The gem decides what.",
+      "kit": [
+        { "k": "Basic", "n": "Place Card", "t": "A peel thrust or thrown card that hits two enemies." },
+        { "k": "Passive", "n": "Seating Plan", "t": "Allies in adjacent slots share 15% of any healing or shield either receives." },
+        { "k": "Signature", "n": "Change of Seat", "t": "Swaps the most-damaged ally’s slot with the Host’s and shields the ally for 20% max HP." } ],
+      "cuts": [
+        { "gem": "ruby", "role": "Striker", "name": "Toast of the Table", "basic": "Unchanged.", "passive": "Adjacent allies also gain +8% ATK.", "signature": "Toast. Every ally’s next three attacks crit and Burn ×1, and the Host strikes the target for 200%." },
+        { "gem": "sapphire", "role": "Warden", "name": "Doorman", "basic": "2× threat.", "passive": "The Host takes 30% of the damage dealt to adjacent allies and has +20% ARM.", "signature": "Guest of Honour. Links to the highest-ATK ally for 5 s: half their damage taken goes to the Host, their attacks crit, and the Host heals 5% per second." },
+        { "gem": "emerald", "role": "Mender", "name": "Long Table", "basic": "Every 3rd card instead heals the most-damaged ally 6%.", "passive": "Sharing is 25%, and the Host heals 2% whenever an adjacent ally is healed by anyone.", "signature": "Long Table. A heal over time on every ally, 3% per second for 4 s; each cast adds +1% per second for the fight (Grow)." } ] }
+  ]
+}
