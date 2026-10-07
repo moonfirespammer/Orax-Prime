@@ -9,12 +9,12 @@ export interface GameSlice {
   id: string;
   introSeen: boolean;
   preferButtons: boolean;
-  signature?: SavedVerdict;
   cursedPlates: SavedVerdict[];
   habits: Habits;
 }
 
-const IDENTITY: readonly (keyof Me)[] = ['name', 'city', 'classKey', 'gem', 'figure'];
+/** What the me store owns: the identity, and the Signature Dish the You screen shows. */
+const IDENTITY: readonly (keyof Me)[] = ['name', 'city', 'classKey', 'gem', 'figure', 'signature'];
 
 const newId = (): string =>
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -42,9 +42,9 @@ export function freshSlice(month: string): GameSlice {
 }
 
 /**
- * BaD's ProfileStore over the OraX player: name, class, gem, figure and city are read from and written to the me
- * store (one identity for the whole app); introSeen, preferButtons, signature, cursedPlates and habits live under
- * `bad:profile`. `load(month)` resets the month-scoped counters when the month has changed.
+ * BaD's ProfileStore over the OraX player: name, class, gem, figure, city and the Signature Dish are read from and
+ * written to the me store (one identity for the whole app, the signature on the profile); introSeen,
+ * preferButtons, cursedPlates and habits live under `bad:profile`. `load(month)` resets the month-scoped counters when the month has changed.
  */
 export class ProfileStore {
   private slice: GameSlice | null = null;
@@ -77,7 +77,7 @@ export class ProfileStore {
       figure: me.figure,
       introSeen: this.slice.introSeen,
       preferButtons: this.slice.preferButtons,
-      ...(this.slice.signature ? { signature: this.slice.signature } : {}),
+      ...(me.signature ? { signature: me.signature } : {}),
       cursedPlates: this.slice.cursedPlates,
       habits: this.slice.habits,
     };

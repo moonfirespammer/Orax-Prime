@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { Gallery } from '@/dev/Gallery';
 import { Board } from '@/games/bad/screens/Board';
 import { Station } from '@/games/bad/screens/Station';
+import { Verdict } from '@/games/bad/screens/Verdict';
 import { BaselinePlay } from '@/dev/baseline/Play';
 import { Invite } from '@/onboarding/Invite';
 import { Onboarding } from '@/onboarding/Onboarding';
@@ -63,8 +64,9 @@ export const router = createBrowserRouter([
       {
         path: 'play/bad/verdict',
         handle: header('The Bin’s verdict', '', 'resets', 'x'),
-        element: <Pending />,
+        element: <Verdict />,
       },
+      { path: 'play/bad/share', handle: header('Share card', ''), element: <Pending /> },
       {
         path: 'play/hmd',
         handle: header('HMD · the last stand', 'Five cooks · one horde of 999'),

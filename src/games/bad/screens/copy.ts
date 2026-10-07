@@ -41,3 +41,17 @@ export const STATION = {
   plateIt: 'Plate it',
   plateHint: 'or flick up on the sigil pad',
 } as const;
+
+export const VERDICT = {
+  bin: 'The Bin',
+  pose: (pose: string) => `The Bin · ${pose}`,
+  cursed: (dish: string) => `Cursed plate · meant to be ${dish}`,
+  stones: (n: number, gems: string) => `${n} of 3 ${gems}`,
+  leftovers: 'Leftovers hour',
+  cursedChip: 'Cursed plate',
+  share: 'Share to your party',
+  setSignature: 'Set as Signature Dish',
+  signatureSet: 'Signature Dish set',
+  seeOthers: (dish: string) => `See who else made ${dish}`,
+  signatureToast: 'Signature Dish set. It sits on your profile until you replace it.',
+} as const;

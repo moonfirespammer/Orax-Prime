@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router';
 import { CITY_NAME } from '@/data/cities';
 import { Button } from '@/ds';
 import { useShell } from '@/store/shell';
+import { useToday } from '@/store/today';
 import t from '@/styles/type.module.css';
 import { PantryCard } from '../components/PantryCard';
 import { PlateChip } from '../components/PlateChip';
@@ -71,10 +72,12 @@ export function Station() {
   );
   const items = plate.items.filter((i) => i.n > 0);
   const selectedItem = items.find((i) => i.ingredientId === selectedIng);
-  /** A stroke or Plate it that plated the dish opens the verdict. */
+  /** A stroke or Plate it that plated the dish opens the verdict; a full plate is quest 1 (PRODUCT_SPEC §5.2). */
   const plated = (v: Verdict | null): void => {
     if (!v || leaving.current) return;
     leaving.current = true;
+    const full = d.ingredients.every((id) => plate.items.some((i) => i.ingredientId === id && i.n > 0));
+    if (full) useToday.getState().markDone('q1');
     void navigate(VERDICT_PATH);
   };
   const strokeNow = (kind: SigilKind, fast: boolean): void => {

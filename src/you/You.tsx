@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { CITY_NAME } from '@/app/clock';
 import { ThemeToggle } from '@/app/ThemeToggle';
-import { Avatar, Button, CLASSES, Chip, GEMS, Icon } from '@/ds';
+import { Avatar, Button, CLASSES, Chip, GEMS, Icon, StoneRow } from '@/ds';
 import { useMe } from '@/store/me';
 import type from '@/styles/type.module.css';
 import { BONDMATES, HABITS } from '@/today/data';
@@ -14,6 +14,7 @@ const COPY = {
     `${gem} ${cls} · ${n} plates this month · gem locks at 00:00`,
   bondmates: 'Bondmates',
   signature: 'Signature Dish',
+  dishRender: 'Dish render',
   noSignature: 'No Signature Dish yet. Cook one and keep it.',
   todaysDishes: "Today's dishes",
   habits: 'Your habits · all three rooms',
@@ -80,12 +81,25 @@ export function You() {
 
       <section className={styles.group} aria-label={COPY.signature}>
         <span className={type.overline}>{COPY.signature}</span>
-        <div className={styles.noSignature}>
-          <span className={type.caption}>{COPY.noSignature}</span>
-          <Button variant="ghost" onClick={() => void navigate('/play/bad')}>
-            {COPY.todaysDishes}
-          </Button>
-        </div>
+        {me.signature ? (
+          <div className={styles.signature}>
+            <span className={styles.dishRender}>{COPY.dishRender}</span>
+            <div className={styles.signatureText}>
+              <div className={styles.signatureName}>{me.signature.name}</div>
+              <div className={type.caption}>
+                {me.signature.label} · {me.signature.date}
+              </div>
+              <StoneRow gem={me.gem} stones={me.signature.stones} className={styles.stoneRow} />
+            </div>
+          </div>
+        ) : (
+          <div className={styles.noSignature}>
+            <span className={type.caption}>{COPY.noSignature}</span>
+            <Button variant="ghost" onClick={() => void navigate('/play/bad')}>
+              {COPY.todaysDishes}
+            </Button>
+          </div>
+        )}
       </section>
 
       <section className={styles.group} aria-label={COPY.habits}>

@@ -1,0 +1,15 @@
+.row {
+  display: inline-flex;
+  gap: 6px;
+}
+.stone {
+  background: var(--surface-sunken);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.gem {
+  background-size: contain;
+  background-repeat: no-repeat;
+}

@@ -61,8 +61,54 @@ test.describe('Phase 3b · Build-A-Dish: the Board and the Station', () => {
       await expectNoAxeViolations(page, `station ${theme}`);
       await expectHitTargets(page, `station ${theme}`);
       await shot(page, `bad-station-${theme}`);
+
+      await page.getByRole('button', { name: 'Plate it' }).click();
+      await expect(page).toHaveURL(/\/play\/bad\/verdict$/);
+      await expect(page.getByRole('heading', { name: 'The Bin’s verdict' })).toBeVisible();
+      await expect(page.getByText('The Bin', { exact: true })).toBeVisible();
+      await expect(page.getByText('The rice is raw. Rice is the easy part.')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Chicken rice, missing something' })).toBeVisible();
+      await expect(page.getByText(/^\d of 3 sapphires$/)).toBeVisible();
+      await expect(page.getByText('Raw rice. Again.')).toBeVisible();
+      await expectNoAxeViolations(page, `verdict ${theme}`);
+      await expectHitTargets(page, `verdict ${theme}`);
+      await shot(page, `bad-verdict-${theme}`);
     });
   }
+
+  test('Set as Signature Dish keeps the plate on the You screen; the verdict closes back to the Station', async ({
+    page,
+  }) => {
+    await open(page, { path: '/play/bad', clock: CLOCK });
+    await cook(page);
+    await card(page, 'chicken').click();
+    await page.getByRole('button', { name: 'Plate it' }).click();
+    await expect(page.getByRole('heading', { name: 'The Bin’s verdict' })).toBeVisible();
+    await page.getByRole('button', { name: 'Set as Signature Dish' }).click();
+    await expect(page.getByRole('button', { name: 'Signature Dish set' })).toBeVisible();
+    await expect(page.getByTestId('toast')).toContainText(
+      'Signature Dish set. It sits on your profile until you replace it.',
+    );
+    await page.getByRole('button', { name: 'Back' }).click();
+    await expect(page).toHaveURL(/\/play\/bad\/station$/);
+    await page.goto('/you');
+    await page.locator('[data-testid="orax-app"]').waitFor();
+    await expect(page.getByText('Chicken rice, missing something')).toBeVisible();
+    await expect(page.getByRole('img', { name: /of 3 sapphires$/ })).toBeVisible();
+    await expect(page.getByText('No Signature Dish yet. Cook one and keep it.')).toBeHidden();
+  });
+
+  test('See who else made it goes to the city wall; Share to the share card', async ({ page }) => {
+    await open(page, { path: '/play/bad', clock: CLOCK });
+    await cook(page);
+    await page.getByRole('button', { name: 'Plate it' }).click();
+    await page.getByRole('button', { name: 'See who else made chicken rice' }).click();
+    await expect(page).toHaveURL(/\/today\/wall$/);
+    await expect(page.getByRole('heading', { name: 'Singapore today' })).toBeVisible();
+    await page.goto('/play/bad/verdict');
+    await page.locator('[data-testid="orax-app"]').waitFor();
+    await expect(page).toHaveURL(/\/play\/bad$/); // the verdict lives for the session, not across a reload
+  });
 
   test('a slash on the pad cuts the aimed item, a flick up plates it, and the verdict opens', async ({
     page,
@@ -86,14 +132,6 @@ test.describe('Phase 3b · Build-A-Dish: the Board and the Station', () => {
     ]);
     await expect(page).toHaveURL(/\/play\/bad\/verdict$/);
     await expect(page.getByRole('heading', { name: 'The Bin’s verdict' })).toBeVisible();
-  });
-
-  test('Plate it from the footer opens the verdict too', async ({ page }) => {
-    await open(page, { path: '/play/bad', clock: CLOCK });
-    await cook(page);
-    await card(page, 'chicken').click();
-    await page.getByRole('button', { name: 'Plate it' }).click();
-    await expect(page).toHaveURL(/\/play\/bad\/verdict$/);
   });
 
   test('the Station without a pick returns to the Board; Back from the Station lands on the Board', async ({

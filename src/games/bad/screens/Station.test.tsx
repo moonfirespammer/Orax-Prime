@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { Toast } from '@/app/Toast';
 import { useShell } from '@/store/shell';
 import { useToast } from '@/store/toast';
+import { useToday } from '@/store/today';
 import { useGame } from '../store';
 import { Station } from './Station';
 import { bootRoom, closeRoom } from './test-room';
@@ -43,6 +44,7 @@ const chips = () => screen.getByTestId('plate-chips');
 describe('the Station (the prototype’s BaD STATION on BaD’s rules)', () => {
   beforeEach(() => {
     useToast.getState().clear();
+    useToday.setState({ done: {} });
   });
   afterEach(() => {
     closeRoom();
@@ -129,6 +131,23 @@ describe('the Station (the prototype’s BaD STATION on BaD’s rules)', () => {
     expect(screen.getByText('Tap an item to aim your strokes')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /Remove one portion/ }));
     expect(screen.getByText('Nothing yet. Tap the Pantry to add a portion.')).toBeInTheDocument();
+  });
+
+  it('a full plate is quest 1 done; a partial plate is not', async () => {
+    const user = userEvent.setup();
+    await bootRoom();
+    await pickChickenRice();
+    mount();
+    await user.click(card('chicken'));
+    await user.click(screen.getByRole('button', { name: 'Plate it' }));
+    expect(useToday.getState().done.q1).toBeUndefined();
+    await bootRoom();
+    await pickChickenRice();
+    mount();
+    for (const id of ['chicken', 'rice', 'ginger', 'chilli-sauce', 'cucumber', 'dark-soy'])
+      await user.click(card(id));
+    await user.click(screen.getByRole('button', { name: 'Plate it' }));
+    expect(useToday.getState().done.q1).toBe(true);
   });
 
   it('Plate it judges the plate, opens the verdict and hands the header back', async () => {
