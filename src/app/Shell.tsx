@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { Outlet, useMatches } from 'react-router';
+import { useToday } from '@/store/today';
+import { clock, useNow } from './clock';
 import { Header } from './Header';
 import { PlaySheet } from './PlaySheet';
 import { TabBar } from './TabBar';
@@ -27,6 +30,15 @@ export const header = (title: string, subtitle: string, right?: 'resets', backIc
 const isHandle = (h: unknown): h is ScreenHandle =>
   typeof h === 'object' && h !== null && 'chrome' in h && typeof (h as ScreenHandle).chrome === 'string';
 
+/** Watches the Singapore date: at 00:00 the match, the picks and the done flags start again (PRODUCT_SPEC §5.2). */
+function DayWatch() {
+  const now = useNow();
+  useEffect(() => {
+    useToday.getState().ensureDay(clock.city().date);
+  }, [now]);
+  return null;
+}
+
 /** The phone frame: a screen over a pinned tab bar, the Play sheet and the toast above it (MIGRATION §3.2). */
 export function Shell() {
   const matches = useMatches();
@@ -39,6 +51,7 @@ export function Shell() {
       {handle.chrome === 'tabs' ? <TabBar /> : null}
       <PlaySheet />
       <Toast />
+      <DayWatch />
     </div>
   );
 }

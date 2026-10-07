@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router';
 import { CITY_NAME, clock, useNow } from '@/app/clock';
 import { RoomRow, type Room } from '@/app/RoomRow';
-import { Avatar, Button, CLASSES, Chip, Icon, Logo, kitCrop } from '@/ds';
+import { Avatar, Button, CLASSES, Chip, Logo, kitCrop } from '@/ds';
 import { useToday } from '@/store/today';
 import { say } from '@/store/toast';
 import type from '@/styles/type.module.css';
 import { MATCH, QUESTS, digest, rooms } from './data';
+import { QuestRow } from './QuestRow';
 import styles from './Today.module.css';
 
 const COPY = {
@@ -21,9 +22,6 @@ const COPY = {
   questsOverline: "Today's quests",
   pickedLabel: (n: number) => `Pick two · ${n} picked`,
   questsFoot: 'The other three expire at 00:00. Rewards are chips and trims, never a number in a fight.',
-  stateDone: 'Done',
-  statePicked: 'Picked',
-  stateExpires: 'Expires 00:00',
   tonight: 'Tonight',
   digestOverline: (n: number) => `Today's digest · ${n}`,
   cityWall: 'City wall',
@@ -125,35 +123,18 @@ export function Today() {
           <span className={`${type.overline} ${styles.nowrap}`}>{COPY.questsOverline}</span>
           <span className={type.pixelMuted}>{COPY.pickedLabel(picked.length)}</span>
         </div>
-        {QUESTS.map((q) => {
-          const isPicked = picked.includes(q.id);
-          const isDone = !!done[q.id];
-          const disabled = !isPicked && full;
-          const state = isDone ? COPY.stateDone : isPicked ? COPY.statePicked : full ? COPY.stateExpires : '';
-          return (
-            <button
-              key={q.id}
-              type="button"
-              aria-pressed={isPicked}
-              disabled={disabled}
-              className={`${styles.questRow} ${isPicked ? styles.questPicked : ''}`}
-              onClick={() => togglePick(q.id)}
-            >
-              <span className={`${styles.box} ${isPicked ? styles.boxPicked : ''}`}>
-                {isPicked ? <Icon name="check" size={14} /> : null}
-              </span>
-              <span className={styles.questText2}>
-                <span className={styles.questTitle}>{q.title}</span>
-                <span className={styles.questMeta}>
-                  {q.room} · {q.reward}
-                </span>
-              </span>
-              <span className={`${type.pixel} ${styles.questState} ${isDone ? styles.done : ''}`}>
-                {state}
-              </span>
-            </button>
-          );
-        })}
+        {QUESTS.map((q) => (
+          <QuestRow
+            key={q.id}
+            quest={q}
+            picked={picked.includes(q.id)}
+            done={!!done[q.id]}
+            full={full}
+            onToggle={() => {
+              togglePick(q.id);
+            }}
+          />
+        ))}
         <p className={`${type.caption} ${styles.questsFoot}`}>{COPY.questsFoot}</p>
       </section>
 

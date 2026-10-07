@@ -115,8 +115,11 @@ test.describe('Phase 2a · the shell: Today, the Play sheet, You', () => {
     );
     await expect(page.getByRole('button', { name: 'Open the chat with Nadia' })).toBeVisible();
     await expect(page.getByTestId('toast')).toBeHidden({ timeout: 5000 });
+    // The answer is kept for the day; the next day's match arrives new.
     await page.reload();
     await page.locator('[data-testid="orax-app"]').waitFor();
+    await expect(page.getByRole('button', { name: 'Open the chat with Nadia' })).toBeVisible();
+    await open(page, { path: '/today', clock: '2026-09-24T09:00:00' });
     await page.getByRole('button', { name: 'Not today' }).click();
     await expect(page.getByText("Not today. Tomorrow's match arrives at 00:00.")).toBeVisible();
   });

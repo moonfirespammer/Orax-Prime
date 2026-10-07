@@ -1,0 +1,93 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.top {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.figure {
+  flex: none;
+  width: 150px;
+  height: 200px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface-raised);
+}
+.who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.classLine {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.className {
+  font: var(--text-body-strong);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.matched {
+  margin: 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.palates {
+  gap: 6px;
+}
+.palateLine {
+  margin: 0;
+  font: var(--text-body);
+  text-wrap: pretty;
+}
+.quest {
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+.questLabel {
+  font: var(--text-pixel-label);
+  letter-spacing: var(--tracking-pixel-label);
+  text-transform: uppercase;
+  color: var(--brand-text);
+}
+.questText {
+  margin: 4px 0 0;
+  font: var(--text-body-lg);
+  text-wrap: pretty;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+.declined {
+  margin: 0;
+  text-align: center;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}

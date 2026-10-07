@@ -6,6 +6,9 @@ import { Verdict } from '@/games/bad/screens/Verdict';
 import { BaselinePlay } from '@/dev/baseline/Play';
 import { Invite } from '@/onboarding/Invite';
 import { Onboarding } from '@/onboarding/Onboarding';
+import { Digest } from '@/today/Digest';
+import { Match } from '@/today/Match';
+import { Quests } from '@/today/Quests';
 import { Today } from '@/today/Today';
 import { You } from '@/you/You';
 import { CITY_NAME } from './clock';
@@ -27,17 +30,17 @@ export const router = createBrowserRouter([
       {
         path: 'today/match',
         handle: header('Today’s match', 'One a day · arrives at 00:00'),
-        element: <Pending />,
+        element: <Match />,
       },
       {
         path: 'today/quests',
         handle: header('Today’s quests', 'Pick two · the rest expire at 00:00', 'resets'),
-        element: <Pending />,
+        element: <Quests />,
       },
       {
         path: 'today/digest',
         handle: header('Today’s digest', 'Seven moments, then done'),
-        element: <Pending />,
+        element: <Digest />,
       },
       { path: 'today/wall', handle: header(`${CITY_NAME} today`, 'Wiped at 00:00'), element: <Pending /> },
       {

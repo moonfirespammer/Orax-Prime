@@ -17,6 +17,8 @@ export default tseslint.config(
         projectService: {
           allowDefaultProject: ['*.ts', '*.js', 'e2e/*.ts', 'scripts/*.mjs'],
           defaultProject: 'tsconfig.node.json',
+          // The config files, the scripts and one Playwright spec per phase: more than the default eight.
+          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 24,
         },
         tsconfigRootDir: import.meta.dirname,
       },

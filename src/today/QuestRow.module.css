@@ -1,0 +1,67 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  box-sizing: border-box;
+}
+.row:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.row:disabled {
+  color: var(--ink-faint);
+  cursor: default;
+}
+.picked {
+  padding: 11px;
+  background: var(--brand-subtle);
+  border: 2px solid var(--brand);
+}
+.box {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-strong);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-brand);
+  /* The prototype's box is a span: 22 px of content plus the 2 px border on each side, 26 px in all. */
+  box-sizing: content-box;
+}
+.boxPicked {
+  border-color: var(--brand);
+  background: var(--brand);
+}
+.text {
+  flex: 1;
+  min-width: 0;
+}
+.title {
+  display: block;
+  font: var(--text-body-strong);
+}
+.meta {
+  display: block;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+}
+.state {
+  flex: none;
+  color: var(--ink-muted);
+}
+.done {
+  color: var(--success);
+}
